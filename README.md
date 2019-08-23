@@ -1,0 +1,2 @@
+# blog
+PikachuKing Blog
