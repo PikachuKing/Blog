@@ -342,5 +342,18 @@ return [
     |
     */
     'extensions' => [
+        'simplemde' => [
+
+            // Set to false if you want to disable this extension
+            'enable' => true,
+
+            // If you want to set an alias for the calling method
+            //'alias' => 'markdown',
+
+            // Editor configuration
+            'config' => [
+
+            ]
+        ]
     ],
 ];
