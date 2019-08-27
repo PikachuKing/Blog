@@ -101,14 +101,14 @@ return [
         'guard' => 'admin',
         'guards' => [
             'admin' => [
-                'driver'   => 'session',
+                'driver' => 'session',
                 'provider' => 'admin',
             ],
         ],
         'providers' => [
             'admin' => [
                 'driver' => 'eloquent',
-                'model'  => Encore\Admin\Auth\Database\Administrator::class,
+                'model' => Encore\Admin\Auth\Database\Administrator::class,
             ],
         ],
         // Add "remember me" to login form
@@ -136,7 +136,7 @@ return [
         // Image and file upload path under the disk above.
         'directory' => [
             'image' => 'images',
-            'file'  => 'files',
+            'file' => 'files',
         ],
     ],
     /*
@@ -163,11 +163,11 @@ return [
         'menu_table' => 'admin_menu',
         'menu_model' => Encore\Admin\Auth\Database\Menu::class,
         // Pivot table for table above.
-        'operation_log_table'    => 'admin_operation_log',
+        'operation_log_table' => 'admin_operation_log',
         'user_permissions_table' => 'admin_user_permissions',
-        'role_users_table'       => 'admin_role_users',
+        'role_users_table' => 'admin_role_users',
         'role_permissions_table' => 'admin_role_permissions',
-        'role_menu_table'        => 'admin_role_menu',
+        'role_menu_table' => 'admin_role_menu',
     ],
     /*
     |--------------------------------------------------------------------------
@@ -204,7 +204,7 @@ return [
     | Indicates whether to check menu roles.
     |--------------------------------------------------------------------------
     */
-    'check_menu_roles'       => true,
+    'check_menu_roles' => true,
     /*
     |--------------------------------------------------------------------------
     | User default avatar
@@ -343,17 +343,33 @@ return [
     */
     'extensions' => [
         'simplemde' => [
-
             // Set to false if you want to disable this extension
             'enable' => true,
-
             // If you want to set an alias for the calling method
             //'alias' => 'markdown',
-
             // Editor configuration
             'config' => [
-
+                'autofocus' => true,
             ]
+        ],
+        'editormd' => [
+            // Set to false if you want to disable this extension
+            'enable' => true,
+            // Set to true if you want to take advantage the screen length for your editormd instance.
+            'wideMode' => false,
+            // Set to true when the instance included in larave-admin tab component.
+            'dynamicMode' => false,
+            // Editor.js configuration (Refer to http://pandao.github.io/editor.md/)
+            'config' =>
+                [
+                    'path' => '/vendor/laravel-admin-ext/editormd/editormd-1.5.0/lib/',
+                    'width' => '100%',
+                    'height' => 600,
+                    'emoji' => true,
+                    'imageUpload' => true,
+                    'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                    'imageUploadURL' => ""
+                ]
         ]
     ],
 ];

@@ -4,9 +4,12 @@ namespace App\Admin\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
+use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
 class ArticleController extends AdminController
@@ -19,6 +22,58 @@ class ArticleController extends AdminController
     protected $title = 'App\Models\Article';
 
     /**
+     * 文章管理列表页
+     * @param Content $content
+     * @return Content
+     */
+    public function index(Content $content)
+    {
+        return $content
+            ->header('文章')
+            ->description('列表')
+            ->body($this->grid());
+    }
+
+    /**
+     * 添加页
+     * @param Content $content
+     * @return Content
+     */
+    public function create(Content $content)
+    {
+        return $content
+            ->header('添加文章')
+            ->body($this->form());
+    }
+
+    /**
+     * 编辑页
+     * @param $id
+     * @param Content $content
+     * @return Content
+     */
+    public function edit($id, Content $content)
+    {
+        return $content
+            ->header('修改文章')
+            ->body($this->form()->edit($id));
+    }
+
+    /**
+     * 详情页
+     * @param $id
+     * @param Content $content
+     * @return Content
+     */
+    public function show($id, Content $content)
+    {
+        return $content
+            ->header('文章详情')
+            ->body($this->detail($id));
+    }
+
+
+    /**
      * Make a grid builder.
      *
      * @return Grid
@@ -26,17 +81,17 @@ class ArticleController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Article);
-        $grid->column('user_id')->display(function() {
+        $grid->column('user_id')->display(function () {
             return Admin::user()->name;
         });
-        $grid->column('category_id')->display(function($categoryId) {
+        $grid->column('category_id')->display(function ($categoryId) {
             return Category::find($categoryId)->name;
         });
         $grid->column('title', '标题');
         $grid->column('slug', 'slug');
         $grid->column('is_draft', '草稿');
         $grid->column('view_number', '阅读数')->sortable();
-        $grid->column('published_at','发布时间')->sortable();
+        $grid->column('published_at', '发布时间')->sortable();
         $grid->disableExport();
         return $grid;
     }
@@ -75,18 +130,27 @@ class ArticleController extends AdminController
     protected function form()
     {
         $form = new Form(new Article);
-
-        $form->number('user_id', __('User id'));
-        $form->number('category_id', __('Category id'));
-        $form->text('title', __('Title'));
-        $form->text('slug', __('Slug'));
-        $form->text('description', __('Description'));
-        $form->simplemde('content');
-
-        $form->switch('is_draft', __('Is draft'));
-        $form->number('view_number', __('View number'));
-        $form->datetime('published_at', __('Published at'))->default(date('Y-m-d H:i:s'));
-
+        $form->hidden('user_id')->value(Admin::user()->id);
+        $form->hidden('slug')->value(Admin::user()->id);
+        $form->text('title', '标题');
+        $form->select('category_id', '分类')->options(function () {
+            $categories = Category::all();
+            $options = [];
+            if ($categories->count()) {
+                foreach ($categories as $category) {
+                    $options[$category['id']] = $category['name'];
+                }
+            }
+            return $options;
+        });
+        $form->multipleSelect('tags', '标签')->options(Tag::all()->pluck('name', 'id'));
+        $form->simplemde('description', '摘要');
+        $form->editormd('content', '内容');
+        $form->switch('is_draft', '草稿');
+        //保存前回调
+        $form->saving(function (Form $form) {
+            //...
+        });
         return $form;
     }
 }

@@ -14,4 +14,9 @@ class Category extends Model
     protected $fillable = [
         'name', 'article_num', 'search_num'
     ];
+
+    public function articles()
+    {
+        return $this->belongsTo(Article::class, 'category_id', 'id');
+    }
 }
