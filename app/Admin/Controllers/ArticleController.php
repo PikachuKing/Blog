@@ -81,10 +81,10 @@ class ArticleController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Article);
-        $grid->column('user_id')->display(function () {
+        $grid->column('user_id', '用户')->display(function () {
             return Admin::user()->name;
         });
-        $grid->column('category_id')->display(function ($categoryId) {
+        $grid->column('category_id','分类')->display(function ($categoryId) {
             return Category::find($categoryId)->name;
         });
         $grid->column('title', '标题');
@@ -144,13 +144,14 @@ class ArticleController extends AdminController
             return $options;
         });
         $form->multipleSelect('tags', '标签')->options(Tag::all()->pluck('name', 'id'));
-        $form->simplemde('description', '摘要');
-        $form->editormd('content', '内容');
-        $form->switch('is_draft', '草稿');
-        //保存前回调
-        $form->saving(function (Form $form) {
-            //...
+        $form->simplemde('description', '摘要', function ($table) {
+            $table->text('raw');
         });
+        $form->editormd('content', '内容', function ($table) {
+            $table->text('raw');
+        });
+        $form->switch('is_draft', '草稿');
+
         return $form;
     }
 }
