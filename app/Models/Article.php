@@ -15,6 +15,7 @@ class Article extends Model
     ];
 
     protected $casts = [
+        'description' => 'array',
         'content' => 'array',
     ];
 
@@ -69,11 +70,17 @@ class Article extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'article_tags', 'article_id', 'tag_id');
+    }
+
+    public function user()
+    {
+        $relatedModel = config('admin.database.users_model');
+        return $this->belongsTo($relatedModel, 'user_id', 'id');
     }
 }

@@ -41,9 +41,12 @@ class ArticleController extends AdminController
      */
     public function create(Content $content)
     {
+        $form = $this->form();
+        $form->simplemde('description', '摘要');
+        $form->editormd('content', '内容');
         return $content
             ->header('添加文章')
-            ->body($this->form());
+            ->body($form);
     }
 
     /**
@@ -54,9 +57,12 @@ class ArticleController extends AdminController
      */
     public function edit($id, Content $content)
     {
+        $form = $this->form()->edit($id);
+        $form->simplemde('description', '摘要')->default($form->model()->description['raw']);
+        $form->editormd('content', '内容')->default($form->model()->content['raw']);
         return $content
             ->header('修改文章')
-            ->body($this->form()->edit($id));
+            ->body($form);
     }
 
     /**
@@ -84,12 +90,12 @@ class ArticleController extends AdminController
         $grid->column('user_id', '用户')->display(function () {
             return Admin::user()->name;
         });
-        $grid->column('category_id','分类')->display(function ($categoryId) {
+        $grid->column('category_id', '分类')->display(function ($categoryId) {
             return Category::find($categoryId)->name;
         });
         $grid->column('title', '标题');
         $grid->column('slug', 'slug');
-        $grid->column('is_draft', '草稿');
+        $grid->column('is_draft', '草稿')->sortable();
         $grid->column('view_number', '阅读数')->sortable();
         $grid->column('published_at', '发布时间')->sortable();
         $grid->disableExport();
@@ -105,14 +111,24 @@ class ArticleController extends AdminController
     protected function detail($id)
     {
         $show = new Show(Article::findOrFail($id));
-
         $show->field('id', __('Id'));
-        $show->field('user_id', __('User id'));
-        $show->field('category_id', __('Category id'));
+//        $show->category()->name();
+
+        $show->user('创建人')->as(function ($user) {
+            return $user->name;
+        });
+        $show->category('分类')->as(function ($category) {
+            return $category->name;
+        });
+
         $show->field('title', '标题');
         $show->field('slug', __('Slug'));
-        $show->field('description', '摘要');
-        $show->field('content', '内容');
+        $show->field('description', '摘要')->as(function ($description) {
+            return $description['html'];
+        })->json();
+        $show->field('content', '内容')->as(function ($content) {
+            return $content['html'];
+        })->json();
         $show->field('is_draft', '草稿');
         $show->field('view_number', '阅读数');
         $show->field('published_at', '发布时间');
@@ -144,14 +160,7 @@ class ArticleController extends AdminController
             return $options;
         });
         $form->multipleSelect('tags', '标签')->options(Tag::all()->pluck('name', 'id'));
-        $form->simplemde('description', '摘要', function ($table) {
-            $table->text('raw');
-        });
-        $form->editormd('content', '内容', function ($table) {
-            $table->text('raw');
-        });
         $form->switch('is_draft', '草稿');
-
         return $form;
     }
 }
