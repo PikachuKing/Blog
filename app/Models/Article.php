@@ -19,12 +19,23 @@ class Article extends Model
         'content' => 'array',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($article) {
+//            $article->withTrashed()->tags()->delete();
+        });
+    }
+
+
     /**
      * set the published_at attribute.
      * @param $value
      */
     public function setIsDraftAttribute($value)
     {
+        $this->attributes['is_draft'] = $value;
         if (!$value){
             $this->attributes['published_at'] = Carbon::now();
         }
@@ -65,6 +76,7 @@ class Article extends Model
      */
     public function setTitleAttribute($value)
     {
+        $this->attributes['title'] = $value;
         $this->attributes['slug'] = translug($value);
     }
 
