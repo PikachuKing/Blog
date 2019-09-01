@@ -90,17 +90,21 @@ class ArticleController extends AdminController
         $grid->column('user_id', '用户')->display(function () {
             return Admin::user()->name;
         });
+        $grid->column('title', '标题');
+        $grid->column('slug', 'slug');
         $grid->column('category_id', '分类')->display(function ($categoryId) {
             return Category::find($categoryId)->name;
         });
-        $grid->column('title', '标题');
-        $grid->column('slug', 'slug');
-        $grid->column('is_draft', '草稿')->sortable();
+        $grid->column('tags', '标签')->display(function ($tags) {
+            $tags = array_column($tags, 'name');
+            return implode(', ', $tags);
+        });
+        $grid->column('is_draft', '草稿')->switch()->sortable();
         $grid->column('view_number', '阅读数')->sortable();
         $grid->column('published_at', '发布时间')->sortable();
         $grid->disableExport();
         // 添加文章标题过滤
-        $grid->filter(function($filter){
+        $grid->filter(function ($filter) {
             // 去掉默认的id过滤器
             $filter->disableIdFilter();
             // 添加文章标题字段过滤器
@@ -122,12 +126,15 @@ class ArticleController extends AdminController
         $show->user('创建人')->as(function ($user) {
             return $user->name;
         });
+        $show->field('title', '标题');
+        $show->field('slug', __('Slug'));
         $show->category('分类')->as(function ($category) {
             return $category->name;
         });
-
-        $show->field('title', '标题');
-        $show->field('slug', __('Slug'));
+        $show->tags('标签')->as(function ($tags) {
+            $tags = array_column($tags->toArray(), 'name');
+            return implode(', ', $tags);
+        });
         $show->field('description', '摘要')->as(function ($description) {
             return $description['html'];
         })->json();
@@ -135,9 +142,8 @@ class ArticleController extends AdminController
             return $content['html'];
         })->json();
         $show->field('is_draft', '草稿')->as(function ($is_draft) {
-            return $is_draft?'是':'否';
+            return $is_draft ? '是' : '否';
         });
-        ;
         $show->field('view_number', '阅读数');
         $show->field('published_at', '发布时间');
         $show->field('created_at', '创建时间');
@@ -183,10 +189,6 @@ class ArticleController extends AdminController
         $form->switch('is_draft', '草稿');
         $form->simplemde('description', '摘要');
         $form->editormd('content', '内容');
-        //保存前回调
-        $form->saving(function (Form $form) {
-//            dd($form);
-        });
         return $form;
     }
 }

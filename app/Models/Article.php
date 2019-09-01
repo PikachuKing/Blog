@@ -10,6 +10,7 @@ use League\CommonMark\CommonMarkConverter;
 class Article extends Model
 {
     use SoftDeletes;
+
     protected $fillable = [
         'user_id', 'category_id', 'title', 'slug', 'description', 'content', 'is_draft', 'view_number', 'published_at'
     ];
@@ -18,15 +19,6 @@ class Article extends Model
         'description' => 'array',
         'content' => 'array',
     ];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function($article) {
-//            $article->withTrashed()->tags()->delete();
-        });
-    }
 
 
     /**

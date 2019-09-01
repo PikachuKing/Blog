@@ -2,16 +2,16 @@
 
 namespace App\Admin\Actions\Article;
 
-use Encore\Admin\Actions\RowAction;
+use App\Admin\Actions\TrashedRowAction;
 use Illuminate\Database\Eloquent\Model;
 
-class Restore extends RowAction
+class Restore extends TrashedRowAction
 {
     public $name = '恢复';
 
     public function handle(Model $model)
     {
-        $model->onlyTrashed()->restore();
+        $model->restore();
         return $this->response()->success('Success message.')->refresh();
     }
 

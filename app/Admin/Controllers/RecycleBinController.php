@@ -4,13 +4,12 @@
  */
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Article\ForceDelete;
 use App\Admin\Actions\Article\Restore;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\Tag;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
-use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
@@ -64,12 +63,15 @@ class RecycleBinController extends AdminController
         $grid->column('user_id', '用户')->display(function () {
             return Admin::user()->name;
         });
+        $grid->column('title', '标题');
+        $grid->column('slug', 'slug');
         $grid->column('category_id', '分类')->display(function ($categoryId) {
             return Category::find($categoryId)->name;
         });
-        $grid->column('title', '标题');
-        $grid->column('slug', 'slug');
-        $grid->column('is_draft', '草稿')->bool()->sortable();
+        $grid->column('tags', '标签')->display(function ($tags) {
+            $tags = array_column($tags, 'name');
+            return implode(', ', $tags);
+        });
         $grid->column('view_number', '阅读数')->sortable();
         $grid->column('published_at', '发布时间')->sortable();
         $grid->disableExport();
@@ -84,9 +86,12 @@ class RecycleBinController extends AdminController
         $grid->actions(function ($actions) {
             // 去掉编辑
             $actions->disableEdit();
+            // 去掉删除
+            $actions->disableDelete();
             // 恢复
-            $actions->add(new Restore());
-
+            $actions->add(new Restore);
+            // 永久删除
+            $actions->add(new ForceDelete);
         });
         return $grid;
     }
@@ -104,12 +109,15 @@ class RecycleBinController extends AdminController
         $show->user('创建人')->as(function ($user) {
             return $user->name;
         });
+        $show->field('title', '标题');
+        $show->field('slug', __('Slug'));
         $show->category('分类')->as(function ($category) {
             return $category->name;
         });
-
-        $show->field('title', '标题');
-        $show->field('slug', __('Slug'));
+        $show->tags('标签')->as(function ($tags) {
+            $tags = array_column($tags->toArray(), 'name');
+            return implode(', ', $tags);
+        });
         $show->field('description', '摘要')->as(function ($description) {
             return $description['html'];
         })->json();

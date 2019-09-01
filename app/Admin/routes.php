@@ -15,5 +15,7 @@ Route::group([
     $router->resource('categories', 'CategoryController');
     $router->resource('articles', 'ArticleController');
     $router->resource('recycle_bin', 'RecycleBinController');
+    $router->resource('abouts', 'AboutController');
+    $router->resource('links', 'LinkController');
 
 });

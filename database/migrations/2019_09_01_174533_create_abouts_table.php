@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTagsTable extends Migration
+class CreateAboutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateArticleTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_tags', function (Blueprint $table) {
-            $table->unsignedBigInteger('article_id')->nullable()->comment('文章id');
-            $table->unsignedBigInteger('tag_id')->nullable()->comment('标签id');
+        Schema::create('abouts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('content')->nullable(false)->comment('内容');
+            $table->boolean('show')->default(0)->comment('展示');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateArticleTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_tags');
+        Schema::dropIfExists('abouts');
     }
 }
