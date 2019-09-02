@@ -116,7 +116,7 @@ class CategoryController extends AdminController
     {
         $form = new Form(new Category);
 
-        $form->text('name', '分类名称');
+        $form->text('name', '分类名称')->rules('required|max: 255');
 
         return $form;
     }

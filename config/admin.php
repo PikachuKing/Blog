@@ -368,7 +368,7 @@ return [
                     'emoji' => true,
                     'imageUpload' => true,
                     'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                    'imageUploadURL' => ""
+                    'imageUploadURL' => "/admin/article_images"
                 ]
         ]
     ],

@@ -126,7 +126,7 @@ class AboutController extends AdminController
     {
         $form = new Form(new About);
         $form->switch('show', '展示');
-        $form->editormd('content', '内容');
+        $form->editormd('content', '内容')->rules('required');;
         return $form;
     }
 }

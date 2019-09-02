@@ -11,6 +11,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Illuminate\Http\Request;
 
 class ArticleController extends AdminController
 {
@@ -156,7 +157,7 @@ class ArticleController extends AdminController
     {
         $form = new Form(new Article);
         $form->hidden('user_id')->value(Admin::user()->id);
-        $form->hidden('slug')->value(Admin::user()->id);
+        $form->hidden('slug')->value('slug');
         $form->text('title', '标题');
         $form->select('category_id', '分类')->options(function () {
             $categories = Category::all();
@@ -181,14 +182,21 @@ class ArticleController extends AdminController
     protected function form()
     {
         $form = new Form(new Article);
-        $form->hidden('user_id');
+        $form->hidden('user_id')->rules('required');
         $form->hidden('slug');
-        $form->text('title', '标题');
-        $form->select('category_id', '分类');
-        $form->multipleSelect('tags', '标签');
+        $form->text('title', '标题')->rules('required');
+        $form->select('category_id', '分类')->rules('required');
+        $form->multipleSelect('tags', '标签')->rules('required');
         $form->switch('is_draft', '草稿');
-        $form->simplemde('description', '摘要');
-        $form->editormd('content', '内容');
+        $form->simplemde('description', '摘要')->rules('required');
+        $form->editormd('content', '内容')->rules('required');
         return $form;
+    }
+
+    public function articleImages(Request $request)
+    {
+        $path = $request->file('editormd-image-file')->store('public/uploads/articles');
+        return json_encode(['success'=>1, 'message' => '上传成功！','url' => asset('storage/'.substr($path,7))]);
+
     }
 }

@@ -123,7 +123,7 @@ class TagController extends AdminController
     {
         $form = new Form(new Tag);
 
-        $form->text('name', '标签名称');
+        $form->text('name', '标签名称')->rules('required|max: 255');
 
         return $form;
     }
