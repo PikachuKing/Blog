@@ -1,0 +1,17 @@
+<template>
+    <div class="header">
+        <div class="header-inner">
+
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: "Header"
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
