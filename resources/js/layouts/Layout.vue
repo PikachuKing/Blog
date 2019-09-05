@@ -1,18 +1,23 @@
 <template>
-
+    <div class="layout">
+        <navigation></navigation>
+    </div>
 </template>
 
 <script>
-    import Header from '../components/global/Header'
+    import Navigation from '../components/global/Navigation'
 
     export default {
         name: "Layout",
         components: {
-            Header
+            Navigation
         },
     }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+    .layout{
+        width: 100%;
+        height: auto;
+    }
 </style>

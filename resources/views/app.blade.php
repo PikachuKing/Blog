@@ -8,7 +8,7 @@
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-    <title>Roast</title>
+    <title>PikachuKing</title>
 
     <script type='text/javascript'>
         window.Laravel = <?php echo json_encode([
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<div id="app">
+<div id="app" class="app">
     <router-view></router-view>
 </div>
 

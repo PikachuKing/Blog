@@ -23,38 +23,37 @@ export default new VueRouter({
     routes: [
         {
             path: '/',
-            name: 'layout',
-            component: Vue.component('Home', require('./layouts/Layout.vue')),
+            component: Vue.component('Home', require('./layouts/Layout.vue')).default,
             children: [
                 {
                     path: '/',
                     name: 'home',
-                    component: Vue.component('Home', require('./pages/Home.vue'))
+                    component: Vue.component('Home', require('./pages/Home.vue')).default
                 },
                 {
                     path: '/about',
                     name: 'about',
-                    component: Vue.component('About', require('./pages/About.vue'))
+                    component: Vue.component('About', require('./pages/About.vue')).default
                 },
                 {
                     path: '/tags',
                     name: 'tag',
-                    component: Vue.component('Tag', require('./pages/Tag.vue'))
+                    component: Vue.component('Tag', require('./pages/Tag.vue')).default
                 },
                 {
                     path: '/categories',
                     name: 'category',
-                    component: Vue.component('Category', require('./pages/Category.vue'))
+                    component: Vue.component('Category', require('./pages/Category.vue')).default
                 },
                 {
                     path: '/archives',
                     name: 'archives',
-                    component: Vue.component('Archive', require('./pages/Archive.vue'))
+                    component: Vue.component('Archive', require('./pages/Archive.vue')).default
                 },
                 {
                     path: '/:article',
                     name: 'article',
-                    component: Vue.component('Article', require('./pages/Article.vue'))
+                    component: Vue.component('Article', require('./pages/Article.vue')).default
                 }
             ]
         }
