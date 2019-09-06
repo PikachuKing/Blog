@@ -4,7 +4,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('foundation-sites');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -33,8 +34,10 @@ if (token) {
 import Vue from 'vue';
 import router from './routes.js'
 import store from './store.js'
+
 // 将 Vue 挂载到 ID 为 app 的页面元素上
 new Vue({
     router,
     store
 }).$mount('#app');
+

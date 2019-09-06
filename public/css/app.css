@@ -17,20 +17,21 @@ html body {
 }
 
 html body .app {
+  position: relative;
+  min-height: 100%;
+}
+
+html body .app,
+html body .footer-inner {
   margin: 0 auto;
-  width: 700px;
+  width: 767px;
   background-color: #fff;
 }
 
 @media (min-width: 1200px) {
-  html body .app {
-    width: 1100px;
-  }
-}
-
-@media (min-width: 1600px) {
-  html body .app {
-    width: 1400px;
+  html body .app,
+  html body .footer-inner {
+    width: 80%;
   }
 }
 

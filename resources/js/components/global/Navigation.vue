@@ -28,7 +28,7 @@
     .header {
         width: 100%;
         .header-inner {
-            padding: 50px 0 20px;
+            padding: 60px 0 40px;
             .site-meta {
                 text-align: center;
                 .site-title {
