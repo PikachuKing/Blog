@@ -3,6 +3,8 @@
         <div class="main-inner">
             <section class="articles">
                 <article-catalog></article-catalog>
+                <article-catalog></article-catalog>
+                <article-catalog></article-catalog>
             </section>
         </div>
     </main>
