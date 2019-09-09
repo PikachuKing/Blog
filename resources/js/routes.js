@@ -48,6 +48,11 @@ export default new VueRouter({
                     component: Vue.component('Category', require('./pages/Category.vue')).default
                 },
                 {
+                    path: '/categories/:name',
+                    name: 'category',
+                    component: Vue.component('Category', require('./pages/Category.vue')).default
+                },
+                {
                     path: '/archives',
                     name: 'archives',
                     component: Vue.component('Archive', require('./pages/Archive.vue')).default

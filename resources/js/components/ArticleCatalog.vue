@@ -62,7 +62,7 @@
                     content: "";
                     position: absolute;
                     width: 100%;
-                    height: 1.5px;
+                    height: 2px;
                     bottom: -2px;
                     left: 0;
                     background-color: #000;

@@ -48,10 +48,10 @@
                     padding: 0;
                     text-align: center;
                     .menu-item{
-                        margin: 0 15px;
+                        margin: 0 20px;
                         display: inline-block;
                         list-style: none;
-                        font-size: 16px;
+                        font-size: 18px;
                         color: red;
                     }
                 }

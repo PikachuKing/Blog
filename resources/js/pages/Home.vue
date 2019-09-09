@@ -1,17 +1,16 @@
 <template>
-    <main class="main">
-        <div class="main-inner">
-            <section class="articles">
-                <article-catalog></article-catalog>
-                <article-catalog></article-catalog>
-                <article-catalog></article-catalog>
-            </section>
-        </div>
-    </main>
+    <div class="articles">
+        <section>
+            <article-catalog></article-catalog>
+            <article-catalog></article-catalog>
+            <article-catalog></article-catalog>
+        </section>
+    </div>
 </template>
 
 <script>
     import ArticleCatalog from '../components/ArticleCatalog'
+
     export default {
         name: "Home",
         components: {
@@ -21,12 +20,5 @@
 </script>
 
 <style lang="scss" scoped>
-    .main{
-        padding-bottom: 150px;
-        text-align: center;
-        .main-inner{
-            margin: 0 auto;
-            width: 65%;
-        }
-    }
+
 </style>

@@ -1,7 +1,11 @@
 <template>
     <div class="layout">
         <navigation></navigation>
-        <router-view></router-view>
+        <main class="main">
+            <div class="main-inner">
+                <router-view></router-view>
+            </div>
+        </main>
         <foot></foot>
     </div>
 </template>
@@ -20,8 +24,16 @@
 </script>
 
 <style lang="scss" scoped>
-    .layout{
+    .layout {
         width: 100%;
         height: auto;
+        .main {
+            padding-bottom: 150px;
+            text-align: center;
+            .main-inner {
+                margin: 0 auto;
+                width: 65%;
+            }
+        }
     }
 </style>
