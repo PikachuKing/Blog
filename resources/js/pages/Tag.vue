@@ -4,7 +4,7 @@
         <div class="tag-body">
             <div class="tag-list">
                 <span class="tag-list-item"  v-for="tag of tags" :key="tag.id">
-                    <a class="tag-list-item-link" :href="'/tags/'+tag.name">{{ tag.name }}</a>
+                    <a class="tag-list-item-link" :style="{fontSize: tagSize(tag.count)}" :href="'/tags/'+tag.name">{{ tag.name }}</a>
                 </span>
             </div>
         </div>
@@ -35,6 +35,14 @@
 </script>
 
 <style lang="scss" scoped>
+    @function tagSize($n) {
+        @if($n < 15){
+            @return 12 + (($n - 1) * 0.87);
+        }
+        @else{
+            @return 30px;
+        }
+    }
     .tag {
         margin-top: 50px;
         .tag-title {
@@ -51,7 +59,6 @@
                     margin: 10px 20px;
                     .tag-list-item-link {
                         color: #555;
-                        font-size: 18px;
                     }
                     .tag-list-item-link:hover {
                         color: red;

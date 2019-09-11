@@ -51,7 +51,7 @@
                 .article-title-link {
                     display: inline-block;
                     position: relative;
-                    color: #555;
+                    color: #000;
                     border-bottom: none;
                     text-decoration: none;
                     line-height: 1.2;
