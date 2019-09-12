@@ -1,5 +1,9 @@
 <template>
-
+    <div class="about">
+        <div class="about-content">
+            aaaa
+        </div>
+    </div>
 </template>
 
 <script>
@@ -12,6 +16,11 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    .about{
+        margin-top: 70px;
+        .about-content{
 
+        }
+    }
 </style>

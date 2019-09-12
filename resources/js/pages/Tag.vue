@@ -3,8 +3,8 @@
         <header class="tag-title">共计11个标签</header>
         <div class="tag-body">
             <div class="tag-list">
-                <span class="tag-list-item"  v-for="tag of tags" :key="tag.id">
-                    <a class="tag-list-item-link" :style="{fontSize: tagSize(tag.count)}" :href="'/tags/'+tag.name">{{ tag.name }}</a>
+                <span class="tag-list-item" v-for="tag of tags" :key="tag.id">
+                    <a class="tag-list-item-link" :style="{fontSize: tag.fontSize+'px', color: tag.color}" :href="'/tags/'+tag.name">{{ tag.name }}</a>
                 </span>
             </div>
         </div>
@@ -19,30 +19,45 @@
                 tags: [{
                     id: 0,
                     name: 'PHP',
-                    count: 10
-                },{
+                    count: 1
+                }, {
                     id: 1,
                     name: 'Laravel',
                     count: 10
-                },{
+                }, {
                     id: 2,
                     name: 'Mysql',
-                    count: 14
+                    count: 15
                 }]
             }
+        },
+        methods: {
+            setFontSize: function () {
+                this.tags.forEach(item => {
+                    if (item.count < 15) {
+                        item.fontSize = 12 + ((item.count - 1) * 0.87);
+                    } else {
+                        item.fontSize = 30;
+                    }
+                    switch (true) {
+                        case item.count <= 3: item.color = '#ccc'; break;
+                        case item.count <= 5: item.color = '#c4c4c4'; break;
+                        case item.count <= 8: item.color = '#ababab'; break;
+                        case item.count <= 12: item.color = '#a3a3a3'; break;
+                        case item.count <= 14: item.color = '#7b7b7b'; break;
+                        default: item.color = '#111'; break;
+                    }
+                })
+            }
+        },
+        created() {
+            this.setFontSize();
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    @function tagSize($n) {
-        @if($n < 15){
-            @return 12 + (($n - 1) * 0.87);
-        }
-        @else{
-            @return 30px;
-        }
-    }
+
     .tag {
         margin-top: 50px;
         .tag-title {
@@ -55,13 +70,15 @@
             .tag-list {
                 margin-top: 60px;
                 .tag-list-item {
-                    display: inline-block;
-                    margin: 10px 20px;
                     .tag-list-item-link {
+                        display: inline-block;
+                        margin: 10px;
                         color: #555;
+                        text-decoration: none;
+                        border-bottom: 1px solid #999;
                     }
                     .tag-list-item-link:hover {
-                        color: red;
+                        border-bottom: 1px solid red;
                     }
                 }
             }

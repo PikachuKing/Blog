@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,8 +11,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'v1', 'middleware' => 'throttle'], function(){
-    Route::get('/user', function( Request $request ){
-        return $request->user();
-    });
+Route::group(['prefix' => 'v1', 'namespace' => 'API', 'middleware' => 'throttle'], function(){
+    Route::get('/', 'ArticleController@getArticles');
+    Route::get('/page/{page}', 'ArticleController@getArticles')->where('page', '[0-9]+');
 });
