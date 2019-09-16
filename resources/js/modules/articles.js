@@ -19,17 +19,15 @@ export const articles = {
      * Defines the actions used to retrieve the data.
      */
     actions: {
-        loadArticles({commit}) {
+        loadArticles({commit}, data) {
             commit('setArticlesLoadStatus', 1);
-            CafeAPI.getArticles()
-                .then(function (response) {
-                    commit('setArticles', response.data);
-                    commit('setArticlesLoadStatus', 2);
-                })
-                .catch(function () {
-                    commit('setArticles', []);
-                    commit('setArticlesLoadStatus', 3);
-                });
+            CafeAPI.getArticles(data.page).then(function (response) {
+                commit('setArticles', response.data);
+                commit('setArticlesLoadStatus', 2);
+            }).catch(function () {
+                commit('setArticles', []);
+                commit('setArticlesLoadStatus', 3);
+            });
         }
     },
     /**

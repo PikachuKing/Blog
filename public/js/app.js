@@ -59979,6 +59979,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
       name: 'home',
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
     }, {
+      path: '/page/:page',
+      name: 'home',
+      component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
+    }, {
       path: '/about',
       name: 'about',
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('About', __webpack_require__(/*! ./pages/About.vue */ "./resources/js/pages/About.vue"))["default"]

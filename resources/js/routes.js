@@ -33,6 +33,11 @@ export default new VueRouter({
                     component: Vue.component('Home', require('./pages/Home.vue')).default
                 },
                 {
+                    path: '/page/:page',
+                    name: 'home',
+                    component: Vue.component('Home', require('./pages/Home.vue')).default
+                },
+                {
                     path: '/about',
                     name: 'about',
                     component: Vue.component('About', require('./pages/About.vue')).default
