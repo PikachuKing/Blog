@@ -5,16 +5,19 @@
             <article-catalog></article-catalog>
             <article-catalog></article-catalog>
         </section>
+        <pagination></pagination>
     </div>
 </template>
 
 <script>
     import ArticleCatalog from '../components/ArticleCatalog'
+    import Pagination from '../components/Pagination'
 
     export default {
         name: "Home",
         components: {
-            ArticleCatalog
+            ArticleCatalog,
+            Pagination
         }
     }
 </script>
