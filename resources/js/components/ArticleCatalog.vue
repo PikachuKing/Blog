@@ -36,7 +36,13 @@
 
 <script>
     export default {
-        name: "ArticleCatalog"
+        name: "ArticleCatalog",
+        computed: {
+            articles(){
+                // console.log(this.$store.getters.getArticles());
+                return this.$store.getters.getArticles();
+            }
+        }
     }
 </script>
 

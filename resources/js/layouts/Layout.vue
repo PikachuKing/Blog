@@ -19,7 +19,7 @@
         components: {
             Navigation,
             Foot
-        },
+        }
     }
 </script>
 
@@ -33,6 +33,12 @@
             .main-inner {
                 margin: 0 auto;
                 width: 65%;
+            }
+            @media (max-width: 1200px) {
+                .main-inner {
+                    width: 90%;
+                    margin: 0 auto;
+                }
             }
         }
     }

@@ -5,7 +5,7 @@
  | The Vuex data store for the articles
  */
 
-import CafeAPI from '../api/articles.js';
+import ArticlesAPI from '../api/articles.js';
 
 export const articles = {
     /**
@@ -21,7 +21,7 @@ export const articles = {
     actions: {
         loadArticles({commit}, data) {
             commit('setArticlesLoadStatus', 1);
-            CafeAPI.getArticles(data.page).then(function (response) {
+            ArticlesAPI.getArticles(data.page).then(function (response) {
                 commit('setArticles', response.data);
                 commit('setArticlesLoadStatus', 2);
             }).catch(function () {
@@ -35,11 +35,11 @@ export const articles = {
      */
     mutations: {
         setArticlesLoadStatus(state, status) {
-            state.cafesLoadStatus = status;
+            state.articlesLoadStatus = status;
         },
 
-        setArticles(state, cafes) {
-            state.cafes = cafes;
+        setArticles(state, articles) {
+            state.articles = articles;
         }
     },
     /**
@@ -47,11 +47,11 @@ export const articles = {
      */
     getters: {
         getArticlesLoadStatus(state) {
-            return state.cafesLoadStatus;
+            return state.articlesLoadStatus;
         },
 
         getArticles(state) {
-            return state.cafes;
+            return state.articles;
         }
     }
 };

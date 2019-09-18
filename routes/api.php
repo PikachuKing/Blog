@@ -12,6 +12,5 @@
 */
 
 Route::group(['prefix' => 'v1', 'namespace' => 'API', 'middleware' => 'throttle'], function(){
-    Route::get('/', 'ArticleController@getArticles');
-    Route::get('/page/{page}', 'ArticleController@getArticles')->where('page', '[0-9]+');
+    Route::get('/articles/{page}', 'ArticleController@getArticles')->where('page', '[0-9]+');
 });

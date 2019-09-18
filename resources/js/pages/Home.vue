@@ -10,14 +10,17 @@
 </template>
 
 <script>
-    import ArticleCatalog from '../components/ArticleCatalog'
-    import Pagination from '../components/Pagination'
+    import ArticleCatalog from '../components/ArticleCatalog';
+    import Pagination from '../components/Pagination';
 
     export default {
         name: "Home",
         components: {
             ArticleCatalog,
             Pagination
+        },
+        created() {
+            this.$store.dispatch('loadArticles', {page: this.$route.params.page});
         }
     }
 </script>
