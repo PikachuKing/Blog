@@ -22,7 +22,7 @@ export const articles = {
         loadArticles({commit}, data) {
             commit('setArticlesLoadStatus', 1);
             ArticlesAPI.getArticles(data.page).then(function (response) {
-                commit('setArticles', response.data);
+                commit('setArticles', response.data.data);
                 commit('setArticlesLoadStatus', 2);
             }).catch(function () {
                 commit('setArticles', []);

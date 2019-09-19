@@ -1,11 +1,9 @@
 <template>
     <div class="articles">
         <section>
-            <article-catalog></article-catalog>
-            <article-catalog></article-catalog>
-            <article-catalog></article-catalog>
+            <article-catalog :articles="articles.data"></article-catalog>
         </section>
-        <pagination></pagination>
+        <pagination :currentPage="articles.current_page" :lastPage="articles.last_page"></pagination>
     </div>
 </template>
 
@@ -18,6 +16,11 @@
         components: {
             ArticleCatalog,
             Pagination
+        },
+        computed: {
+            articles() {
+                return this.$store.getters.getArticles;
+            }
         },
         created() {
             this.$store.dispatch('loadArticles', {page: this.$route.params.page});

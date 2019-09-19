@@ -4,7 +4,7 @@
  随后我们会导入所有子模块到这个文件
  */
 
-// require('es6-promise').polyfill();
+require('es6-promise').polyfill();
 
 import Vue from 'vue'
 import Vuex from 'vuex'

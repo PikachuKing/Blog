@@ -1,16 +1,16 @@
 <template>
     <nav class="pagination">
-        <a class="prev" href="/">
+        <a class="prev" href="/" v-if="showPrev">
             <i class="fa fa-angle-left"></i>
         </a>
-        <a class="page-number" href="/">1</a>
-        <span class="space">...</span>
-        <a class="page-number" href="/">3</a>
-        <span class="page-number current">4</span>
-        <a class="page-number" href="/">5</a>
-        <span class="space">...</span>
-        <a class="page-number" href="/">13</a>
-        <a class="next" href="/">
+        <a class="page-number" href="/" v-if="showFirstNumber">{{ showFirstNumber }}</a>
+        <span class="space" v-if="showPrevSpace">...</span>
+        <a class="page-number" href="/" v-if="showPrevNumber">{{ showPrevNumber }}</a>
+        <span class="page-number current">{{ currentPage }}</span>
+        <a class="page-number" :href="'/page/'+showNextNumber" v-if="showNextNumber">{{ showNextNumber }}</a>
+        <span class="space" v-if="showNextSpace">...</span>
+        <a class="page-number" :href="'/page/'+showLastNumber" v-if="showLastNumber">{{ showLastNumber }}</a>
+        <a class="next" :href="'/page/'+showNext" v-if="showNext">
             <i class="fa fa-angle-right"></i>
         </a>
     </nav>
@@ -18,7 +18,37 @@
 
 <script>
     export default {
-        name: "Pagination"
+        name: "Pagination",
+        props: {
+            'currentPage': Number,
+            'lastPage': Number,
+        },
+        computed: {
+            showPrev() {
+                return this.currentPage != 1 ? this.currentPage - 1 : null;
+            },
+            showPrevSpace() {
+                return this.currentPage === 1 || this.currentPage === 2 || this.currentPage === 3 ? false : true;
+            },
+            showFirstNumber() {
+                return this.currentPage === 1 ? null : 1;
+            },
+            showPrevNumber() {
+                return this.currentPage === 1 || this.currentPage === 2 ? this.currentPage - 1 : null;
+            },
+            showNext() {
+                return this.currentPage != this.lastPage ? this.currentPage + 1 : null;
+            },
+            showNextNumber() {
+                return this.currentPage === this.lastPage || this.currentPage === (this.lastPage - 1) ? null : this.currentPage + 1;
+            },
+            showNextSpace() {
+                return this.currentPage === this.lastPage || (this.currentPage + 1) === this.lastPage || (this.currentPage + 2) === this.lastPage ? false : true;
+            },
+            showLastNumber() {
+                return this.currentPage === this.lastPage ? null : this.lastPage;
+            }
+        }
     }
 </script>
 

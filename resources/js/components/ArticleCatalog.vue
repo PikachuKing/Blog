@@ -1,48 +1,46 @@
 <template>
-    <article class="article">
-        <header class="article-header">
-            <h2><a class="article-title-link" href="#">这是一个测试标题</a></h2>
-            <div class="article-meta">
+    <div>
+        <article class="article" v-for="article of articles" :key="article.slug">
+            <header class="article-header">
+                <h2><a class="article-title-link" href="#">{{ article.title }}</a></h2>
+                <div class="article-meta">
                 <span class="article-meta-item">
                     <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
                     <span class="post-meta-item-text">发表于:</span>
-                    <time>2018-02-05</time>
+                    <time>{{ article.published_at }}</time>
                 </span>
-                <span class="article-meta-item">
+                    <span class="article-meta-item">
                     <span class="article-meta-item-divider">|</span>
                     <span class="article-meta-item-icon"><i class="fa fa-folder-o"></i></span>
                     <span class="post-meta-item-text">分类:</span>
-                    <span><a href="baidi.com">php</a></span>
+                    <span><a href="baidi.com">{{ article.category.name }}</a></span>
                 </span>
-                <span class="article-meta-item">
+                    <span class="article-meta-item">
                     <span class="article-meta-item-divider">|</span>
                     <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
                     <span class="post-meta-item-text">浏览:</span>
-                    <span>10</span>
+                    <span>{{ article.view_number }}</span>
                 </span>
+                </div>
+            </header>
+            <div class="article-body" v-html="article.description.html">
+
             </div>
-        </header>
-        <div class="article-body">
-            主流的编程语言中，函数是构成程序的最小单元，如果把编程比喻成搬砖那么函数就是砖。搬砖是一门大学问，大多数人搬不好。写函数是更大的学问，许多程序员都写的很糟糕，包括我自己。
-            今天说说函数编写的错误集锦，怎样写函数会让函数变的特别糟糕，函数的传参在编译器中是如何优化的。 先执行一段代码： 123456 ..
-        </div>
-        <footer class="article-footer">
-            <span class="article-footer-tag-icon"><i class="fa fa-tags"></i></span>
-            <span class="article-footer-tag-text">标签:</span>
-            <span><a>#php</a><a>#laravel</a></span>
-        </footer>
-    </article>
+            <footer class="article-footer">
+                <span class="article-footer-tag-icon"><i class="fa fa-tags"></i></span>
+                <span class="article-footer-tag-text">标签:</span>
+                <span v-for="tag of article.tags"><a>#{{ tag.name }}</a></span>
+            </footer>
+        </article>
+    </div>
 </template>
 
 <script>
     export default {
         name: "ArticleCatalog",
-        computed: {
-            articles(){
-                // console.log(this.$store.getters.getArticles());
-                return this.$store.getters.getArticles();
-            }
-        }
+        props: [
+            'articles'
+        ]
     }
 </script>
 
