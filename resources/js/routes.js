@@ -34,8 +34,8 @@ export default new VueRouter({
                 },
                 {
                     path: '/page/:page',
-                    name: 'home',
-                    component: Vue.component('Home', require('./pages/Home.vue')).default
+                    name: 'page',
+                    component: Vue.component('Home', require('./pages/Home.vue')).default,
                 },
                 {
                     path: '/about',

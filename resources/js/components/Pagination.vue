@@ -1,18 +1,38 @@
 <template>
     <nav class="pagination">
-        <a class="prev" href="/" v-if="showPrev">
+        <router-link class="prev" :to="{ name: 'page', params: { page: showPrev }}" v-if="showPrev && showPrev != 1">
             <i class="fa fa-angle-left"></i>
-        </a>
-        <a class="page-number" href="/" v-if="showFirstNumber">{{ showFirstNumber }}</a>
+        </router-link>
+
+        <router-link class="prev" :to="{ name: 'home' }" v-if="showPrev === 1">
+            <i class="fa fa-angle-left"></i>
+        </router-link>
+
+        <router-link class="page-number" :to="{ name: 'home' }" v-if="showFirstNumber">
+            {{ showFirstNumber }}
+        </router-link>
+
         <span class="space" v-if="showPrevSpace">...</span>
-        <a class="page-number" href="/" v-if="showPrevNumber">{{ showPrevNumber }}</a>
+
+        <router-link class="page-number" :to="{ name: 'page', params: { page: showPrevNumber }}" v-if="showPrevNumber">
+            {{ showPrevNumber }}
+        </router-link>
+
         <span class="page-number current">{{ currentPage }}</span>
-        <a class="page-number" :href="'/page/'+showNextNumber" v-if="showNextNumber">{{ showNextNumber }}</a>
+
+        <router-link class="page-number" :to="{ name: 'page', params: { page: showNextNumber }}" v-if="showNextNumber">
+            {{ showNextNumber }}
+        </router-link>
+
         <span class="space" v-if="showNextSpace">...</span>
-        <a class="page-number" :href="'/page/'+showLastNumber" v-if="showLastNumber">{{ showLastNumber }}</a>
-        <a class="next" :href="'/page/'+showNext" v-if="showNext">
+
+        <router-link class="page-number" :to="{ name: 'page', params: { page: showLastNumber }}" v-if="showLastNumber">
+            {{ showLastNumber }}
+        </router-link>
+
+        <router-link class="next" :to="{ name: 'page', params: { page: showNext }}" v-if="showNext">
             <i class="fa fa-angle-right"></i>
-        </a>
+        </router-link>
     </nav>
 </template>
 
@@ -34,7 +54,7 @@
                 return this.currentPage === 1 ? null : 1;
             },
             showPrevNumber() {
-                return this.currentPage === 1 || this.currentPage === 2 ? this.currentPage - 1 : null;
+                return this.currentPage === 1 || this.currentPage === 2 ? null : this.currentPage - 1;
             },
             showNext() {
                 return this.currentPage != this.lastPage ? this.currentPage + 1 : null;

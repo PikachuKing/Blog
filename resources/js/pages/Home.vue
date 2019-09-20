@@ -22,6 +22,11 @@
                 return this.$store.getters.getArticles;
             }
         },
+        watch:{
+            '$route'(to){
+                this.$store.dispatch('loadArticles', {page: to.params.page});
+            }
+        },
         created() {
             this.$store.dispatch('loadArticles', {page: this.$route.params.page});
         }

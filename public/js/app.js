@@ -1768,6 +1768,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pagination",
   props: {
@@ -1785,7 +1805,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.currentPage === 1 ? null : 1;
     },
     showPrevNumber: function showPrevNumber() {
-      return this.currentPage === 1 || this.currentPage === 2 ? this.currentPage - 1 : null;
+      return this.currentPage === 1 || this.currentPage === 2 ? null : this.currentPage - 1;
     },
     showNext: function showNext() {
       return this.currentPage != this.lastPage ? this.currentPage + 1 : null;
@@ -2161,6 +2181,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     articles: function articles() {
       return this.$store.getters.getArticles;
+    }
+  },
+  watch: {
+    '$route': function $route(to) {
+      this.$store.dispatch('loadArticles', {
+        page: to.params.page
+      });
     }
   },
   created: function created() {
@@ -44759,67 +44786,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "pagination" }, [
-    _vm.showPrev
-      ? _c("a", { staticClass: "prev", attrs: { href: "/" } }, [
-          _c("i", { staticClass: "fa fa-angle-left" })
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showFirstNumber
-      ? _c("a", { staticClass: "page-number", attrs: { href: "/" } }, [
-          _vm._v(_vm._s(_vm.showFirstNumber))
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showPrevSpace
-      ? _c("span", { staticClass: "space" }, [_vm._v("...")])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showPrevNumber
-      ? _c("a", { staticClass: "page-number", attrs: { href: "/" } }, [
-          _vm._v(_vm._s(_vm.showPrevNumber))
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("span", { staticClass: "page-number current" }, [
-      _vm._v(_vm._s(_vm.currentPage))
-    ]),
-    _vm._v(" "),
-    _vm.showNextNumber
-      ? _c(
-          "a",
-          {
-            staticClass: "page-number",
-            attrs: { href: "/page/" + _vm.showNextNumber }
-          },
-          [_vm._v(_vm._s(_vm.showNextNumber))]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showNextSpace
-      ? _c("span", { staticClass: "space" }, [_vm._v("...")])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showLastNumber
-      ? _c(
-          "a",
-          {
-            staticClass: "page-number",
-            attrs: { href: "/page/" + _vm.showLastNumber }
-          },
-          [_vm._v(_vm._s(_vm.showLastNumber))]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showNext
-      ? _c(
-          "a",
-          { staticClass: "next", attrs: { href: "/page/" + _vm.showNext } },
-          [_c("i", { staticClass: "fa fa-angle-right" })]
-        )
-      : _vm._e()
-  ])
+  return _c(
+    "nav",
+    { staticClass: "pagination" },
+    [
+      _vm.showPrev && _vm.showPrev != 1
+        ? _c(
+            "router-link",
+            {
+              staticClass: "prev",
+              attrs: { to: { name: "page", params: { page: _vm.showPrev } } }
+            },
+            [_c("i", { staticClass: "fa fa-angle-left" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showPrev === 1
+        ? _c(
+            "router-link",
+            { staticClass: "prev", attrs: { to: { name: "home" } } },
+            [_c("i", { staticClass: "fa fa-angle-left" })]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showFirstNumber
+        ? _c(
+            "router-link",
+            { staticClass: "page-number", attrs: { to: { name: "home" } } },
+            [_vm._v("\n        " + _vm._s(_vm.showFirstNumber) + "\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showPrevSpace
+        ? _c("span", { staticClass: "space" }, [_vm._v("...")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showPrevNumber
+        ? _c(
+            "router-link",
+            {
+              staticClass: "page-number",
+              attrs: {
+                to: { name: "page", params: { page: _vm.showPrevNumber } }
+              }
+            },
+            [_vm._v("\n        " + _vm._s(_vm.showPrevNumber) + "\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("span", { staticClass: "page-number current" }, [
+        _vm._v(_vm._s(_vm.currentPage))
+      ]),
+      _vm._v(" "),
+      _vm.showNextNumber
+        ? _c(
+            "router-link",
+            {
+              staticClass: "page-number",
+              attrs: {
+                to: { name: "page", params: { page: _vm.showNextNumber } }
+              }
+            },
+            [_vm._v("\n        " + _vm._s(_vm.showNextNumber) + "\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showNextSpace
+        ? _c("span", { staticClass: "space" }, [_vm._v("...")])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showLastNumber
+        ? _c(
+            "router-link",
+            {
+              staticClass: "page-number",
+              attrs: {
+                to: { name: "page", params: { page: _vm.showLastNumber } }
+              }
+            },
+            [_vm._v("\n        " + _vm._s(_vm.showLastNumber) + "\n    ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showNext
+        ? _c(
+            "router-link",
+            {
+              staticClass: "next",
+              attrs: { to: { name: "page", params: { page: _vm.showNext } } }
+            },
+            [_c("i", { staticClass: "fa fa-angle-right" })]
+          )
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62664,7 +62725,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
     }, {
       path: '/page/:page',
-      name: 'home',
+      name: 'page',
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
     }, {
       path: '/about',
