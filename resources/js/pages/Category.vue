@@ -1,6 +1,6 @@
 <template>
     <div class="category">
-        <header class="category-title">共计11个分类</header>
+        <header class="category-title">共计{{ categories.length }}个分类</header>
         <div class="category-body">
             <div class="category-list">
                 <span class="category-list-item"  v-for="category of categories" :key="category.id">
@@ -15,21 +15,9 @@
 <script>
     export default {
         name: "Category",
-        data() {
-            return {
-                categories: [{
-                    id: 0,
-                    name: 'PHP',
-                    count: 10
-                },{
-                    id: 1,
-                    name: 'Laravel',
-                    count: 10
-                },{
-                    id: 2,
-                    name: 'Mysql',
-                    count: 14
-                }]
+        computed:{
+            categories() {
+                return this.$store.getters.getCategories;
             }
         }
     }

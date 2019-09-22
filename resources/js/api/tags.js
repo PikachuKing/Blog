@@ -5,9 +5,9 @@ import {BLOG_CONFIG} from '../config.js';
 
 export default {
     /**
-     * GET /api/v1/articles
+     * GET /api/v1/tags
      */
-    getArticles: function (page = 1) {
-        return axios.get(BLOG_CONFIG.API_URL + '/articles/' + page);
+    getTags: function () {
+        return axios.get(BLOG_CONFIG.API_URL + '/tags');
     }
 }

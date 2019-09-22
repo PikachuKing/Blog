@@ -30,7 +30,9 @@ class ArticleController extends APIController
             ->with('category:id,name', 'tags:name')
             ->orderBy('published_at', 'DESC')
             ->paginate(2, ['description', 'slug', 'title', 'published_at', 'view_number', 'id', 'category_id'], 'articles', $page);
+
         $articles->data = $articles->makeHidden(['id', 'category_id']);
+
         return $this->success($articles);
     }
 

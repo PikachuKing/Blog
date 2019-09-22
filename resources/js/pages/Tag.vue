@@ -1,6 +1,6 @@
 <template>
     <div class="tag">
-        <header class="tag-title">共计11个标签</header>
+        <header class="tag-title">共计{{ tags.length }}个标签</header>
         <div class="tag-body">
             <div class="tag-list">
                 <span class="tag-list-item" v-for="tag of tags" :key="tag.id">
@@ -14,21 +14,9 @@
 <script>
     export default {
         name: "Tag",
-        data() {
-            return {
-                tags: [{
-                    id: 0,
-                    name: 'PHP',
-                    count: 1
-                }, {
-                    id: 1,
-                    name: 'Laravel',
-                    count: 10
-                }, {
-                    id: 2,
-                    name: 'Mysql',
-                    count: 15
-                }]
+        computed: {
+            tags() {
+                return this.$store.getters.getTags;
             }
         },
         methods: {

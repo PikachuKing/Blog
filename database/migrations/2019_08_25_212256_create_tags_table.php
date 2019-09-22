@@ -16,8 +16,6 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique()->comment('标签名称');
-            $table->integer('article_num')->default(0)->comment('对应的文章数');
-            $table->integer('search_num')->default(0)->comment('搜索热度');
             $table->timestamps();
         });
     }

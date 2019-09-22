@@ -1734,6 +1734,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ArticleCatalog",
   props: ['articles']
@@ -1944,6 +1948,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navigation"
 });
@@ -1980,6 +2004,11 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Navigation: _components_global_Navigation__WEBPACK_IMPORTED_MODULE_0__["default"],
     Foot: _components_global_Foot__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  created: function created() {
+    this.$store.dispatch('loadTags');
+    this.$store.dispatch('loadCategories');
+    this.$store.dispatch('loadArchives');
   }
 });
 
@@ -2129,22 +2158,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Category",
-  data: function data() {
-    return {
-      categories: [{
-        id: 0,
-        name: 'PHP',
-        count: 10
-      }, {
-        id: 1,
-        name: 'Laravel',
-        count: 10
-      }, {
-        id: 2,
-        name: 'Mysql',
-        count: 14
-      }]
-    };
+  computed: {
+    categories: function categories() {
+      return this.$store.getters.getCategories;
+    }
   }
 });
 
@@ -2223,22 +2240,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Tag",
-  data: function data() {
-    return {
-      tags: [{
-        id: 0,
-        name: 'PHP',
-        count: 1
-      }, {
-        id: 1,
-        name: 'Laravel',
-        count: 10
-      }, {
-        id: 2,
-        name: 'Mysql',
-        count: 15
-      }]
-    };
+  computed: {
+    tags: function tags() {
+      return this.$store.getters.getTags;
+    }
   },
   methods: {
     setFontSize: function setFontSize() {
@@ -2372,7 +2377,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header[data-v-9652e536] {\n  width: 100%;\n}\n.header .header-inner[data-v-9652e536] {\n  padding: 60px 0 0 0;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n  text-align: center;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n  padding: 8px;\n  color: #fff;\n  font-size: 18px;\n  font-weight: bold;\n  background-color: red;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n  margin: 10px 0 20px 0;\n  color: grey;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n  padding: 0;\n  text-align: center;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n  margin: 0 20px;\n  display: inline-block;\n  list-style: none;\n  font-size: 18px;\n  color: red;\n}", ""]);
+exports.push([module.i, ".header[data-v-9652e536] {\n  width: 100%;\n}\n.header .header-inner[data-v-9652e536] {\n  padding: 60px 0 0 0;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n  text-align: center;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n  padding: 8px;\n  color: #fff;\n  font-size: 18px;\n  font-weight: bold;\n  background-color: red;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n  margin: 10px 0 20px 0;\n  color: grey;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n  padding: 0;\n  text-align: center;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n  margin: 0 20px;\n  display: inline-block;\n  list-style: none;\n  font-size: 18px;\n  color: red;\n}\n.header .header-inner .site-nav .menu .menu-item a[data-v-9652e536] {\n  color: red;\n  text-decoration: none;\n}", ""]);
 
 // exports
 
@@ -44652,13 +44657,28 @@ var render = function() {
     _vm._l(_vm.articles, function(article) {
       return _c("article", { key: article.slug, staticClass: "article" }, [
         _c("header", { staticClass: "article-header" }, [
-          _c("h2", [
-            _c(
-              "a",
-              { staticClass: "article-title-link", attrs: { href: "#" } },
-              [_vm._v(_vm._s(article.title))]
-            )
-          ]),
+          _c(
+            "h2",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "article-title-link",
+                  attrs: {
+                    to: { name: "article", params: { article: article.slug } }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(article.title) +
+                      "\n                "
+                  )
+                ]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "article-meta" }, [
             _c("span", { staticClass: "article-meta-item" }, [
@@ -45006,36 +45026,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("header", { staticClass: "header" }, [
+    _c("div", { staticClass: "header-inner" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("nav", { staticClass: "site-nav" }, [
+        _c("ul", { staticClass: "menu" }, [
+          _c(
+            "li",
+            { staticClass: "menu-item" },
+            [
+              _c("router-link", { attrs: { to: { name: "home" } } }, [
+                _vm._v("\n                        主页\n                    ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "menu-item" },
+            [
+              _c("router-link", { attrs: { to: { name: "category" } } }, [
+                _vm._v("\n                        分类\n                    ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "menu-item" },
+            [
+              _c("router-link", { attrs: { to: { name: "tag" } } }, [
+                _vm._v("\n                        标签\n                    ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "menu-item" },
+            [
+              _c("router-link", { attrs: { to: { name: "archives" } } }, [
+                _vm._v("\n                        归档\n                    ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "menu-item" },
+            [
+              _c("router-link", { attrs: { to: { name: "about" } } }, [
+                _vm._v("\n                        关于\n                    ")
+              ])
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("header", { staticClass: "header" }, [
-      _c("div", { staticClass: "header-inner" }, [
-        _c("div", { staticClass: "site-meta" }, [
-          _c("span", { staticClass: "site-title" }, [_vm._v("PikachuKing")]),
-          _vm._v(" "),
-          _c("p", { staticClass: "site-describe" }, [
-            _vm._v("PikachuKing PikachuKing")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("nav", { staticClass: "site-nav" }, [
-          _c("ul", { staticClass: "menu" }, [
-            _c("li", { staticClass: "menu-item" }, [_vm._v("主页")]),
-            _vm._v(" "),
-            _c("li", { staticClass: "menu-item" }, [_vm._v("分类")]),
-            _vm._v(" "),
-            _c("li", { staticClass: "menu-item" }, [_vm._v("标签")]),
-            _vm._v(" "),
-            _c("li", { staticClass: "menu-item" }, [_vm._v("归档")]),
-            _vm._v(" "),
-            _c("li", { staticClass: "menu-item" }, [_vm._v("关于")])
-          ])
-        ])
+    return _c("div", { staticClass: "site-meta" }, [
+      _c("span", { staticClass: "site-title" }, [_vm._v("PikachuKing")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "site-describe" }, [
+        _vm._v("PikachuKing PikachuKing")
       ])
     ])
   }
@@ -45277,7 +45342,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "category" }, [
-    _c("header", { staticClass: "category-title" }, [_vm._v("共计11个分类")]),
+    _c("header", { staticClass: "category-title" }, [
+      _vm._v("共计" + _vm._s(_vm.categories.length) + "个分类")
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "category-body" }, [
       _c(
@@ -45373,7 +45440,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "tag" }, [
-    _c("header", { staticClass: "tag-title" }, [_vm._v("共计11个标签")]),
+    _c("header", { staticClass: "tag-title" }, [
+      _vm._v("共计" + _vm._s(_vm.tags.length) + "个标签")
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "tag-body" }, [
       _c(
@@ -61466,6 +61535,31 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/api/archives.js":
+/*!**************************************!*\
+  !*** ./resources/js/api/archives.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the Blog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * GET /api/v1/archives
+   */
+  getArchives: function getArchives() {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/archives');
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/api/articles.js":
 /*!**************************************!*\
   !*** ./resources/js/api/articles.js ***!
@@ -61477,7 +61571,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
 /**
- * Imports the Roast API URL from the config.
+ * Imports the Blog API URL from the config.
  */
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -61487,6 +61581,56 @@ __webpack_require__.r(__webpack_exports__);
   getArticles: function getArticles() {
     var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
     return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/articles/' + page);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/categories.js":
+/*!****************************************!*\
+  !*** ./resources/js/api/categories.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the Blog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * GET /api/v1/categories
+   */
+  getCategories: function getCategories() {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/categories');
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/api/tags.js":
+/*!**********************************!*\
+  !*** ./resources/js/api/tags.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../config.js */ "./resources/js/config.js");
+/**
+ * Imports the Blog API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  /**
+   * GET /api/v1/tags
+   */
+  getTags: function getTags() {
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/tags');
   }
 });
 
@@ -61999,8 +62143,8 @@ var app_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://blog.com/api/v1';
-    app_url = 'http://blog.com';
+    api_url = 'http://blog.test/api/v1';
+    app_url = 'http://blog.test';
     break;
 
   case 'production':
@@ -62103,6 +62247,77 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/modules/archives.js":
+/*!******************************************!*\
+  !*** ./resources/js/modules/archives.js ***!
+  \******************************************/
+/*! exports provided: archives */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "archives", function() { return archives; });
+/* harmony import */ var _api_archives_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/archives.js */ "./resources/js/api/archives.js");
+/*
+ |-------------------------------------------------------------------------------
+ | VUEX modules/tags.js
+ |-------------------------------------------------------------------------------
+ | The Vuex data store for the tags
+ */
+
+var archives = {
+  /**
+   * Defines the state being monitored for the module.
+   */
+  state: {
+    archives: [],
+    archivesLoadStatus: 0
+  },
+
+  /**
+   * Defines the actions used to retrieve the data.
+   */
+  actions: {
+    loadArchives: function loadArchives(_ref) {
+      var commit = _ref.commit;
+      commit('setArchivesLoadStatus', 1);
+      _api_archives_js__WEBPACK_IMPORTED_MODULE_0__["default"].getArchives().then(function (response) {
+        commit('setArchives', response.data.data);
+        commit('setArchivesLoadStatus', 2);
+      })["catch"](function () {
+        commit('setArchives', []);
+        commit('setArchivesLoadStatus', 3);
+      });
+    }
+  },
+
+  /**
+   * Defines the mutations used
+   */
+  mutations: {
+    setArchivesLoadStatus: function setArchivesLoadStatus(state, status) {
+      state.archivesLoadStatus = status;
+    },
+    setArchives: function setArchives(state, archives) {
+      state.archives = archives;
+    }
+  },
+
+  /**
+   * Defines the getters used by the module
+   */
+  getters: {
+    getArchivesLoadStatus: function getArchivesLoadStatus(state) {
+      return state.archivesLoadStatus;
+    },
+    getArchives: function getArchives(state) {
+      return state.archives;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/modules/articles.js":
 /*!******************************************!*\
   !*** ./resources/js/modules/articles.js ***!
@@ -62168,6 +62383,148 @@ var articles = {
     },
     getArticles: function getArticles(state) {
       return state.articles;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/modules/categories.js":
+/*!********************************************!*\
+  !*** ./resources/js/modules/categories.js ***!
+  \********************************************/
+/*! exports provided: categories */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "categories", function() { return categories; });
+/* harmony import */ var _api_categories_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/categories.js */ "./resources/js/api/categories.js");
+/*
+ |-------------------------------------------------------------------------------
+ | VUEX modules/categories.js
+ |-------------------------------------------------------------------------------
+ | The Vuex data store for the categories
+ */
+
+var categories = {
+  /**
+   * Defines the state being monitored for the module.
+   */
+  state: {
+    categories: [],
+    categoriesLoadStatus: 0
+  },
+
+  /**
+   * Defines the actions used to retrieve the data.
+   */
+  actions: {
+    loadCategories: function loadCategories(_ref) {
+      var commit = _ref.commit;
+      commit('setCategoriesLoadStatus', 1);
+      _api_categories_js__WEBPACK_IMPORTED_MODULE_0__["default"].getCategories().then(function (response) {
+        commit('setCategories', response.data.data);
+        commit('setCategoriesLoadStatus', 2);
+      })["catch"](function () {
+        commit('setCategories', []);
+        commit('setCategoriesLoadStatus', 3);
+      });
+    }
+  },
+
+  /**
+   * Defines the mutations used
+   */
+  mutations: {
+    setCategoriesLoadStatus: function setCategoriesLoadStatus(state, status) {
+      state.categoriesLoadStatus = status;
+    },
+    setCategories: function setCategories(state, categories) {
+      state.categories = categories;
+    }
+  },
+
+  /**
+   * Defines the getters used by the module
+   */
+  getters: {
+    getCategoriesLoadStatus: function getCategoriesLoadStatus(state) {
+      return state.categoriesLoadStatus;
+    },
+    getCategories: function getCategories(state) {
+      return state.categories;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/modules/tags.js":
+/*!**************************************!*\
+  !*** ./resources/js/modules/tags.js ***!
+  \**************************************/
+/*! exports provided: tags */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tags", function() { return tags; });
+/* harmony import */ var _api_tags_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/tags.js */ "./resources/js/api/tags.js");
+/*
+ |-------------------------------------------------------------------------------
+ | VUEX modules/tags.js
+ |-------------------------------------------------------------------------------
+ | The Vuex data store for the tags
+ */
+
+var tags = {
+  /**
+   * Defines the state being monitored for the module.
+   */
+  state: {
+    tags: [],
+    tagsLoadStatus: 0
+  },
+
+  /**
+   * Defines the actions used to retrieve the data.
+   */
+  actions: {
+    loadTags: function loadTags(_ref) {
+      var commit = _ref.commit;
+      commit('setTagsLoadStatus', 1);
+      _api_tags_js__WEBPACK_IMPORTED_MODULE_0__["default"].getTags().then(function (response) {
+        commit('setTags', response.data.data);
+        commit('setTagsLoadStatus', 2);
+      })["catch"](function () {
+        commit('setTags', []);
+        commit('setTagsLoadStatus', 3);
+      });
+    }
+  },
+
+  /**
+   * Defines the mutations used
+   */
+  mutations: {
+    setTagsLoadStatus: function setTagsLoadStatus(state, status) {
+      state.tagsLoadStatus = status;
+    },
+    setTags: function setTags(state, tags) {
+      state.tags = tags;
+    }
+  },
+
+  /**
+   * Defines the getters used by the module
+   */
+  getters: {
+    getTagsLoadStatus: function getTagsLoadStatus(state) {
+      return state.tagsLoadStatus;
+    },
+    getTags: function getTags(state) {
+      return state.tags;
     }
   }
 };
@@ -62770,6 +63127,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_articles_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/articles.js */ "./resources/js/modules/articles.js");
+/* harmony import */ var _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/tags.js */ "./resources/js/modules/tags.js");
+/* harmony import */ var _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/categories.js */ "./resources/js/modules/categories.js");
+/* harmony import */ var _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/archives.js */ "./resources/js/modules/archives.js");
 /*
  Vuex 模块的起点，
  Vuex 由一个父模块和多个子模块构成，该文件包含父模块，
@@ -62785,13 +63145,19 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
  */
 
 
+
+
+
 /**
  * Export our data store.
  */
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    articles: _modules_articles_js__WEBPACK_IMPORTED_MODULE_2__["articles"]
+    articles: _modules_articles_js__WEBPACK_IMPORTED_MODULE_2__["articles"],
+    tags: _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__["tags"],
+    categories: _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__["categories"],
+    archives: _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__["archives"]
   }
 }));
 

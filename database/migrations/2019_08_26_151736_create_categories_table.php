@@ -16,8 +16,6 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique()->comment('分类名称');
-            $table->integer('article_num')->default(0)->comment('对应的文章数');
-            $table->integer('search_num')->default(0)->comment('搜索热度');
             $table->timestamps();
         });
     }

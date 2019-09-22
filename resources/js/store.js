@@ -15,6 +15,9 @@ Vue.use( Vuex );
  * Imports all of the modules used in the application to build the data store.
  */
 import {articles} from './modules/articles.js';
+import {tags} from './modules/tags.js';
+import {categories} from './modules/categories.js';
+import {archives} from './modules/archives.js';
 
 /**
  * Export our data store.
@@ -22,5 +25,8 @@ import {articles} from './modules/articles.js';
 export default new Vuex.Store({
     modules: {
         articles,
+        tags,
+        categories,
+        archives,
     }
 });

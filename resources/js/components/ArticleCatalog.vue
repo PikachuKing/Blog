@@ -2,7 +2,11 @@
     <div>
         <article class="article" v-for="article of articles" :key="article.slug">
             <header class="article-header">
-                <h2><a class="article-title-link" href="#">{{ article.title }}</a></h2>
+                <h2>
+                    <router-link class="article-title-link" :to="{ name: 'article', params: { article:  article.slug }}">
+                        {{ article.title }}
+                    </router-link>
+                </h2>
                 <div class="article-meta">
                 <span class="article-meta-item">
                     <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>

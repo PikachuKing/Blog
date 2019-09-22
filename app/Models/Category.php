@@ -11,12 +11,10 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'article_num', 'search_num'
-    ];
+    protected $fillable = ['name'];
 
     public function articles()
     {
-        return $this->belongsTo(Article::class, 'category_id', 'id');
+        return $this->hasMany(Article::class, 'category_id', 'id');
     }
 }

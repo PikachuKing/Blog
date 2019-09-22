@@ -19,6 +19,11 @@
         components: {
             Navigation,
             Foot
+        },
+        created() {
+            this.$store.dispatch('loadTags');
+            this.$store.dispatch('loadCategories');
+            this.$store.dispatch('loadArchives');
         }
     }
 </script>
