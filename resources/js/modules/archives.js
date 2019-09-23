@@ -19,9 +19,9 @@ export const archives = {
      * Defines the actions used to retrieve the data.
      */
     actions: {
-        loadArchives({commit}) {
+        loadArchives({commit}, data) {
             commit('setArchivesLoadStatus', 1);
-            ArchivesAPI.getArchives().
+            ArchivesAPI.getArchives(data.page).
             then(function (response) {
                 commit('setArchives', response.data.data);
                 commit('setArchivesLoadStatus', 2);

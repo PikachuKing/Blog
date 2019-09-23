@@ -23,7 +23,7 @@
                         </router-link>
                     </li>
                     <li class="menu-item">
-                        <router-link :to="{ name: 'archives' }">
+                        <router-link :to="{ name: 'archive' }">
                             归档
                         </router-link>
                     </li>

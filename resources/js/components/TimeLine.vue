@@ -2,14 +2,14 @@
     <div class="timeline-collapse">
         <div v-for="(article,index) of articles" :key="index">
             <div class="timeline-title">
-                <h2>{{ article.title }}</h2>
+                <h2>{{ index }}</h2>
             </div>
-            <article class="timeline-item" v-for="item of article.content" :key="item.slug">
+            <article class="timeline-item" v-for="item of article" :key="item.slug">
                 <header class="timeline-item-header">
                     <h3 class="timeline-item-title">
-                        <a class="timeline-item-link" :href="item.slug">
+                        <router-link class="timeline-item-link" :to="{ name: 'article', params: { article: item.slug }}">
                             <span>{{ item.name }}</span>
-                        </a>
+                        </router-link>
                     </h3>
                     <div class="timeline-item-meta">
                         <time class="timeline-item-time">{{ item.time }}</time>
@@ -23,37 +23,9 @@
 <script>
     export default {
         name: "TimeLine",
-        data() {
-            return {
-                articles: [{
-                    title: 2018,
-                    content: [{
-                        slug: 'adsad',
-                        name: '程序的设计美学',
-                        time: '08-02'
-                    },{
-                        slug: 'adsad12',
-                        name: '程序的设计美1学2',
-                        time: '08-02'
-                    },{
-                        slug: 'adsad313',
-                        name: '程序的设计2222222',
-                        time: '08-02'
-                    },{
-                        slug: 'adsad1313',
-                        name: '程asdsada',
-                        time: '08-02'
-                    }]
-                },{
-                    title: 2017,
-                    content: [{
-                        slug: 'adsad131113',
-                        name: '2222222',
-                        time: '08-05',
-                    }]
-                }]
-            }
-        }
+        props: [
+            'articles'
+        ],
     }
 </script>
 

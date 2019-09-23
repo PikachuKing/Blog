@@ -44,4 +44,9 @@ class APIController extends  Controller
             'data' => $data,
         ]);
     }
+
+    public function pageSize()
+    {
+        return 3;
+    }
 }

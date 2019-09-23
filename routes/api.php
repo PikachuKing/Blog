@@ -17,5 +17,5 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API', 'middleware' => 'throttle'
     Route::get('/tags', 'TagController@getTags');
     Route::get('/categories', 'CategoryController@getCategories');
 
-    Route::get('/archives', 'ArchiveController@getArchives');
+    Route::get('/archives/{page}', 'ArchiveController@getArchives')->where('page', '[0-9]+');
 });

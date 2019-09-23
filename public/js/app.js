@@ -1791,10 +1791,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Pagination",
   props: {
+    'routeName': String,
     'currentPage': Number,
     'lastPage': Number
   },
@@ -1861,37 +1861,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeLine",
-  data: function data() {
-    return {
-      articles: [{
-        title: 2018,
-        content: [{
-          slug: 'adsad',
-          name: '程序的设计美学',
-          time: '08-02'
-        }, {
-          slug: 'adsad12',
-          name: '程序的设计美1学2',
-          time: '08-02'
-        }, {
-          slug: 'adsad313',
-          name: '程序的设计2222222',
-          time: '08-02'
-        }, {
-          slug: 'adsad1313',
-          name: '程asdsada',
-          time: '08-02'
-        }]
-      }, {
-        title: 2017,
-        content: [{
-          slug: 'adsad131113',
-          name: '2222222',
-          time: '08-05'
-        }]
-      }]
-    };
-  }
+  props: ['articles']
 });
 
 /***/ }),
@@ -2008,7 +1978,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.$store.dispatch('loadTags');
     this.$store.dispatch('loadCategories');
-    this.$store.dispatch('loadArchives');
   }
 });
 
@@ -2050,6 +2019,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_TimeLine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/TimeLine */ "./resources/js/components/TimeLine.vue");
+/* harmony import */ var _components_Pagination__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Pagination */ "./resources/js/components/Pagination.vue");
+//
+//
 //
 //
 //
@@ -2057,10 +2029,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Archive",
   components: {
-    TimeLine: _components_TimeLine__WEBPACK_IMPORTED_MODULE_0__["default"]
+    TimeLine: _components_TimeLine__WEBPACK_IMPORTED_MODULE_0__["default"],
+    Pagination: _components_Pagination__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  computed: {
+    archives: function archives() {
+      return this.$store.getters.getArchives;
+    }
+  },
+  watch: {
+    '$route': function $route(to) {
+      this.$store.dispatch('loadArchives', {
+        page: to.params.page
+      });
+    }
+  },
+  created: function created() {
+    this.$store.dispatch('loadArchives', {
+      page: this.$route.params.page
+    });
   }
 });
 
@@ -44810,21 +44801,15 @@ var render = function() {
     "nav",
     { staticClass: "pagination" },
     [
-      _vm.showPrev && _vm.showPrev != 1
+      _vm.showPrev
         ? _c(
             "router-link",
             {
               staticClass: "prev",
-              attrs: { to: { name: "page", params: { page: _vm.showPrev } } }
+              attrs: {
+                to: { name: _vm.routeName, params: { page: _vm.showPrev } }
+              }
             },
-            [_c("i", { staticClass: "fa fa-angle-left" })]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.showPrev === 1
-        ? _c(
-            "router-link",
-            { staticClass: "prev", attrs: { to: { name: "home" } } },
             [_c("i", { staticClass: "fa fa-angle-left" })]
           )
         : _vm._e(),
@@ -44832,7 +44817,15 @@ var render = function() {
       _vm.showFirstNumber
         ? _c(
             "router-link",
-            { staticClass: "page-number", attrs: { to: { name: "home" } } },
+            {
+              staticClass: "page-number",
+              attrs: {
+                to: {
+                  name: _vm.routeName,
+                  params: { page: _vm.showFirstNumber }
+                }
+              }
+            },
             [_vm._v("\n        " + _vm._s(_vm.showFirstNumber) + "\n    ")]
           )
         : _vm._e(),
@@ -44847,7 +44840,10 @@ var render = function() {
             {
               staticClass: "page-number",
               attrs: {
-                to: { name: "page", params: { page: _vm.showPrevNumber } }
+                to: {
+                  name: _vm.routeName,
+                  params: { page: _vm.showPrevNumber }
+                }
               }
             },
             [_vm._v("\n        " + _vm._s(_vm.showPrevNumber) + "\n    ")]
@@ -44864,7 +44860,10 @@ var render = function() {
             {
               staticClass: "page-number",
               attrs: {
-                to: { name: "page", params: { page: _vm.showNextNumber } }
+                to: {
+                  name: _vm.routeName,
+                  params: { page: _vm.showNextNumber }
+                }
               }
             },
             [_vm._v("\n        " + _vm._s(_vm.showNextNumber) + "\n    ")]
@@ -44881,7 +44880,10 @@ var render = function() {
             {
               staticClass: "page-number",
               attrs: {
-                to: { name: "page", params: { page: _vm.showLastNumber } }
+                to: {
+                  name: _vm.routeName,
+                  params: { page: _vm.showLastNumber }
+                }
               }
             },
             [_vm._v("\n        " + _vm._s(_vm.showLastNumber) + "\n    ")]
@@ -44893,7 +44895,9 @@ var render = function() {
             "router-link",
             {
               staticClass: "next",
-              attrs: { to: { name: "page", params: { page: _vm.showNext } } }
+              attrs: {
+                to: { name: _vm.routeName, params: { page: _vm.showNext } }
+              }
             },
             [_c("i", { staticClass: "fa fa-angle-right" })]
           )
@@ -44933,25 +44937,35 @@ var render = function() {
         { key: index },
         [
           _c("div", { staticClass: "timeline-title" }, [
-            _c("h2", [_vm._v(_vm._s(article.title))])
+            _c("h2", [_vm._v(_vm._s(index))])
           ]),
           _vm._v(" "),
-          _vm._l(article.content, function(item) {
+          _vm._l(article, function(item) {
             return _c(
               "article",
               { key: item.slug, staticClass: "timeline-item" },
               [
                 _c("header", { staticClass: "timeline-item-header" }, [
-                  _c("h3", { staticClass: "timeline-item-title" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "timeline-item-link",
-                        attrs: { href: item.slug }
-                      },
-                      [_c("span", [_vm._v(_vm._s(item.name))])]
-                    )
-                  ]),
+                  _c(
+                    "h3",
+                    { staticClass: "timeline-item-title" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "timeline-item-link",
+                          attrs: {
+                            to: {
+                              name: "article",
+                              params: { article: item.slug }
+                            }
+                          }
+                        },
+                        [_c("span", [_vm._v(_vm._s(item.name))])]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c("div", { staticClass: "timeline-item-meta" }, [
                     _c("time", { staticClass: "timeline-item-time" }, [
@@ -45069,7 +45083,7 @@ var render = function() {
             "li",
             { staticClass: "menu-item" },
             [
-              _c("router-link", { attrs: { to: { name: "archives" } } }, [
+              _c("router-link", { attrs: { to: { name: "archive" } } }, [
                 _vm._v("\n                        归档\n                    ")
               ])
             ],
@@ -45198,7 +45212,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "archive" }, [_c("time-line")], 1)
+  return _c(
+    "div",
+    { staticClass: "archive" },
+    [
+      _c("time-line", { attrs: { articles: _vm.archives.articles } }),
+      _vm._v(" "),
+      _c("pagination", {
+        attrs: {
+          routeName: "archivePage",
+          currentPage: _vm.archives.currentPage,
+          lastPage: _vm.archives.lastPage
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -45409,6 +45438,7 @@ var render = function() {
       _vm._v(" "),
       _c("pagination", {
         attrs: {
+          routeName: "homePage",
           currentPage: _vm.articles.current_page,
           lastPage: _vm.articles.last_page
         }
@@ -61554,7 +61584,8 @@ __webpack_require__.r(__webpack_exports__);
    * GET /api/v1/archives
    */
   getArchives: function getArchives() {
-    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/archives');
+    var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+    return axios.get(_config_js__WEBPACK_IMPORTED_MODULE_0__["BLOG_CONFIG"].API_URL + '/archives/' + page);
   }
 });
 
@@ -62143,8 +62174,8 @@ var app_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://blog.test/api/v1';
-    app_url = 'http://blog.test';
+    api_url = 'http://blog.com/api/v1';
+    app_url = 'http://blog.com';
     break;
 
   case 'production':
@@ -62278,10 +62309,10 @@ var archives = {
    * Defines the actions used to retrieve the data.
    */
   actions: {
-    loadArchives: function loadArchives(_ref) {
+    loadArchives: function loadArchives(_ref, data) {
       var commit = _ref.commit;
       commit('setArchivesLoadStatus', 1);
-      _api_archives_js__WEBPACK_IMPORTED_MODULE_0__["default"].getArchives().then(function (response) {
+      _api_archives_js__WEBPACK_IMPORTED_MODULE_0__["default"].getArchives(data.page).then(function (response) {
         commit('setArchives', response.data.data);
         commit('setArchivesLoadStatus', 2);
       })["catch"](function () {
@@ -63082,7 +63113,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
     }, {
       path: '/page/:page',
-      name: 'page',
+      name: 'homePage',
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Home', __webpack_require__(/*! ./pages/Home.vue */ "./resources/js/pages/Home.vue"))["default"]
     }, {
       path: '/about',
@@ -63102,7 +63133,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Category', __webpack_require__(/*! ./pages/Category.vue */ "./resources/js/pages/Category.vue"))["default"]
     }, {
       path: '/archives',
-      name: 'archives',
+      name: 'archive',
+      component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Archive', __webpack_require__(/*! ./pages/Archive.vue */ "./resources/js/pages/Archive.vue"))["default"]
+    }, {
+      path: '/archives/page/:page',
+      name: 'archivePage',
       component: vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Archive', __webpack_require__(/*! ./pages/Archive.vue */ "./resources/js/pages/Archive.vue"))["default"]
     }, {
       path: '/:article',

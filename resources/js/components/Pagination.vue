@@ -1,36 +1,35 @@
 <template>
     <nav class="pagination">
-        <router-link class="prev" :to="{ name: 'page', params: { page: showPrev }}" v-if="showPrev && showPrev != 1">
+        <router-link class="prev" :to="{ name: routeName, params: { page: showPrev }}" v-if="showPrev">
             <i class="fa fa-angle-left"></i>
         </router-link>
 
-        <router-link class="prev" :to="{ name: 'home' }" v-if="showPrev === 1">
-            <i class="fa fa-angle-left"></i>
-        </router-link>
-
-        <router-link class="page-number" :to="{ name: 'home' }" v-if="showFirstNumber">
+        <router-link class="page-number" :to="{ name: routeName, params: { page: showFirstNumber }}" v-if="showFirstNumber">
             {{ showFirstNumber }}
         </router-link>
 
         <span class="space" v-if="showPrevSpace">...</span>
 
-        <router-link class="page-number" :to="{ name: 'page', params: { page: showPrevNumber }}" v-if="showPrevNumber">
+        <router-link class="page-number" :to="{ name: routeName, params: { page: showPrevNumber }}"
+                     v-if="showPrevNumber">
             {{ showPrevNumber }}
         </router-link>
 
         <span class="page-number current">{{ currentPage }}</span>
 
-        <router-link class="page-number" :to="{ name: 'page', params: { page: showNextNumber }}" v-if="showNextNumber">
+        <router-link class="page-number" :to="{ name: routeName, params: { page: showNextNumber }}"
+                     v-if="showNextNumber">
             {{ showNextNumber }}
         </router-link>
 
         <span class="space" v-if="showNextSpace">...</span>
 
-        <router-link class="page-number" :to="{ name: 'page', params: { page: showLastNumber }}" v-if="showLastNumber">
+        <router-link class="page-number" :to="{ name: routeName, params: { page: showLastNumber }}"
+                     v-if="showLastNumber">
             {{ showLastNumber }}
         </router-link>
 
-        <router-link class="next" :to="{ name: 'page', params: { page: showNext }}" v-if="showNext">
+        <router-link class="next" :to="{ name: routeName, params: { page: showNext }}" v-if="showNext">
             <i class="fa fa-angle-right"></i>
         </router-link>
     </nav>
@@ -40,6 +39,7 @@
     export default {
         name: "Pagination",
         props: {
+            'routeName': String,
             'currentPage': Number,
             'lastPage': Number,
         },

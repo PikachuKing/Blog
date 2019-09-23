@@ -34,7 +34,7 @@ export default new VueRouter({
                 },
                 {
                     path: '/page/:page',
-                    name: 'page',
+                    name: 'homePage',
                     component: Vue.component('Home', require('./pages/Home.vue')).default,
                 },
                 {
@@ -59,8 +59,13 @@ export default new VueRouter({
                 },
                 {
                     path: '/archives',
-                    name: 'archives',
+                    name: 'archive',
                     component: Vue.component('Archive', require('./pages/Archive.vue')).default
+                },
+                {
+                    path: '/archives/page/:page',
+                    name: 'archivePage',
+                    component: Vue.component('Archive', require('./pages/Archive.vue')).default,
                 },
                 {
                     path: '/:article',

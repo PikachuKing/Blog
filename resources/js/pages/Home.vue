@@ -3,7 +3,7 @@
         <section>
             <article-catalog :articles="articles.data"></article-catalog>
         </section>
-        <pagination :currentPage="articles.current_page" :lastPage="articles.last_page"></pagination>
+        <pagination routeName="homePage" :currentPage="articles.current_page" :lastPage="articles.last_page"></pagination>
     </div>
 </template>
 

@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\API;
 
-
 use App\Models\Article;
 
 class ArchiveController extends APIController
@@ -21,12 +20,24 @@ class ArchiveController extends APIController
      | Method:         GET
      | Description:    Gets archives list by years in the application
     */
-    public function getArchives()
+    public function getArchives(int $currentPage = 1)
     {
-        $categories = Article::query()
+        $articles = Article::query()
+            ->whereNotNull('published_at')
+            ->select('title as name', 'slug', 'published_at')
+            ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
+            ->selectRaw('DATE_FORMAT(published_at,"%m%d") as time')
             ->orderBy('published_at', 'DESC')
-            ->select('title', 'slug', 'published_at')
-            ->paginate(10);
-        return $this->success($categories);
+            ->offset($this->pageSize() * ($currentPage - 1))
+            ->limit($this->pageSize())
+            ->get()
+            ->makeHidden('published_at')
+            ->groupBy('year');
+
+        // 计算总页数
+        $lastPage = ceil(Article::query()->whereNotNull('published_at')->count() / $this->pageSize());
+        return $this->success(compact('articles', 'currentPage', 'lastPage'));
     }
+
+
 }
