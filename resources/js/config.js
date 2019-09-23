@@ -6,8 +6,8 @@ var app_url = '';
 
 switch( process.env.NODE_ENV ){
     case 'development':
-        api_url = 'http://blog.com/api/v1';
-        app_url = 'http://blog.com';
+        api_url = 'http://blog.test/api/v1';
+        app_url = 'http://blog.test';
         break;
     case 'production':
         api_url = 'http://pikachuking.com/api/v1';

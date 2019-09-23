@@ -9,5 +9,11 @@ export default {
      */
     getTags: function () {
         return axios.get(BLOG_CONFIG.API_URL + '/tags');
+    },
+    /**
+     * GET /api/v1/tags
+     */
+    getTagCatalogs: function (name, page = 1) {
+        return axios.get(BLOG_CONFIG.API_URL + '/tag/' + name + '/' + page);
     }
 }

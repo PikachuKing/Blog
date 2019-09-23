@@ -14,6 +14,9 @@ export const tags = {
     state: {
         tags: [],
         tagsLoadStatus: 0,
+
+        tagCatalogs: [],
+        tagCatalogsLoadStatus: 0,
     },
     /**
      * Defines the actions used to retrieve the data.
@@ -29,6 +32,17 @@ export const tags = {
                 commit('setTags', []);
                 commit('setTagsLoadStatus', 3);
             });
+        },
+        loadTagCatalogs({commit}, data) {
+            commit('setTagsLoadStatus', 1);
+            TagsAPI.getTags(data.name, data.page).
+            then(function (response) {
+                commit('setTagCatalogs', response.data.data);
+                commit('setTagCatalogsLoadStatus', 2);
+            }).catch(function () {
+                commit('setTagCatalogs', []);
+                commit('setTagCatalogsLoadStatus', 3);
+            });
         }
     },
     /**
@@ -41,6 +55,14 @@ export const tags = {
 
         setTags(state, tags) {
             state.tags = tags;
+        },
+
+        setTagCatalogsLoadStatus(state, status) {
+            state.tagCatalogsLoadStatus = status;
+        },
+
+        setTagCatalogs(state, tagCatalogs) {
+            state.tagCatalogs = tagCatalogs;
         }
     },
     /**
@@ -53,6 +75,14 @@ export const tags = {
 
         getTags(state) {
             return state.tags;
+        },
+
+        getTagCatalogsLoadStatus(state) {
+            return state.tagCatalogsLoadStatus;
+        },
+
+        getTagCatalogs(state) {
+            return state.tagCatalogs;
         }
     }
 };

@@ -38,14 +38,14 @@ export default new VueRouter({
                     component: Vue.component('Home', require('./pages/Home.vue')).default,
                 },
                 {
-                    path: '/about',
-                    name: 'about',
-                    component: Vue.component('About', require('./pages/About.vue')).default
-                },
-                {
                     path: '/tags',
                     name: 'tag',
                     component: Vue.component('Tag', require('./pages/Tag.vue')).default
+                },
+                {
+                    path: '/tags/:name/page/:page',
+                    name: 'tagCatalog',
+                    component: Vue.component('TagCatalog', require('./pages/TagCatalog.vue')).default
                 },
                 {
                     path: '/categories',
@@ -71,6 +71,11 @@ export default new VueRouter({
                     path: '/:article',
                     name: 'article',
                     component: Vue.component('Article', require('./pages/Article.vue')).default
+                },
+                {
+                    path: '/about',
+                    name: 'about',
+                    component: Vue.component('About', require('./pages/About.vue')).default
                 }
             ]
         }

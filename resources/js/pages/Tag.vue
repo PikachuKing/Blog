@@ -4,7 +4,13 @@
         <div class="tag-body">
             <div class="tag-list">
                 <span class="tag-list-item" v-for="tag of tags" :key="tag.id">
-                    <a class="tag-list-item-link" :style="{fontSize: tag.fontSize+'px', color: tag.color}" :href="'/tags/'+tag.name">{{ tag.name }}</a>
+                    <router-link
+                        class="tag-list-item-link"
+                        :style="{fontSize: tag.fontSize+'px', color: tag.color}"
+                        :to="{ name: 'tagCatalog', params: { name: tag.name, page: 1 }}"
+                    >
+                        {{ tag.name }}
+                    </router-link>
                 </span>
             </div>
         </div>
