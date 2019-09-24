@@ -53,9 +53,9 @@ export default new VueRouter({
                     component: Vue.component('Category', require('./pages/Category.vue')).default
                 },
                 {
-                    path: '/categories/:name',
-                    name: 'category',
-                    component: Vue.component('Category', require('./pages/Category.vue')).default
+                    path: '/categories/:name/page/:page',
+                    name: 'categoryCatalog',
+                    component: Vue.component('CategoryCatalog', require('./pages/CategoryCatalog.vue')).default
                 },
                 {
                     path: '/archives',
@@ -68,7 +68,7 @@ export default new VueRouter({
                     component: Vue.component('Archive', require('./pages/Archive.vue')).default,
                 },
                 {
-                    path: '/:article',
+                    path: '/:slug',
                     name: 'article',
                     component: Vue.component('Article', require('./pages/Article.vue')).default
                 },

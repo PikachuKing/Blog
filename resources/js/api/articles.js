@@ -9,5 +9,12 @@ export default {
      */
     getArticles: function (page = 1) {
         return axios.get(BLOG_CONFIG.API_URL + '/articles/' + page);
+    },
+
+    /**
+     * GET /api/v1/{slug}
+     */
+    getArticle: function (slug) {
+        return axios.get(BLOG_CONFIG.API_URL + '/' + slug);
     }
 }

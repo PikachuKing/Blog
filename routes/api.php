@@ -12,12 +12,18 @@
 */
 
 Route::group(['prefix' => 'v1', 'namespace' => 'API', 'middleware' => 'throttle'], function(){
-    Route::get('/articles/{page}', 'ArticleController@getArticles')->where('page', '[0-9]+');
-
+    // 标签
     Route::get('/tags', 'TagController@getTags');
-    Route::get('/tags/{name}/{page}', 'TagController@getTagCatalogs')->where('page', '[0-9]+');
+    Route::get('/tags/{name}/{currentPage}', 'TagController@getTagCatalogs')->where('page', '[0-9]+');
 
+    // 分类
     Route::get('/categories', 'CategoryController@getCategories');
+    Route::get('/categories/{name}/{currentPage}', 'CategoryController@getCategoryCatalogs')->where('page', '[0-9]+');
 
-    Route::get('/archives/{page}', 'ArchiveController@getArchives')->where('page', '[0-9]+');
+    // 归档
+    Route::get('/archives/{currentPage}', 'ArchiveController@getArchives')->where('page', '[0-9]+');
+
+    // 文章列表
+    Route::get('/articles/{currentPage}', 'ArticleController@getArticles')->where('page', '[0-9]+');
+    Route::get('/{slug}', 'ArticleController@getArticle');
 });

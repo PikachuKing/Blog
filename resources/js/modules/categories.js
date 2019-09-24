@@ -14,6 +14,9 @@ export const categories = {
     state: {
         categories: [],
         categoriesLoadStatus: 0,
+
+        categoryCatalogs: [],
+        categoryCatalogsLoadStatus: 0,
     },
     /**
      * Defines the actions used to retrieve the data.
@@ -29,6 +32,17 @@ export const categories = {
                 commit('setCategories', []);
                 commit('setCategoriesLoadStatus', 3);
             });
+        },
+        loadCategoryCatalogs({commit}, data) {
+            commit('setCategoryCatalogsLoadStatus', 1);
+            CategoriesAPI.getCategoryCatalogs(data.name, data.page).
+            then(function (response) {
+                commit('setCategoryCatalogs', response.data.data);
+                commit('setCategoryCatalogsLoadStatus', 2);
+            }).catch(function () {
+                commit('setCategoryCatalogs', []);
+                commit('setCategoryCatalogsLoadStatus', 3);
+            });
         }
     },
     /**
@@ -41,7 +55,15 @@ export const categories = {
 
         setCategories(state, categories) {
             state.categories = categories;
-        }
+        },
+
+        setCategoryCatalogsLoadStatus(state, status) {
+            state.categoriesLoadStatus = status;
+        },
+
+        setCategoryCatalogs(state, categoryCatalogs) {
+            state.categoryCatalogs = categoryCatalogs;
+        },
     },
     /**
      * Defines the getters used by the module
@@ -53,6 +75,14 @@ export const categories = {
 
         getCategories(state) {
             return state.categories;
+        },
+
+        getCategoryCatalogsLoadStatus(state) {
+            return state.categoryCatalogsLoadStatus;
+        },
+
+        getCategoryCatalogs(state) {
+            return state.categoryCatalogs;
         }
     }
 };

@@ -1,5 +1,5 @@
 <template>
-    <nav class="pagination">
+    <nav class="pagination" v-if="currentPage">
         <router-link class="prev" :to="{ name: routeName, params: { page: showPrev }}" v-if="showPrev">
             <i class="fa fa-angle-left"></i>
         </router-link>

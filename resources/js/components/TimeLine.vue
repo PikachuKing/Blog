@@ -7,7 +7,8 @@
             <article class="timeline-item" v-for="item of article" :key="item.slug">
                 <header class="timeline-item-header">
                     <h3 class="timeline-item-title">
-                        <router-link class="timeline-item-link" :to="{ name: 'article', params: { article: item.slug }}">
+                        <router-link class="timeline-item-link"
+                                     :to="{ name: 'article', params: { slug: item.slug }}">
                             <span>{{ item.name }}</span>
                         </router-link>
                     </h3>
@@ -25,7 +26,7 @@
         name: "TimeLine",
         props: [
             'articles'
-        ],
+        ]
     }
 </script>
 

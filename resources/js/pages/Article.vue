@@ -1,48 +1,55 @@
 <template>
     <div class="article">
-        <div class="content">
+        <div class="content" v-if="article">
             <header class="article-header">
-                <h2 class="article-title">Web开发人员对安全的思考</h2>
+                <h2 class="article-title">{{ article.title }}</h2>
                 <div class="article-meta">
                     <span class="article-meta-item">
                         <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
                         <span class="post-meta-item-text">发表于:</span>
-                        <time>2018-02-05</time>
+                        <time>{{ article.time }}</time>
                     </span>
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-folder-o"></i></span>
                         <span class="post-meta-item-text">分类:</span>
-                        <span><a href="baidi.com">php</a></span>
+                        <span>
+                            <router-link class="page-number"
+                                         :to="{ name: 'categoryCatalog', params: { name: article.category.name, page: 1 }}">
+                                {{ article.category.name }}
+                            </router-link>
+                        </span>
                     </span>
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
                         <span class="post-meta-item-text">浏览:</span>
-                        <span>10</span>
+                        <span>{{ article.view_number }}</span>
                     </span>
                 </div>
             </header>
-            <section class="article-body">
-aaaaaaaaaaaaaaaaaaaaaaaaaa
-            </section>
+            <section class="article-body" v-html="article.content.html"></section>
             <footer class="article-footer">
                 <div class="article-tags">
-                    <a href="/laravel">laravel</a>
-                    <a href="/laravel">php</a>
+                    <router-link
+                            v-for="(tag, index) of article.tags" :key="index"
+                            :to="{ name: 'tagCatalog', params: { name: tag.name, page: 1 }}"
+                    >
+                        {{ tag.name }}
+                    </router-link>
                 </div>
                 <div class="article-nav">
                     <div class="article-nav-item">
-                        <a href="/444444">
+                        <router-link v-if="prevArticle" :to="{ name: 'article', params: { slug:  prevArticle.slug }}">
                             <i class="fa fa-chevron-left"></i>
-                            aaaaaaaaaaa
-                        </a>
+                            {{ prevArticle.title }}
+                        </router-link>
                     </div>
                     <div class="article-nav-item article-nav-prev">
-                        <a href="/444444">
-                            aaaaaaaaaaa
+                        <router-link v-if="nextArticle" :to="{ name: 'article', params: { slug:  nextArticle.slug }}">
+                            {{ nextArticle.title }}
                             <i class="fa fa-chevron-right"></i>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </footer>
@@ -52,7 +59,26 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
 
 <script>
     export default {
-        name: "Article"
+        name: "Article",
+        computed: {
+            article() {
+                return this.$store.getters.getArticle.article;
+            },
+            prevArticle() {
+                return this.$store.getters.getArticle.prevArticle;
+            },
+            nextArticle() {
+                return this.$store.getters.getArticle.nextArticle;
+            }
+        },
+        watch: {
+            '$route'(to) {
+                this.$store.dispatch('loadArticle', {slug: to.params.slug});
+            }
+        },
+        created() {
+            this.$store.dispatch('loadArticle', {slug: this.$route.params.slug});
+        }
     }
 </script>
 
@@ -88,13 +114,13 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
                     }
                 }
             }
-            .article-body{
+            .article-body {
                 text-align: justify;
             }
-            .article-footer{
-                .article-tags{
+            .article-footer {
+                .article-tags {
                     text-align: left;
-                    a{
+                    a {
                         position: relative;
                         padding: 1px 5px;
                         background: #f5f5f5;
@@ -107,7 +133,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
                         outline: none;
                         word-wrap: break-word;
                     }
-                    a::before{
+                    a::before {
                         content: '# ';
                     }
                     a:hover {
@@ -115,17 +141,17 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
                         background: #ccc;
                     }
                 }
-                .article-nav{
+                .article-nav {
                     margin-top: 40px;
                     display: table;
                     width: 100%;
                     border-top: 1px solid #eee;
-                    .article-nav-item{
+                    .article-nav-item {
                         display: table-cell;
                         padding: 10px 0 0 0;
                         width: 45%;
                         vertical-align: top;
-                        a{
+                        a {
                             position: relative;
                             display: block;
                             padding-left: 15px;
@@ -142,7 +168,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaa
                             border-bottom: none;
                         }
                     }
-                    .article-nav-prev{
+                    .article-nav-prev {
                         text-align: right;
                     }
                 }

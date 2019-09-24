@@ -4,7 +4,13 @@
         <div class="category-body">
             <div class="category-list">
                 <span class="category-list-item"  v-for="category of categories" :key="category.id">
-                    <a class="category-list-item-link" :href="'/categories/'+category.name">{{ category.name }}</a>
+
+                    <router-link
+                            class="category-list-item-link"
+                            :to="{ name: 'categoryCatalog', params: { name: category.name, page: 1 }}"
+                    >
+                        {{ category.name }}
+                    </router-link>
                     <span class="category-list-item-num">[{{ category.count }}]</span>
                 </span>
             </div>

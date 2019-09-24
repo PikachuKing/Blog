@@ -14,6 +14,9 @@ export const articles = {
     state: {
         articles: [],
         articlesLoadStatus: 0,
+
+        article: [],
+        articleLoadStatus: 0,
     },
     /**
      * Defines the actions used to retrieve the data.
@@ -28,6 +31,16 @@ export const articles = {
                 commit('setArticles', []);
                 commit('setArticlesLoadStatus', 3);
             });
+        },
+        loadArticle({commit}, data) {
+            commit('setArticleLoadStatus', 1);
+            ArticlesAPI.getArticle(data.slug).then(function (response) {
+                commit('setArticle', response.data.data);
+                commit('setArticleLoadStatus', 2);
+            }).catch(function () {
+                commit('setArticle', []);
+                commit('setArticleLoadStatus', 3);
+            });
         }
     },
     /**
@@ -40,6 +53,14 @@ export const articles = {
 
         setArticles(state, articles) {
             state.articles = articles;
+        },
+
+        setArticleLoadStatus(state, status) {
+            state.articleLoadStatus = status;
+        },
+
+        setArticle(state, article) {
+            state.article = article;
         }
     },
     /**
@@ -52,6 +73,14 @@ export const articles = {
 
         getArticles(state) {
             return state.articles;
+        },
+
+        getArticleLoadStatus(state) {
+            return state.articleLoadStatus;
+        },
+
+        getArticle(state) {
+            return state.article;
         }
     }
 };

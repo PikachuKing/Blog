@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Models\Article;
 use App\Models\Category;
 
 class CategoryController extends APIController
@@ -28,5 +29,39 @@ class CategoryController extends APIController
             ->withCount('articles as count')
             ->get();
         return $this->success($categories);
+    }
+
+    /*
+     |-------------------------------------------------------------------------------
+     | URL:            /api/v1/tags/{name}/{currentPage}
+     | Method:         GET
+     | Description:    获取当前分类下的所有文章
+     |-------------------------------------------------------------------------------
+    */
+    public function getCategoryCatalogs(string $name, int $currentPage = 1)
+    {
+
+        $categoryCatalogs[$name] = Article::query()
+            ->where('is_draft', 0)
+            ->select('title as name', 'slug', 'published_at')
+            ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
+            ->selectRaw('DATE_FORMAT(published_at,"%m-%d") as time')
+            ->whereHas('category', function ($query) use ($name) {
+                $query->where('name', $name);
+            })
+            ->orderBy('published_at', 'DESC')
+            ->offset($this->pageSize() * ($currentPage - 1))
+            ->limit($this->pageSize())
+            ->get()
+            ->makeHidden('published_at');
+
+        // 计算总页数
+        $lastPage = ceil(Article::query()
+                ->whereNotNull('published_at')
+                ->whereHas('category', function ($query) use ($name) {
+                    $query->where('name', $name);
+                })
+                ->count() / $this->pageSize());
+        return $this->success(compact('categoryCatalogs', 'currentPage', 'lastPage'));
     }
 }

@@ -26,7 +26,7 @@ class ArchiveController extends APIController
             ->whereNotNull('published_at')
             ->select('title as name', 'slug', 'published_at')
             ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
-            ->selectRaw('DATE_FORMAT(published_at,"%m%d") as time')
+            ->selectRaw('DATE_FORMAT(published_at,"%m-%d") as time')
             ->orderBy('published_at', 'DESC')
             ->offset($this->pageSize() * ($currentPage - 1))
             ->limit($this->pageSize())

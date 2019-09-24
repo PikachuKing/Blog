@@ -35,7 +35,7 @@ export const tags = {
         },
         loadTagCatalogs({commit}, data) {
             commit('setTagsLoadStatus', 1);
-            TagsAPI.getTags(data.name, data.page).
+            TagsAPI.getTagCatalogs(data.name, data.page).
             then(function (response) {
                 commit('setTagCatalogs', response.data.data);
                 commit('setTagCatalogsLoadStatus', 2);

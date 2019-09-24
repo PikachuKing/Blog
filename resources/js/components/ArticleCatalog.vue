@@ -3,7 +3,7 @@
         <article class="article" v-for="article of articles" :key="article.slug">
             <header class="article-header">
                 <h2>
-                    <router-link class="article-title-link" :to="{ name: 'article', params: { article:  article.slug }}">
+                    <router-link class="article-title-link" :to="{ name: 'article', params: { slug:  article.slug }}">
                         {{ article.title }}
                     </router-link>
                 </h2>
@@ -33,7 +33,11 @@
             <footer class="article-footer">
                 <span class="article-footer-tag-icon"><i class="fa fa-tags"></i></span>
                 <span class="article-footer-tag-text">标签:</span>
-                <span v-for="tag of article.tags"><a>#{{ tag.name }}</a></span>
+                <span v-for="tag of article.tags">
+                     <router-link :to="{ name: 'tagCatalog', params: { name: tag.name, page: 1 }}">
+                        #{{ tag.name }}
+                    </router-link>
+                </span>
             </footer>
         </article>
     </div>

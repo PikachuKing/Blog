@@ -1,8 +1,8 @@
 <template>
     <div class="tag-catalog">
-        <time-line :articles="archives.articles"></time-line>
-        <pagination routeName="archivePage" :currentPage="archives.currentPage"
-                    :lastPage="archives.lastPage"></pagination>
+        <time-line :articles="tagCatalogs.tagCatalogs"></time-line>
+        <pagination routeName="tagCatalog" :currentPage="tagCatalogs.currentPage"
+                    :lastPage="tagCatalogs.lastPage"></pagination>
     </div>
 </template>
 
@@ -17,13 +17,13 @@
             Pagination
         },
         computed: {
-            archives() {
-                return this.$store.getters.getArchives;
+            tagCatalogs() {
+                return this.$store.getters.getTagCatalogs;
             }
         },
         watch: {
             '$route'(to) {
-                this.$store.dispatch('loadTagCatalogs', {name: to.params.name,page: to.params.page});
+                this.$store.dispatch('loadTagCatalogs', {name: to.params.name, page: to.params.page});
             }
         },
         created() {
