@@ -66,7 +66,7 @@
                 return this.currentPage === this.lastPage || (this.currentPage + 1) === this.lastPage || (this.currentPage + 2) === this.lastPage ? false : true;
             },
             showLastNumber() {
-                return this.currentPage === this.lastPage ? null : this.lastPage;
+                return this.currentPage === this.lastPage || this.lastPage === 0 ? null : this.lastPage;
             }
         }
     }
@@ -128,6 +128,7 @@
     @media (max-width: 767px) {
         .pagination {
             border-top: none;
+            text-align: center;
             .prev, .next, .page-number {
                 margin-bottom: 10px;
                 border-top: 0;

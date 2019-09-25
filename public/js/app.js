@@ -1825,7 +1825,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.currentPage === this.lastPage || this.currentPage + 1 === this.lastPage || this.currentPage + 2 === this.lastPage ? false : true;
     },
     showLastNumber: function showLastNumber() {
-      return this.currentPage === this.lastPage ? null : this.lastPage;
+      return this.currentPage === this.lastPage || this.lastPage === 0 ? null : this.lastPage;
     }
   }
 });
@@ -2458,7 +2458,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".pagination[data-v-d7acf176] {\n  margin: 120px 0 0;\n  text-align: left;\n  border-top: 1px solid #eee;\n}\n.pagination a[data-v-d7acf176] {\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  border-bottom: 1px solid #999;\n  word-wrap: break-word;\n}\n.pagination .space[data-v-d7acf176] {\n  padding: 0;\n  margin: 0;\n}\n.pagination .prev[data-v-d7acf176] {\n  margin-left: 0;\n}\n.pagination .next[data-v-d7acf176] {\n  margin-right: 0;\n}\n.pagination .current[data-v-d7acf176] {\n  color: #fff;\n  background: #ccc;\n  border-top-color: #ccc;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176], .pagination .space[data-v-d7acf176] {\n  display: inline-block;\n  position: relative;\n  top: -1px;\n  margin: 0 10px;\n  padding: 0 11px;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176] {\n  border-bottom: 0;\n  border-top: 1px solid #eee;\n  transition-property: border-color;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n}\n.pagination .prev[data-v-d7acf176]:hover, .pagination .next[data-v-d7acf176]:hover, .pagination .page-number[data-v-d7acf176]:hover {\n  border-top-color: #222;\n}\n@media (max-width: 767px) {\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176], .pagination .space[data-v-d7acf176] {\n    margin: 0 5px;\n}\n}\n@media (max-width: 767px) {\n.pagination[data-v-d7acf176] {\n    border-top: none;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176] {\n    margin-bottom: 10px;\n    border-top: 0;\n    border-bottom: 1px solid #eee;\n    padding: 0 10px;\n}\n.pagination .prev[data-v-d7acf176]:hover, .pagination .next[data-v-d7acf176]:hover, .pagination .page-number[data-v-d7acf176]:hover {\n    border-bottom-color: #222;\n}\n}", ""]);
+exports.push([module.i, ".pagination[data-v-d7acf176] {\n  margin: 120px 0 0;\n  text-align: left;\n  border-top: 1px solid #eee;\n}\n.pagination a[data-v-d7acf176] {\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  border-bottom: 1px solid #999;\n  word-wrap: break-word;\n}\n.pagination .space[data-v-d7acf176] {\n  padding: 0;\n  margin: 0;\n}\n.pagination .prev[data-v-d7acf176] {\n  margin-left: 0;\n}\n.pagination .next[data-v-d7acf176] {\n  margin-right: 0;\n}\n.pagination .current[data-v-d7acf176] {\n  color: #fff;\n  background: #ccc;\n  border-top-color: #ccc;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176], .pagination .space[data-v-d7acf176] {\n  display: inline-block;\n  position: relative;\n  top: -1px;\n  margin: 0 10px;\n  padding: 0 11px;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176] {\n  border-bottom: 0;\n  border-top: 1px solid #eee;\n  transition-property: border-color;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n}\n.pagination .prev[data-v-d7acf176]:hover, .pagination .next[data-v-d7acf176]:hover, .pagination .page-number[data-v-d7acf176]:hover {\n  border-top-color: #222;\n}\n@media (max-width: 767px) {\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176], .pagination .space[data-v-d7acf176] {\n    margin: 0 5px;\n}\n}\n@media (max-width: 767px) {\n.pagination[data-v-d7acf176] {\n    border-top: none;\n    text-align: center;\n}\n.pagination .prev[data-v-d7acf176], .pagination .next[data-v-d7acf176], .pagination .page-number[data-v-d7acf176] {\n    margin-bottom: 10px;\n    border-top: 0;\n    border-bottom: 1px solid #eee;\n    padding: 0 10px;\n}\n.pagination .prev[data-v-d7acf176]:hover, .pagination .next[data-v-d7acf176]:hover, .pagination .page-number[data-v-d7acf176]:hover {\n    border-bottom-color: #222;\n}\n}", ""]);
 
 // exports
 
@@ -62670,8 +62670,8 @@ var app_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://blog.com/api/v1';
-    app_url = 'http://blog.com';
+    api_url = 'http://blog.test/api/v1';
+    app_url = 'http://blog.test';
     break;
 
   case 'production':

@@ -57,6 +57,8 @@ class ArticleController extends APIController
         if (!$article) {
             return $this->fail(1000);
         }
+        // 阅读数自增
+        $article->increment('view_number');
         $prevArticle = Article::query()
             ->where('is_draft', 0)
             ->where('published_at', '>', $article->published_at)

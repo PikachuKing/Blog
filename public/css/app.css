@@ -28,8 +28,14 @@ html body .app {
 html body .app,
 html body .footer-inner {
   margin: 0 auto;
-  width: 767px;
   background-color: #fff;
+}
+
+@media (min-width: 767px) {
+  html body .app,
+  html body .footer-inner {
+    width: 85%;
+  }
 }
 
 @media (min-width: 1200px) {
