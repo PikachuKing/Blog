@@ -11,20 +11,25 @@
                 <span class="article-meta-item">
                     <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
                     <span class="post-meta-item-text">发表于:</span>
-                    <time>{{ article.published_at }}</time>
+                    <time>{{ article.time }}</time>
                 </span>
                     <span class="article-meta-item">
                     <span class="article-meta-item-divider">|</span>
                     <span class="article-meta-item-icon"><i class="fa fa-folder-o"></i></span>
                     <span class="post-meta-item-text">分类:</span>
-                    <span><a href="baidi.com">{{ article.category.name }}</a></span>
-                </span>
+                    <span>
+                        <router-link class="article-title-link"
+                                     :to="{ name: 'categoryCatalog', params: { name: article.category.name, page: 1 }}">
+                            {{ article.category.name }}
+                        </router-link>
+                    </span>
+                    </span>
                     <span class="article-meta-item">
-                    <span class="article-meta-item-divider">|</span>
-                    <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
-                    <span class="post-meta-item-text">浏览:</span>
-                    <span>{{ article.view_number }}</span>
-                </span>
+                        <span class="article-meta-item-divider">|</span>
+                        <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
+                        <span class="post-meta-item-text">浏览:</span>
+                        <span>{{ article.view_number }}</span>
+                    </span>
                 </div>
             </header>
             <div class="article-body" v-html="article.description.html">
@@ -52,7 +57,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .article {
         margin-top: 70px;
 
@@ -105,6 +110,11 @@
                 color: #999;
 
                 .article-meta-item {
+                    @media (max-width: 767px) {
+                        .post-meta-item-text {
+                            display: none;
+                        }
+                    }
                     .article-meta-item-divider {
                         margin: 0 0.5em;
                     }
@@ -129,7 +139,11 @@
             text-align: left;
             font-size: 12px;
             color: #999;
-
+            @media (max-width: 767px) {
+                .article-footer-tag-text {
+                    display: none;
+                }
+            }
             a {
                 margin-right: 10px;
                 color: #555;

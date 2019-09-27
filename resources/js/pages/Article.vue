@@ -151,10 +151,10 @@
                         padding: 10px 0 0 0;
                         width: 45%;
                         vertical-align: top;
+                        text-align: left;
                         a {
                             position: relative;
                             display: block;
-                            padding-left: 15px;
                             line-height: 25px;
                             font-size: 14px;
                             color: #555;

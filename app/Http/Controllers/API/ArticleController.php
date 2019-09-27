@@ -29,7 +29,9 @@ class ArticleController extends APIController
             ->where('is_draft', 0)
             ->with('category:id,name', 'tags:name')
             ->orderBy('published_at', 'DESC')
-            ->paginate($this->pageSize(), ['description', 'slug', 'title', 'published_at', 'view_number', 'id', 'category_id'], 'articles', $currentPage);
+            ->select('description', 'slug', 'title', 'published_at', 'view_number', 'id', 'category_id')
+            ->selectRaw('DATE_FORMAT(published_at,"%Y-%m-%d") as time')
+            ->paginate($this->pageSize(), ['*'], 'articles', $currentPage);
 
         $articles->data = $articles->makeHidden(['id', 'category_id']);
 
@@ -61,14 +63,14 @@ class ArticleController extends APIController
         $article->increment('view_number');
         $prevArticle = Article::query()
             ->where('is_draft', 0)
-            ->where('published_at', '>', $article->published_at)
-            ->orderBy('published_at', 'ASC')
+            ->where('id', '>', $article->id)
+            ->orderBy('id', 'ASC')
             ->select('slug', 'title')
             ->first();
         $nextArticle = Article::query()
             ->where('is_draft', 0)
-            ->where('published_at', '<', $article->published_at)
-            ->orderBy('published_at', 'DESC')
+            ->where('id', '<', $article->id)
+            ->orderBy('id', 'DESC')
             ->select('slug', 'title')
             ->first();
 

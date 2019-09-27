@@ -47,6 +47,6 @@ class APIController extends  Controller
 
     public function pageSize()
     {
-        return 3;
+        return 10;
     }
 }
