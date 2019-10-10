@@ -48,20 +48,44 @@
 <script>
     export default {
         name: "Navigation",
-        methods:{
+        data() {
+            return {
+                screenWidth: document.body.clientWidth
+            }
+        },
+        methods: {
             showMenu() {
-                var nav = document.querySelector('.site-nav');
-                var display = window.getComputedStyle(nav,null).display;
-                if (display === 'none'){
-                    nav.setAttribute('style', 'display: block');
-                }else{
-                    nav.setAttribute('style', 'display: none');
-                }
+                window.$('.site-nav').slideToggle(300);
             }
         },
         watch: {
             '$route'() {
-                document.querySelector('.site-nav').setAttribute('style', 'display: none');
+                if (this.screenWidth <= 767) {
+                    window.$('.site-nav').slideUp(0);
+                }
+            },
+            screenWidth() {
+                // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+                if (!this.timer) {
+                    if (this.screenWidth > 767) {
+                        window.$('.site-nav').slideDown(0);
+                    } else {
+                        window.$('.site-nav').slideUp(0);
+                    }
+                    let that = this;
+                    setTimeout(function () {
+                        that.timer = false;
+                    }, 400)
+                }
+            }
+        },
+        mounted() {
+            const that = this;
+            window.onresize = () => {
+                return (() => {
+                    window.screenWidth = document.body.clientWidth;
+                    that.screenWidth = window.screenWidth;
+                })()
             }
         }
     }
@@ -77,25 +101,25 @@
                 margin-bottom: 50px;
                 padding: 10px;
                 background-color: #f5f5f5;
-                .site-meta{
+                .site-meta {
                     float: left;
-                    .site-title{
+                    .site-title {
                         font-size: 22px;
                         color: #000;
                         font-weight: bold;
                     }
-                    .site-describe{
+                    .site-describe {
                         display: none;
                     }
                 }
 
-                .site-nav-toggle{
+                .site-nav-toggle {
                     position: static;
                     float: right;
                     display: block;
                     top: 10px;
                     left: 10px;
-                    button{
+                    button {
                         margin-top: 5px;
                         padding: 9px 10px;
                         background: transparent;
@@ -107,7 +131,7 @@
                             background: #555;
                             border-radius: 1px;
                         }
-                        .btn-bar+.btn-bar {
+                        .btn-bar + .btn-bar {
                             margin-top: 4px;
                         }
                     }
@@ -120,13 +144,13 @@
                     clear: both;
                     border-top: 1px solid #ddd;
 
-                    .menu{
+                    .menu {
                         float: none;
                         margin: 10px 0 0 0;
                         padding: 0;
-                        .menu-item{
+                        .menu-item {
                             display: block;
-                            a{
+                            a {
                                 display: block;
                                 text-align: left;
                                 padding: 0 10px;
@@ -172,7 +196,7 @@
                         color: grey;
                     }
                 }
-                .site-nav-toggle{
+                .site-nav-toggle {
                     display: none;
                 }
 

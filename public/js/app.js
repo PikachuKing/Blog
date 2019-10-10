@@ -1957,22 +1957,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navigation",
+  data: function data() {
+    return {
+      screenWidth: document.body.clientWidth
+    };
+  },
   methods: {
     showMenu: function showMenu() {
-      var nav = document.querySelector('.site-nav');
-      var display = window.getComputedStyle(nav, null).display;
-
-      if (display === 'none') {
-        nav.setAttribute('style', 'display: block');
-      } else {
-        nav.setAttribute('style', 'display: none');
-      }
+      window.$('.site-nav').slideToggle(300);
     }
   },
   watch: {
     '$route': function $route() {
-      document.querySelector('.site-nav').setAttribute('style', 'display: none');
+      if (this.screenWidth <= 767) {
+        window.$('.site-nav').slideUp(0);
+      }
+    },
+    screenWidth: function screenWidth() {
+      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+      if (!this.timer) {
+        if (this.screenWidth > 767) {
+          window.$('.site-nav').slideDown(0);
+        } else {
+          window.$('.site-nav').slideUp(0);
+        }
+
+        var that = this;
+        setTimeout(function () {
+          that.timer = false;
+        }, 400);
+      }
     }
+  },
+  mounted: function mounted() {
+    var that = this;
+
+    window.onresize = function () {
+      return function () {
+        window.screenWidth = document.body.clientWidth;
+        that.screenWidth = window.screenWidth;
+      }();
+    };
   }
 });
 
@@ -64032,8 +64057,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/blog/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/blog/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Administrator\Code\blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Administrator\Code\blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
