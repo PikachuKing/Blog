@@ -1,7 +1,10 @@
 <template>
     <footer class="footer">
         <div class="footer-inner">
-            aaaaaaa
+            <p>© 2019
+                <i class="fa fa-user-o"></i>
+                PikachuKing
+            </p>
         </div>
     </footer>
 </template>
@@ -13,15 +16,21 @@
 </script>
 
 <style lang="scss" scoped>
-    .footer{
+    .footer {
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
         text-align: center;
-        .footer-inner{
+        .footer-inner {
             padding: 20px 0;
             background-color: #fff;
+            p {
+                margin: 0;
+                padding: 0;
+                line-height: 15px;
+                font-size: 14px;
+            }
         }
     }
 </style>

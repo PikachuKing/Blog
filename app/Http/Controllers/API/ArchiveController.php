@@ -25,15 +25,14 @@ class ArchiveController extends APIController
         $articles = Article::query()
             ->whereNotNull('published_at')
             ->select('title as name', 'slug', 'published_at')
-            ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
+            ->selectRaw('DATE_FORMAT(published_at,"%Y年") as year')
             ->selectRaw('DATE_FORMAT(published_at,"%m-%d") as time')
             ->orderBy('published_at', 'DESC')
             ->offset($this->pageSize() * ($currentPage - 1))
             ->limit($this->pageSize())
             ->get()
             ->makeHidden('published_at')
-            ->groupBy('year');
-
+            ->groupBy('year')->toArray();
         // 计算总页数
         $lastPage = ceil(Article::query()->whereNotNull('published_at')->count() / $this->pageSize());
         return $this->success(compact('articles', 'currentPage', 'lastPage'));

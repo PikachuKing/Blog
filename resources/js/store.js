@@ -18,6 +18,7 @@ import {articles} from './modules/articles.js';
 import {tags} from './modules/tags.js';
 import {categories} from './modules/categories.js';
 import {archives} from './modules/archives.js';
+import {layout} from './modules/layout.js';
 
 /**
  * Export our data store.
@@ -28,5 +29,6 @@ export default new Vuex.Store({
         tags,
         categories,
         archives,
+        layout,
     }
 });

@@ -1871,7 +1871,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeLine",
-  props: ['articles']
+  props: ['articles'],
+  computed: {
+    reverseArticles: function reverseArticles() {
+      return this.articles;
+    }
+  }
 });
 
 /***/ }),
@@ -1885,6 +1890,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -1957,14 +1965,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navigation",
-  data: function data() {
-    return {
-      screenWidth: document.body.clientWidth
-    };
-  },
   methods: {
     showMenu: function showMenu() {
       window.$('.site-nav').slideToggle(300);
+    }
+  },
+  computed: {
+    screenWidth: function screenWidth() {
+      return this.$store.getters.getScreenWidth;
     }
   },
   watch: {
@@ -1988,16 +1996,6 @@ __webpack_require__.r(__webpack_exports__);
         }, 400);
       }
     }
-  },
-  mounted: function mounted() {
-    var that = this;
-
-    window.onresize = function () {
-      return function () {
-        window.screenWidth = document.body.clientWidth;
-        that.screenWidth = window.screenWidth;
-      }();
-    };
   }
 });
 
@@ -2034,9 +2032,37 @@ __webpack_require__.r(__webpack_exports__);
     Navigation: _components_global_Navigation__WEBPACK_IMPORTED_MODULE_0__["default"],
     Foot: _components_global_Foot__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      screenWidth: document.body.clientWidth
+    };
+  },
   created: function created() {
     this.$store.dispatch('loadTags');
     this.$store.dispatch('loadCategories');
+  },
+  mounted: function mounted() {
+    var that = this;
+
+    window.onresize = function () {
+      return function () {
+        window.screenWidth = document.body.clientWidth;
+        that.screenWidth = window.screenWidth;
+      }();
+    };
+  },
+  watch: {
+    screenWidth: function screenWidth() {
+      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
+      if (!this.timer) {
+        console.log(this.screenWidth);
+        this.$store.commit('setScreenWidth', this.screenWidth);
+        var that = this;
+        setTimeout(function () {
+          that.timer = false;
+        }, 400);
+      }
+    }
   }
 });
 
@@ -2195,6 +2221,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextArticle: function nextArticle() {
       return this.$store.getters.getArticle.nextArticle;
+    },
+    screenWidth: function screenWidth() {
+      return this.$store.getters.getScreenWidth > 767;
     }
   },
   watch: {
@@ -2550,7 +2579,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".footer[data-v-7d7edd02] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  text-align: center;\n}\n.footer .footer-inner[data-v-7d7edd02] {\n  padding: 20px 0;\n  background-color: #fff;\n}", ""]);
+exports.push([module.i, ".footer[data-v-7d7edd02] {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  text-align: center;\n}\n.footer .footer-inner[data-v-7d7edd02] {\n  padding: 20px 0;\n  background-color: #fff;\n}\n.footer .footer-inner p[data-v-7d7edd02] {\n  margin: 0;\n  padding: 0;\n  line-height: 15px;\n  font-size: 14px;\n}", ""]);
 
 // exports
 
@@ -45275,7 +45304,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "timeline-collapse" },
-    _vm._l(_vm.articles, function(article, index) {
+    _vm._l(_vm.reverseArticles, function(article, index) {
       return _c(
         "div",
         { key: index },
@@ -45355,7 +45384,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("footer", { staticClass: "footer" }, [
       _c("div", { staticClass: "footer-inner" }, [
-        _vm._v("\n        aaaaaaa\n    ")
+        _c("p", [
+          _vm._v("© 2019\n            "),
+          _c("i", { staticClass: "fa fa-user-o" }),
+          _vm._v("\n            PikachuKing\n        ")
+        ])
       ])
     ])
   }
@@ -45622,9 +45655,11 @@ var render = function() {
               _c("span", { staticClass: "article-meta-item" }, [
                 _vm._m(0),
                 _vm._v(" "),
-                _c("span", { staticClass: "post-meta-item-text" }, [
-                  _vm._v("发表于:")
-                ]),
+                _vm.screenWidth
+                  ? _c("span", { staticClass: "post-meta-item-text" }, [
+                      _vm._v("发表于:")
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("time", [_vm._v(_vm._s(_vm.article.time))])
               ]),
@@ -45636,9 +45671,11 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
-                _c("span", { staticClass: "post-meta-item-text" }, [
-                  _vm._v("分类:")
-                ]),
+                _vm.screenWidth
+                  ? _c("span", { staticClass: "post-meta-item-text" }, [
+                      _vm._v("分类:")
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c(
                   "span",
@@ -45674,9 +45711,11 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(2),
                 _vm._v(" "),
-                _c("span", { staticClass: "post-meta-item-text" }, [
-                  _vm._v("浏览:")
-                ]),
+                _vm.screenWidth
+                  ? _c("span", { staticClass: "post-meta-item-text" }, [
+                      _vm._v("浏览:")
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.article.view_number))])
               ])
@@ -63129,6 +63168,51 @@ var categories = {
 
 /***/ }),
 
+/***/ "./resources/js/modules/layout.js":
+/*!****************************************!*\
+  !*** ./resources/js/modules/layout.js ***!
+  \****************************************/
+/*! exports provided: layout */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layout", function() { return layout; });
+/*
+ |-------------------------------------------------------------------------------
+ | VUEX modules/layout.js
+ |-------------------------------------------------------------------------------
+ | The Vuex data store for the tags
+ */
+var layout = {
+  /**
+   * Defines the state being monitored for the module.
+   */
+  state: {
+    screenWidth: 1000
+  },
+
+  /**
+   * Defines the mutations used
+   */
+  mutations: {
+    setScreenWidth: function setScreenWidth(state, status) {
+      state.screenWidth = status;
+    }
+  },
+
+  /**
+   * Defines the getters used by the module
+   */
+  getters: {
+    getScreenWidth: function getScreenWidth(state) {
+      return state.screenWidth;
+    }
+  }
+};
+
+/***/ }),
+
 /***/ "./resources/js/modules/tags.js":
 /*!**************************************!*\
   !*** ./resources/js/modules/tags.js ***!
@@ -64006,6 +64090,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/tags.js */ "./resources/js/modules/tags.js");
 /* harmony import */ var _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/categories.js */ "./resources/js/modules/categories.js");
 /* harmony import */ var _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/archives.js */ "./resources/js/modules/archives.js");
+/* harmony import */ var _modules_layout_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/layout.js */ "./resources/js/modules/layout.js");
 /*
  Vuex 模块的起点，
  Vuex 由一个父模块和多个子模块构成，该文件包含父模块，
@@ -64024,6 +64109,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
+
 /**
  * Export our data store.
  */
@@ -64033,7 +64119,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     articles: _modules_articles_js__WEBPACK_IMPORTED_MODULE_2__["articles"],
     tags: _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__["tags"],
     categories: _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__["categories"],
-    archives: _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__["archives"]
+    archives: _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__["archives"],
+    layout: _modules_layout_js__WEBPACK_IMPORTED_MODULE_6__["layout"]
   }
 }));
 

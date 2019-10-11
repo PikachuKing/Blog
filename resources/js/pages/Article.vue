@@ -6,13 +6,13 @@
                 <div class="article-meta">
                     <span class="article-meta-item">
                         <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
-                        <span class="post-meta-item-text">发表于:</span>
+                        <span class="post-meta-item-text" v-if="screenWidth">发表于:</span>
                         <time>{{ article.time }}</time>
                     </span>
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-folder-o"></i></span>
-                        <span class="post-meta-item-text">分类:</span>
+                        <span class="post-meta-item-text" v-if="screenWidth">分类:</span>
                         <span>
                             <router-link class="page-number"
                                          :to="{ name: 'categoryCatalog', params: { name: article.category.name, page: 1 }}">
@@ -23,7 +23,7 @@
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
-                        <span class="post-meta-item-text">浏览:</span>
+                        <span class="post-meta-item-text" v-if="screenWidth">浏览:</span>
                         <span>{{ article.view_number }}</span>
                     </span>
                 </div>
@@ -69,6 +69,9 @@
             },
             nextArticle() {
                 return this.$store.getters.getArticle.nextArticle;
+            },
+            screenWidth() {
+                return this.$store.getters.getScreenWidth > 767;
             }
         },
         watch: {

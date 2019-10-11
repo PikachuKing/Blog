@@ -48,14 +48,14 @@
 <script>
     export default {
         name: "Navigation",
-        data() {
-            return {
-                screenWidth: document.body.clientWidth
-            }
-        },
         methods: {
             showMenu() {
                 window.$('.site-nav').slideToggle(300);
+            }
+        },
+        computed: {
+            screenWidth() {
+                return this.$store.getters.getScreenWidth;
             }
         },
         watch: {
@@ -77,15 +77,6 @@
                         that.timer = false;
                     }, 400)
                 }
-            }
-        },
-        mounted() {
-            const that = this;
-            window.onresize = () => {
-                return (() => {
-                    window.screenWidth = document.body.clientWidth;
-                    that.screenWidth = window.screenWidth;
-                })()
             }
         }
     }
