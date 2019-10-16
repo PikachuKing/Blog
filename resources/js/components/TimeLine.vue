@@ -1,6 +1,6 @@
 <template>
     <div class="timeline-collapse">
-        <div v-for="(article,index) of reverseArticles" :key="index">
+        <div v-for="(article,index) of articles" :key="index">
             <div class="timeline-title">
                 <h2>{{ index }}</h2>
             </div>
@@ -26,12 +26,7 @@
         name: "TimeLine",
         props: [
             'articles'
-        ],
-        computed: {
-            reverseArticles() {
-                return this.articles;
-            }
-        },
+        ]
     }
 </script>
 

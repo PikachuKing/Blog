@@ -1,4 +1,18 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/components-ArticleCatalog-vue.js": "/js/components-ArticleCatalog-vue.js",
+    "/js/components-Pagination-vue.js": "/js/components-Pagination-vue.js",
+    "/js/components-TimeLine-vue.js": "/js/components-TimeLine-vue.js",
+    "/js/components-global-Foot-vue.js": "/js/components-global-Foot-vue.js",
+    "/js/components-global-Navigation-vue.js": "/js/components-global-Navigation-vue.js",
+    "/js/layouts-Layout-vue.js": "/js/layouts-Layout-vue.js",
+    "/js/pages-About-vue.js": "/js/pages-About-vue.js",
+    "/js/pages-Archive-vue.js": "/js/pages-Archive-vue.js",
+    "/js/pages-Article-vue.js": "/js/pages-Article-vue.js",
+    "/js/pages-Category-vue.js": "/js/pages-Category-vue.js",
+    "/js/pages-CategoryCatalog-vue.js": "/js/pages-CategoryCatalog-vue.js",
+    "/js/pages-Home-vue.js": "/js/pages-Home-vue.js",
+    "/js/pages-Tag-vue.js": "/js/pages-Tag-vue.js",
+    "/js/pages-TagCatalog-vue.js": "/js/pages-TagCatalog-vue.js",
+    "/js/vendors~components-ArticleCatalog-vue~components-Pagination-vue~components-TimeLine-vue~components-g~7dc25366.js": "/js/vendors~components-ArticleCatalog-vue~components-Pagination-vue~components-TimeLine-vue~components-g~7dc25366.js"
 }

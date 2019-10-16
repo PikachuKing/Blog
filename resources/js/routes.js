@@ -16,6 +16,10 @@ import VueRouter from 'vue-router'
  */
 Vue.use(VueRouter);
 
+function loadView(dir, view) {
+    // 注释不要去掉，对应上面 webpack 编译后的文件名
+    return () => import(/* webpackChunkName: "[request]" */ './' + dir + '/' + view + '.vue');
+}
 /**
  * Makes a new VueRouter that we will use to run all of the routes for the app.
  */
@@ -25,57 +29,61 @@ export default new VueRouter({
             path: '/',
             redirect: {name: 'home'},
             name: 'layout',
-            component: Vue.component('Home', require('./layouts/Layout.vue')).default,
+            component: loadView('layouts', 'Layout'),
+
             children: [
                 {
                     path: '/',
                     name: 'home',
-                    component: Vue.component('Home', require('./pages/Home.vue')).default
+                    component: loadView('pages', 'Home')
                 },
                 {
                     path: '/page/:page',
                     name: 'homePage',
-                    component: Vue.component('Home', require('./pages/Home.vue')).default,
+                    component: loadView('pages', 'Home')
                 },
                 {
                     path: '/tags',
                     name: 'tag',
-                    component: Vue.component('Tag', require('./pages/Tag.vue')).default
+                    component: loadView('pages', 'Tag')
                 },
                 {
                     path: '/tags/:name/page/:page',
                     name: 'tagCatalog',
-                    component: Vue.component('TagCatalog', require('./pages/TagCatalog.vue')).default
+                    component: loadView('pages', 'TagCatalog')
                 },
                 {
                     path: '/categories',
                     name: 'category',
-                    component: Vue.component('Category', require('./pages/Category.vue')).default
+                    component: loadView('pages', 'Category')
                 },
                 {
                     path: '/categories/:name/page/:page',
                     name: 'categoryCatalog',
-                    component: Vue.component('CategoryCatalog', require('./pages/CategoryCatalog.vue')).default
+                    component: loadView('pages', 'CategoryCatalog')
                 },
                 {
                     path: '/archives',
                     name: 'archive',
-                    component: Vue.component('Archive', require('./pages/Archive.vue')).default
+                    component: loadView('pages', 'Archive')
+
                 },
                 {
                     path: '/archives/page/:page',
                     name: 'archivePage',
-                    component: Vue.component('Archive', require('./pages/Archive.vue')).default,
+                    component: loadView('pages', 'Archive')
+
                 },
                 {
                     path: '/:slug',
                     name: 'article',
-                    component: Vue.component('Article', require('./pages/Article.vue')).default
+                    component: loadView('pages', 'Article')
+
                 },
                 {
                     path: '/about',
                     name: 'about',
-                    component: Vue.component('About', require('./pages/About.vue')).default
+                    component: loadView('pages', 'About')
                 }
             ]
         }

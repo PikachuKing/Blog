@@ -16,7 +16,6 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->comment('用户ID');
-            $table->foreign('user_id')->references('id')->on('admin_users');
             $table->unsignedBigInteger('category_id')->comment('分类ID');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title')->nullable(false)->comment('标题');

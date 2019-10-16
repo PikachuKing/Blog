@@ -33,6 +33,7 @@ export const articles = {
             });
         },
         loadArticle({commit}, data) {
+            commit('setArticle', []);
             commit('setArticleLoadStatus', 1);
             ArticlesAPI.getArticle(data.slug).then(function (response) {
                 commit('setArticle', response.data.data);

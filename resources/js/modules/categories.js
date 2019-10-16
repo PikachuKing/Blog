@@ -34,6 +34,7 @@ export const categories = {
             });
         },
         loadCategoryCatalogs({commit}, data) {
+            commit('setCategoryCatalogs', []);
             commit('setCategoryCatalogsLoadStatus', 1);
             CategoriesAPI.getCategoryCatalogs(data.name, data.page).
             then(function (response) {

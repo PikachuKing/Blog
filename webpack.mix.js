@@ -10,6 +10,30 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+// mix.sass('resources/sass/app.scss', 'public/css');
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .webpackConfig({
+        output: {
+            chunkFilename: 'js/[name].js'
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.jsx?$/,
+                    exclude: /node_modules(?!\/foundation-sites)|bower_components/,
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: Config.babel()
+                        }
+                    ]
+                }
+            ]
+        },
+        resolve: {
+            alias: {
+                '@': path.resolve('resources/assets/sass')
+            }
+        }
+    });

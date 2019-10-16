@@ -10,8 +10,8 @@ switch( process.env.NODE_ENV ){
         app_url = 'http://blog.com';
         break;
     case 'production':
-        api_url = 'http://pikachuking.com/api/v1';
-        app_url = 'http://pikachuking.com';
+        api_url = 'https://www.pikachuking.com/api/v1';
+        app_url = 'https://www.pikachuking.com';
         break;
 }
 
