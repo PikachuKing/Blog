@@ -75,15 +75,15 @@ export default new VueRouter({
 
                 },
                 {
+                    path: '/about',
+                    name: 'about',
+                    component: loadView('pages', 'About')
+                },
+                {
                     path: '/:slug',
                     name: 'article',
                     component: loadView('pages', 'Article')
 
-                },
-                {
-                    path: '/about',
-                    name: 'about',
-                    component: loadView('pages', 'About')
                 }
             ]
         }

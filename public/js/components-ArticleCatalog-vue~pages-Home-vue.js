@@ -224,7 +224,8 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", {
-          staticClass: "article-body",
+          directives: [{ name: "highlight", rawName: "v-highlight" }],
+          staticClass: "article-body  markdown-body",
           domProps: { innerHTML: _vm._s(article.description.html) }
         }),
         _vm._v(" "),

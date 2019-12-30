@@ -23,6 +23,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'API', 'middleware' => 'throttle'
     // 归档
     Route::get('/archives/{currentPage}', 'ArchiveController@getArchives')->where('page', '[0-9]+');
 
+    //关于
+    Route::get('/about', 'AboutController@getAbout');
+
     // 文章列表
     Route::get('/articles/{currentPage}', 'ArticleController@getArticles')->where('page', '[0-9]+');
     Route::get('/{slug}', 'ArticleController@getArticle');

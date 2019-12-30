@@ -32,7 +32,7 @@
                     </span>
                 </div>
             </header>
-            <div class="article-body" v-html="article.description.html">
+            <div class="article-body  markdown-body" v-highlight v-html="article.description.html">
 
             </div>
             <footer class="article-footer">

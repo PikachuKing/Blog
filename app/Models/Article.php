@@ -5,7 +5,6 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use League\CommonMark\CommonMarkConverter;
 
 class Article extends Model
 {
@@ -42,7 +41,7 @@ class Article extends Model
     {
         $data = [
             'raw' => $value,
-            'html' => (new CommonMarkConverter())->convertToHtml($value),
+            'html' => (new \Parsedown())->text($value),
         ];
         $this->attributes['description'] = json_encode($data);
     }
@@ -56,7 +55,7 @@ class Article extends Model
     {
         $data = [
             'raw' => $value,
-            'html' => (new CommonMarkConverter())->convertToHtml($value),
+            'html' => (new \Parsedown())->text($value),
         ];
         $this->attributes['content'] = json_encode($data);
     }

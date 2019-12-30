@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use League\CommonMark\CommonMarkConverter;
 
 class About extends Model
 {
@@ -29,7 +28,7 @@ class About extends Model
     {
         $data = [
             'raw' => $value,
-            'html' => (new CommonMarkConverter())->convertToHtml($value),
+            'html' => (new \Parsedown())->text($value),
         ];
         $this->attributes['content'] = json_encode($data);
     }

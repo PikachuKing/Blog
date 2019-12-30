@@ -42,10 +42,7 @@
             screenWidth() {
                 // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
                 if (!this.timer) {
-                    console.log(this.screenWidth);
-
                     this.$store.commit('setScreenWidth', this.screenWidth);
-
                     let that = this;
                     setTimeout(function () {
                         that.timer = false;

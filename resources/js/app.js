@@ -34,7 +34,9 @@ if (token) {
 import Vue from 'vue';
 import router from './routes.js'
 import store from './store.js'
-
+// highlight.js代码高亮插件
+import Highlight from './highlight.js';
+Vue.use(Highlight);
 // 将 Vue 挂载到 ID 为 app 的页面元素上
 new Vue({
     router,

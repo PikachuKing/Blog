@@ -1,9 +1,12 @@
 <template>
     <footer class="footer">
         <div class="footer-inner">
-            <p>© 2019
+            <p>© 2020
                 <i class="fa fa-user-o"></i>
                 PikachuKing
+            </p>
+            <p>
+                蜀ICP备18026364号-1
             </p>
         </div>
     </footer>

@@ -18,7 +18,6 @@
         "laravel/passport": "^7.4",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
-        "league/commonmark": "^1.0",
         "sharemant/laravel-admin-ext-editormd": "^1.0"
     },
     "require-dev": {

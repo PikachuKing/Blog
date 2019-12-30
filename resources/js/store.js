@@ -19,6 +19,7 @@ import {tags} from './modules/tags.js';
 import {categories} from './modules/categories.js';
 import {archives} from './modules/archives.js';
 import {layout} from './modules/layout.js';
+import {about} from './modules/about.js';
 
 /**
  * Export our data store.
@@ -30,5 +31,6 @@ export default new Vuex.Store({
         categories,
         archives,
         layout,
+        about,
     }
 });

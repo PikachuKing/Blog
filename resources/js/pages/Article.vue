@@ -28,7 +28,7 @@
                     </span>
                 </div>
             </header>
-            <section class="article-body" v-html="article.content.html"></section>
+            <section class="article-body markdown-body" v-highlight v-html="article.content.html"></section>
             <footer class="article-footer">
                 <div class="article-tags">
                     <router-link
