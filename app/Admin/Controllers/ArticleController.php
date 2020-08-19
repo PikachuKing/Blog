@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Article\ForceDelete;
+use App\Admin\Actions\Article\Restore;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Tag;
@@ -20,35 +22,7 @@ class ArticleController extends AdminController
      *
      * @var string
      */
-    protected $title = 'App\Models\Article';
-
-    /**
-     * 文章管理列表页
-     * @param Content $content
-     * @return Content
-     */
-    public function index(Content $content)
-    {
-        return $content
-            ->header('文章')
-            ->description('列表')
-            ->body($this->grid());
-    }
-
-    /**
-     * 添加页
-     * @param Content $content
-     * @return Content
-     */
-    public function create(Content $content)
-    {
-        $form = $this->_form();
-        $form->simplemde('description', '摘要');
-        $form->editormd('content', '内容');
-        return $content
-            ->header('添加文章')
-            ->body($form);
-    }
+    protected $title = '文章管理';
 
     /**
      * 编辑页
@@ -58,27 +32,13 @@ class ArticleController extends AdminController
      */
     public function edit($id, Content $content)
     {
-        $form = $this->_form()->edit($id);
+        $form = $this->form()->edit($id);
         $form->simplemde('description', '摘要')->default($form->model()->description['raw']);
         $form->editormd('content', '内容')->default($form->model()->content['raw']);
         return $content
             ->header('修改文章')
             ->body($form);
     }
-
-    /**
-     * 详情页
-     * @param $id
-     * @param Content $content
-     * @return Content
-     */
-    public function show($id, Content $content)
-    {
-        return $content
-            ->header('文章详情')
-            ->body($this->detail($id));
-    }
-
 
     /**
      * Make a grid builder.
@@ -88,18 +48,11 @@ class ArticleController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Article);
-        $grid->column('user_id', '用户')->display(function () {
-            return Admin::user()->name;
-        });
+        $grid->column('id', 'ID');
         $grid->column('title', '标题');
         $grid->column('slug', 'slug');
-        $grid->column('category_id', '分类')->display(function ($categoryId) {
-            return Category::find($categoryId)->name;
-        });
-        $grid->column('tags', '标签')->display(function ($tags) {
-            $tags = array_column($tags, 'name');
-            return implode(', ', $tags);
-        });
+        $grid->column('category.name', '分类');
+        $grid->column('tags', '标签')->pluck('name')->label();;
         $grid->column('is_draft', '草稿')->switch()->sortable();
         $grid->column('view_number', '阅读数')->sortable();
         $grid->column('published_at', '发布时间')->sortable();
@@ -138,40 +91,17 @@ class ArticleController extends AdminController
         });
         $show->field('description', '摘要')->as(function ($description) {
             return $description['html'];
-        })->json();
+        })->unescape();
         $show->field('content', '内容')->as(function ($content) {
             return $content['html'];
-        })->json();
-        $show->field('is_draft', '草稿')->as(function ($is_draft) {
-            return $is_draft ? '是' : '否';
-        });
+        })->unescape();
+        $show->field('is_draft', '草稿')->using(['1' => '是', '0' => '否']);
         $show->field('view_number', '阅读数');
         $show->field('published_at', '发布时间');
         $show->field('created_at', '创建时间');
         $show->field('updated_at', '更新时间');
 
         return $show;
-    }
-
-    protected function _form()
-    {
-        $form = new Form(new Article);
-        $form->hidden('user_id')->value(Admin::user()->id);
-        $form->hidden('slug')->value('slug');
-        $form->text('title', '标题');
-        $form->select('category_id', '分类')->options(function () {
-            $categories = Category::all();
-            $options = [];
-            if ($categories->count()) {
-                foreach ($categories as $category) {
-                    $options[$category['id']] = $category['name'];
-                }
-            }
-            return $options;
-        });
-        $form->multipleSelect('tags', '标签')->options(Tag::all()->pluck('name', 'id'));
-        $form->switch('is_draft', '草稿');
-        return $form;
     }
 
     /**
@@ -182,14 +112,20 @@ class ArticleController extends AdminController
     protected function form()
     {
         $form = new Form(new Article);
-        $form->hidden('user_id')->rules('required');
+        $form->hidden('user_id')->value(Admin::user()->id);
         $form->hidden('slug');
         $form->text('title', '标题')->rules('required');
-        $form->select('category_id', '分类')->rules('required');
-        $form->multipleSelect('tags', '标签')->rules('required');
+        $form->select('category_id', '分类')
+            ->options(Category::all(['id', 'name'])->pluck('name', 'id'))
+            ->rules('required');
+        $form->multipleSelect('tags', '标签')
+            ->options(Tag::all(['id', 'name'])->pluck('name', 'id'))
+            ->rules('required');
         $form->switch('is_draft', '草稿');
-        $form->simplemde('description', '摘要')->rules('required');
-        $form->editormd('content', '内容')->rules('required');
+        if ($form->isCreating()){
+            $form->simplemde('description', '摘要')->rules('required');
+            $form->editormd('content', '内容')->rules('required');
+        }
         return $form;
     }
 

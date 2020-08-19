@@ -40,15 +40,13 @@ class CategoryController extends APIController
     */
     public function getCategoryCatalogs(string $name, int $currentPage = 1)
     {
-
+        //获取分类Id
+        $category = Category::query()->where('name', $name)->firstOrFail(['id']);
         $categoryCatalogs[$name] = Article::query()
             ->where('is_draft', 0)
+            ->where('category_id', $category->id)
             ->select('title as name', 'slug', 'published_at')
-            ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
-            ->selectRaw('DATE_FORMAT(published_at,"%m-%d") as time')
-            ->whereHas('category', function ($query) use ($name) {
-                $query->where('name', $name);
-            })
+            ->selectRaw('DATE_FORMAT(published_at,"%Y-%m-%d") as time')
             ->orderBy('published_at', 'DESC')
             ->offset($this->pageSize() * ($currentPage - 1))
             ->limit($this->pageSize())

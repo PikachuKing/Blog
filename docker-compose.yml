@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: .docker/php
+    image: php-app
+    volumes:
+      - ./:/var/www
+  queue:
+    image: php-app
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - php
+    command: php artisan queue:work
+  nginx:
+    image: nginx
+    volumes:
+      - ./:/var/www
+      - .docker/nginx/conf.d/site.conf:/etc/nginx/conf.d/site.conf
+    ports:
+     - "80:80"
+     - "443:443"
+  db:
+    image: mysql:8
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--default-authentication-plugin=mysql_native_password']
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: blog
+      MYSQL_ROOT_PASSWORD: pikachu666..
+    volumes:
+      - dbdata:/var/lib/mysql/
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+
+
+
+volumes:
+  dbdata:
+    driver: local

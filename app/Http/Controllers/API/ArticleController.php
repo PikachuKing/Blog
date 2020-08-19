@@ -22,6 +22,7 @@ class ArticleController extends APIController
     | Description:    Gets all of the articles in the application
     | Parameters:
     |   $page   -> page of the article we are retrieving
+    |-------------------------------------------------------------------------------
    */
     public function getArticles(int $currentPage = 1)
     {
@@ -29,9 +30,7 @@ class ArticleController extends APIController
             ->where('is_draft', 0)
             ->with('category:id,name', 'tags:name')
             ->orderBy('published_at', 'DESC')
-            ->select('description', 'slug', 'title', 'published_at', 'view_number', 'id', 'category_id')
-            ->selectRaw('DATE_FORMAT(published_at,"%Y-%m-%d") as time')
-            ->paginate($this->pageSize(), ['*'], 'articles', $currentPage);
+            ->paginate($this->pageSize(), ['description', 'slug', 'title', 'published_at', 'view_number', 'id', 'category_id'], 'articles', $currentPage);
 
         $articles->data = $articles->makeHidden(['id', 'category_id']);
 
@@ -50,29 +49,27 @@ class ArticleController extends APIController
     public function getArticle($slug)
     {
         $article = Article::query()
-            ->where('is_draft', 0)
-            ->select('slug', 'published_at', 'title', 'content', 'id', 'view_number' , 'category_id')
-            ->selectRaw('DATE_FORMAT(published_at,"%Y-%m-%d") as time')
-            ->where('slug', $slug)
             ->with('category:id,name', 'tags:name')
-            ->first();
+            ->select('slug', 'published_at', 'title','content', 'view_number' , 'category_id')
+            ->firstWhere(['slug' => $slug, 'is_draft' => 0]);
         if (!$article) {
             return $this->fail(1000);
         }
+        //隐藏content
+        $article->makeHidden('content');
+        $article['content_html'] = $article['content']['html'];
         // 阅读数自增
         $article->increment('view_number');
         $prevArticle = Article::query()
             ->where('is_draft', 0)
-            ->where('id', '>', $article->id)
-            ->orderBy('id', 'ASC')
-            ->select('slug', 'title')
-            ->first();
+            ->where('published_at', '>', $article->published_at)
+            ->orderBy('published_at', 'ASC')
+            ->first(['slug', 'title']);
         $nextArticle = Article::query()
             ->where('is_draft', 0)
-            ->where('id', '<', $article->id)
-            ->orderBy('id', 'DESC')
-            ->select('slug', 'title')
-            ->first();
+            ->where('published_at', '<', $article->published_at)
+            ->orderBy('published_at', 'DESC')
+            ->first(['slug', 'title']);
 
         return $this->success(compact('article', 'prevArticle', 'nextArticle'));
     }

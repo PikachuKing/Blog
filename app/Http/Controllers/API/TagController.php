@@ -42,8 +42,7 @@ class TagController extends APIController
         $tagCatalogs[$name] = Article::query()
             ->where('is_draft', 0)
             ->select('title as name', 'slug', 'published_at')
-            ->selectRaw('DATE_FORMAT(published_at,"%Y") as year')
-            ->selectRaw('DATE_FORMAT(published_at,"%m-%d") as time')
+            ->selectRaw('DATE_FORMAT(published_at,"%Y-%m-%d") as time')
             ->whereHas('tags', function ($query) use ($name) {
                 $query->where('name', $name);
             })

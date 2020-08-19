@@ -67,7 +67,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Article",
   computed: {
@@ -79,9 +78,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     nextArticle: function nextArticle() {
       return this.$store.getters.getArticle.nextArticle;
-    },
-    screenWidth: function screenWidth() {
-      return this.$store.getters.getScreenWidth > 767;
     }
   },
   watch: {
@@ -112,7 +108,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".article[data-v-2d7b7a7d] {\n  margin-top: 70px;\n}\n.article .content .article-header .article-title[data-v-2d7b7a7d] {\n  position: relative;\n  font-size: 24px;\n  font-weight: bold;\n  color: #000;\n}\n.article .content .article-header .article-meta[data-v-2d7b7a7d] {\n  margin-top: 5px;\n  margin-bottom: 20px;\n  font-size: 12px;\n  color: #999;\n}\n.article .content .article-header .article-meta .article-meta-item .article-meta-item-divider[data-v-2d7b7a7d] {\n  margin: 0 0.5em;\n}\n.article .content .article-header .article-meta .article-meta-item a[data-v-2d7b7a7d] {\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  border-bottom: 1px solid #999;\n  word-wrap: break-word;\n}\n.article .content .article-body[data-v-2d7b7a7d] {\n  text-align: justify;\n}\n.article .content .article-footer .article-tags[data-v-2d7b7a7d] {\n  text-align: left;\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d] {\n  position: relative;\n  padding: 1px 5px;\n  background: #f5f5f5;\n  border-bottom: none;\n  display: inline-block;\n  margin-right: 10px;\n  font-size: 13px;\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  word-wrap: break-word;\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d]::before {\n  content: \"# \";\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d]:hover {\n  color: #222;\n  background: #ccc;\n}\n.article .content .article-footer .article-nav[data-v-2d7b7a7d] {\n  margin-top: 40px;\n  display: table;\n  width: 100%;\n  border-top: 1px solid #eee;\n}\n.article .content .article-footer .article-nav .article-nav-item[data-v-2d7b7a7d] {\n  display: table-cell;\n  padding: 10px 0 0 0;\n  width: 45%;\n  vertical-align: top;\n  text-align: left;\n}\n.article .content .article-footer .article-nav .article-nav-item a[data-v-2d7b7a7d] {\n  position: relative;\n  display: block;\n  line-height: 25px;\n  font-size: 14px;\n  color: #555;\n  border-bottom: none;\n  text-decoration: none;\n  outline: none;\n  word-wrap: break-word;\n}\n.article .content .article-footer .article-nav .article-nav-item a[data-v-2d7b7a7d]:hover {\n  color: #222;\n  border-bottom: none;\n}\n.article .content .article-footer .article-nav .article-nav-prev[data-v-2d7b7a7d] {\n  text-align: right;\n}", ""]);
+exports.push([module.i, ".article[data-v-2d7b7a7d] {\n  margin-top: 70px;\n}\n.article .content .article-header .article-title[data-v-2d7b7a7d] {\n  position: relative;\n  font-size: 24px;\n  font-weight: bold;\n  color: #000;\n}\n.article .content .article-header .article-meta[data-v-2d7b7a7d] {\n  margin-top: 5px;\n  margin-bottom: 20px;\n  font-size: 12px;\n  color: #999;\n}\n.article .content .article-header .article-meta .article-meta-item .article-meta-item-divider[data-v-2d7b7a7d] {\n  margin: 0 0.5em;\n}\n@media (max-width: 767px) {\n.article .content .article-header .article-meta .article-meta-item .post-meta-item-text[data-v-2d7b7a7d] {\n    display: none;\n}\n}\n.article .content .article-header .article-meta .article-meta-item a[data-v-2d7b7a7d] {\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  border-bottom: 1px solid #999;\n  word-wrap: break-word;\n}\n.article .content .article-body[data-v-2d7b7a7d] {\n  text-align: justify;\n}\n.article .content .article-footer .article-tags[data-v-2d7b7a7d] {\n  text-align: left;\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d] {\n  position: relative;\n  padding: 1px 5px;\n  background: #f5f5f5;\n  border-bottom: none;\n  display: inline-block;\n  margin-right: 10px;\n  font-size: 13px;\n  color: #555;\n  text-decoration: none;\n  outline: none;\n  word-wrap: break-word;\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d]::before {\n  content: \"# \";\n}\n.article .content .article-footer .article-tags a[data-v-2d7b7a7d]:hover {\n  color: #222;\n  background: #ccc;\n}\n.article .content .article-footer .article-nav[data-v-2d7b7a7d] {\n  margin-top: 40px;\n  display: table;\n  width: 100%;\n  border-top: 1px solid #eee;\n}\n.article .content .article-footer .article-nav .article-nav-item[data-v-2d7b7a7d] {\n  display: table-cell;\n  padding: 10px 0 0 0;\n  width: 45%;\n  vertical-align: top;\n  text-align: left;\n}\n.article .content .article-footer .article-nav .article-nav-item a[data-v-2d7b7a7d] {\n  position: relative;\n  display: block;\n  line-height: 25px;\n  font-size: 14px;\n  color: #555;\n  border-bottom: none;\n  text-decoration: none;\n  outline: none;\n  word-wrap: break-word;\n}\n.article .content .article-footer .article-nav .article-nav-item a[data-v-2d7b7a7d]:hover {\n  color: #222;\n  border-bottom: none;\n}\n.article .content .article-footer .article-nav .article-nav-prev[data-v-2d7b7a7d] {\n  text-align: right;\n}", ""]);
 
 // exports
 
@@ -168,21 +164,24 @@ var render = function() {
     _vm.article
       ? _c("div", { staticClass: "content" }, [
           _c("header", { staticClass: "article-header" }, [
-            _c("h2", { staticClass: "article-title" }, [
-              _vm._v(_vm._s(_vm.article.title))
-            ]),
+            _c("h2", {
+              staticClass: "article-title",
+              domProps: { textContent: _vm._s(_vm.article.title) }
+            }),
             _vm._v(" "),
             _c("div", { staticClass: "article-meta" }, [
               _c("span", { staticClass: "article-meta-item" }, [
                 _vm._m(0),
                 _vm._v(" "),
-                _vm.screenWidth
-                  ? _c("span", { staticClass: "post-meta-item-text" }, [
-                      _vm._v("发表于:")
-                    ])
-                  : _vm._e(),
+                _c("span", { staticClass: "post-meta-item-text" }, [
+                  _vm._v("发表于:")
+                ]),
                 _vm._v(" "),
-                _c("time", [_vm._v(_vm._s(_vm.article.time))])
+                _c("time", [
+                  _vm._v(
+                    _vm._s(_vm._f("formatTimer")(_vm.article.published_at))
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "article-meta-item" }, [
@@ -192,34 +191,25 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(1),
                 _vm._v(" "),
-                _vm.screenWidth
-                  ? _c("span", { staticClass: "post-meta-item-text" }, [
-                      _vm._v("分类:")
-                    ])
-                  : _vm._e(),
+                _c("span", { staticClass: "post-meta-item-text" }, [
+                  _vm._v("分类: ")
+                ]),
                 _vm._v(" "),
                 _c(
                   "span",
                   [
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "page-number",
-                        attrs: {
-                          to: {
-                            name: "categoryCatalog",
-                            params: { name: _vm.article.category.name, page: 1 }
-                          }
+                    _c("router-link", {
+                      staticClass: "page-number",
+                      attrs: {
+                        to: {
+                          name: "categoryCatalog",
+                          params: { name: _vm.article.category.name, page: 1 }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.article.category.name) +
-                            "\n                        "
-                        )
-                      ]
-                    )
+                      domProps: {
+                        textContent: _vm._s(_vm.article.category.name)
+                      }
+                    })
                   ],
                   1
                 )
@@ -232,13 +222,12 @@ var render = function() {
                 _vm._v(" "),
                 _vm._m(2),
                 _vm._v(" "),
-                _vm.screenWidth
-                  ? _c("span", { staticClass: "post-meta-item-text" }, [
-                      _vm._v("浏览:")
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(_vm.article.view_number))])
+                _c("span", {
+                  staticClass: "post-meta-item-text",
+                  domProps: {
+                    textContent: _vm._s("浏览: " + _vm.article.view_number)
+                  }
+                })
               ])
             ])
           ]),
@@ -246,7 +235,7 @@ var render = function() {
           _c("section", {
             directives: [{ name: "highlight", rawName: "v-highlight" }],
             staticClass: "article-body markdown-body",
-            domProps: { innerHTML: _vm._s(_vm.article.content.html) }
+            domProps: { innerHTML: _vm._s(_vm.article.content_html) }
           }),
           _vm._v(" "),
           _c("footer", { staticClass: "article-footer" }, [
@@ -254,25 +243,16 @@ var render = function() {
               "div",
               { staticClass: "article-tags" },
               _vm._l(_vm.article.tags, function(tag, index) {
-                return _c(
-                  "router-link",
-                  {
-                    key: index,
-                    attrs: {
-                      to: {
-                        name: "tagCatalog",
-                        params: { name: tag.name, page: 1 }
-                      }
+                return _c("router-link", {
+                  key: index,
+                  attrs: {
+                    to: {
+                      name: "tagCatalog",
+                      params: { name: tag.name, page: 1 }
                     }
                   },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(tag.name) +
-                        "\n                "
-                    )
-                  ]
-                )
+                  domProps: { textContent: _vm._s(tag.name) }
+                })
               }),
               1
             ),

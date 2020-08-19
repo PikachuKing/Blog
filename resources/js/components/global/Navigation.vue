@@ -3,7 +3,7 @@
         <div class="header-inner">
             <div class="site-meta">
                 <span class="site-title">PikachuKing</span>
-                <p class="site-describe">PikachuKing PikachuKing</p>
+                <p class="site-describe">少年不知愁滋味，为赋新词强说愁。<br>而今尝尽愁滋味，却道天凉好个秋。</p>
             </div>
             <div class="site-nav-toggle" @click="showMenu">
                 <button aria-label="切换导航栏">
@@ -51,32 +51,6 @@
         methods: {
             showMenu() {
                 window.$('.site-nav').slideToggle(300);
-            }
-        },
-        computed: {
-            screenWidth() {
-                return this.$store.getters.getScreenWidth;
-            }
-        },
-        watch: {
-            '$route'() {
-                if (this.screenWidth <= 767) {
-                    window.$('.site-nav').slideUp(0);
-                }
-            },
-            screenWidth() {
-                // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-                if (!this.timer) {
-                    if (this.screenWidth > 767) {
-                        window.$('.site-nav').slideDown(0);
-                    } else {
-                        window.$('.site-nav').slideUp(0);
-                    }
-                    let that = this;
-                    setTimeout(function () {
-                        that.timer = false;
-                    }, 400)
-                }
             }
         }
     }
@@ -192,7 +166,7 @@
                 }
 
                 .site-nav {
-                    display: block;
+                    display: block !important;
 
                     .menu {
                         padding: 0;

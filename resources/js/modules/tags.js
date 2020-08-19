@@ -18,6 +18,27 @@ export const tags = {
         tagCatalogs: [],
         tagCatalogsLoadStatus: 0,
     },
+
+    /**
+     * Defines the mutations used
+     */
+    mutations: {
+        setTagsLoadStatus(state, status) {
+            state.tagsLoadStatus = status;
+        },
+
+        setTags(state, tags) {
+            state.tags = tags;
+        },
+
+        setTagCatalogsLoadStatus(state, status) {
+            state.tagCatalogsLoadStatus = status;
+        },
+
+        setTagCatalogs(state, tagCatalogs) {
+            state.tagCatalogs = tagCatalogs;
+        }
+    },
     /**
      * Defines the actions used to retrieve the data.
      */
@@ -44,26 +65,6 @@ export const tags = {
                 commit('setTagCatalogs', []);
                 commit('setTagCatalogsLoadStatus', 3);
             });
-        }
-    },
-    /**
-     * Defines the mutations used
-     */
-    mutations: {
-        setTagsLoadStatus(state, status) {
-            state.tagsLoadStatus = status;
-        },
-
-        setTags(state, tags) {
-            state.tags = tags;
-        },
-
-        setTagCatalogsLoadStatus(state, status) {
-            state.tagCatalogsLoadStatus = status;
-        },
-
-        setTagCatalogs(state, tagCatalogs) {
-            state.tagCatalogs = tagCatalogs;
         }
     },
     /**

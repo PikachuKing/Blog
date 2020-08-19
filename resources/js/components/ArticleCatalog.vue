@@ -11,7 +11,7 @@
                 <span class="article-meta-item">
                     <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
                     <span class="post-meta-item-text">发表于:</span>
-                    <time>{{ article.time }}</time>
+                    <time>{{ article.published_at | formatTimer }}</time>
                 </span>
                     <span class="article-meta-item">
                     <span class="article-meta-item-divider">|</span>

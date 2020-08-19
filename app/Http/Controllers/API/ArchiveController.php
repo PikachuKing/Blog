@@ -32,7 +32,7 @@ class ArchiveController extends APIController
             ->limit($this->pageSize())
             ->get()
             ->makeHidden('published_at')
-            ->groupBy('year')->toArray();
+            ->groupBy('year');
         // 计算总页数
         $lastPage = ceil(Article::query()->whereNotNull('published_at')->count() / $this->pageSize());
         return $this->success(compact('articles', 'currentPage', 'lastPage'));

@@ -62,33 +62,6 @@ __webpack_require__.r(__webpack_exports__);
     showMenu: function showMenu() {
       window.$('.site-nav').slideToggle(300);
     }
-  },
-  computed: {
-    screenWidth: function screenWidth() {
-      return this.$store.getters.getScreenWidth;
-    }
-  },
-  watch: {
-    '$route': function $route() {
-      if (this.screenWidth <= 767) {
-        window.$('.site-nav').slideUp(0);
-      }
-    },
-    screenWidth: function screenWidth() {
-      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-      if (!this.timer) {
-        if (this.screenWidth > 767) {
-          window.$('.site-nav').slideDown(0);
-        } else {
-          window.$('.site-nav').slideUp(0);
-        }
-
-        var that = this;
-        setTimeout(function () {
-          that.timer = false;
-        }, 400);
-      }
-    }
   }
 });
 
@@ -106,7 +79,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header[data-v-9652e536] {\n  width: 100%;\n}\n@media (max-width: 766.9px) {\n.header .header-inner[data-v-9652e536] {\n    width: auto;\n    margin-bottom: 50px;\n    padding: 10px;\n    background-color: #f5f5f5;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n    float: left;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n    font-size: 22px;\n    color: #000;\n    font-weight: bold;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n    display: none;\n}\n.header .header-inner .site-nav-toggle[data-v-9652e536] {\n    position: static;\n    float: right;\n    display: block;\n    top: 10px;\n    left: 10px;\n}\n.header .header-inner .site-nav-toggle button[data-v-9652e536] {\n    margin-top: 5px;\n    padding: 9px 10px;\n    background: transparent;\n    border: none;\n}\n.header .header-inner .site-nav-toggle button .btn-bar[data-v-9652e536] {\n    display: block;\n    width: 22px;\n    height: 2px;\n    background: #555;\n    border-radius: 1px;\n}\n.header .header-inner .site-nav-toggle button .btn-bar + .btn-bar[data-v-9652e536] {\n    margin-top: 4px;\n}\n.header .header-inner .site-nav[data-v-9652e536] {\n    display: none;\n    margin: 0 -10px;\n    padding: 0 10px;\n    clear: both;\n    border-top: 1px solid #ddd;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n    float: none;\n    margin: 10px 0 0 0;\n    padding: 0;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n    display: block;\n}\n.header .header-inner .site-nav .menu .menu-item a[data-v-9652e536] {\n    display: block;\n    text-align: left;\n    padding: 0 10px;\n    color: #555;\n    text-decoration: none;\n}\n.header .header-inner[data-v-9652e536]:before, .header .header-inner[data-v-9652e536]:after {\n    content: \" \";\n    display: table;\n}\n.header .header-inner[data-v-9652e536]:after {\n    clear: both;\n}\n.header .header-inner[data-v-9652e536]:before, .header .header-inner[data-v-9652e536]:after {\n    content: \" \";\n    display: table;\n}\n}\n@media (min-width: 767px) {\n.header .header-inner[data-v-9652e536] {\n    padding: 60px 0 0 0;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n    text-align: center;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n    padding: 8px;\n    color: #fff;\n    font-size: 18px;\n    font-weight: bold;\n    background-color: red;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n    margin: 10px 0 20px 0;\n    color: grey;\n}\n.header .header-inner .site-nav-toggle[data-v-9652e536] {\n    display: none;\n}\n.header .header-inner .site-nav[data-v-9652e536] {\n    display: block;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n    padding: 0;\n    text-align: center;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n    margin: 0 20px;\n    display: inline-block;\n    list-style: none;\n    font-size: 18px;\n    color: red;\n}\n.header .header-inner .site-nav .menu .menu-item a[data-v-9652e536] {\n    color: red;\n    text-decoration: none;\n}\n}", ""]);
+exports.push([module.i, ".header[data-v-9652e536] {\n  width: 100%;\n}\n@media (max-width: 766.9px) {\n.header .header-inner[data-v-9652e536] {\n    width: auto;\n    margin-bottom: 50px;\n    padding: 10px;\n    background-color: #f5f5f5;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n    float: left;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n    font-size: 22px;\n    color: #000;\n    font-weight: bold;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n    display: none;\n}\n.header .header-inner .site-nav-toggle[data-v-9652e536] {\n    position: static;\n    float: right;\n    display: block;\n    top: 10px;\n    left: 10px;\n}\n.header .header-inner .site-nav-toggle button[data-v-9652e536] {\n    margin-top: 5px;\n    padding: 9px 10px;\n    background: transparent;\n    border: none;\n}\n.header .header-inner .site-nav-toggle button .btn-bar[data-v-9652e536] {\n    display: block;\n    width: 22px;\n    height: 2px;\n    background: #555;\n    border-radius: 1px;\n}\n.header .header-inner .site-nav-toggle button .btn-bar + .btn-bar[data-v-9652e536] {\n    margin-top: 4px;\n}\n.header .header-inner .site-nav[data-v-9652e536] {\n    display: none;\n    margin: 0 -10px;\n    padding: 0 10px;\n    clear: both;\n    border-top: 1px solid #ddd;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n    float: none;\n    margin: 10px 0 0 0;\n    padding: 0;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n    display: block;\n}\n.header .header-inner .site-nav .menu .menu-item a[data-v-9652e536] {\n    display: block;\n    text-align: left;\n    padding: 0 10px;\n    color: #555;\n    text-decoration: none;\n}\n.header .header-inner[data-v-9652e536]:before, .header .header-inner[data-v-9652e536]:after {\n    content: \" \";\n    display: table;\n}\n.header .header-inner[data-v-9652e536]:after {\n    clear: both;\n}\n.header .header-inner[data-v-9652e536]:before, .header .header-inner[data-v-9652e536]:after {\n    content: \" \";\n    display: table;\n}\n}\n@media (min-width: 767px) {\n.header .header-inner[data-v-9652e536] {\n    padding: 60px 0 0 0;\n}\n.header .header-inner .site-meta[data-v-9652e536] {\n    text-align: center;\n}\n.header .header-inner .site-meta .site-title[data-v-9652e536] {\n    padding: 8px;\n    color: #fff;\n    font-size: 18px;\n    font-weight: bold;\n    background-color: red;\n}\n.header .header-inner .site-meta .site-describe[data-v-9652e536] {\n    margin: 10px 0 20px 0;\n    color: grey;\n}\n.header .header-inner .site-nav-toggle[data-v-9652e536] {\n    display: none;\n}\n.header .header-inner .site-nav[data-v-9652e536] {\n    display: block !important;\n}\n.header .header-inner .site-nav .menu[data-v-9652e536] {\n    padding: 0;\n    text-align: center;\n}\n.header .header-inner .site-nav .menu .menu-item[data-v-9652e536] {\n    margin: 0 20px;\n    display: inline-block;\n    list-style: none;\n    font-size: 18px;\n    color: red;\n}\n.header .header-inner .site-nav .menu .menu-item a[data-v-9652e536] {\n    color: red;\n    text-decoration: none;\n}\n}", ""]);
 
 // exports
 
@@ -238,7 +211,9 @@ var staticRenderFns = [
       _c("span", { staticClass: "site-title" }, [_vm._v("PikachuKing")]),
       _vm._v(" "),
       _c("p", { staticClass: "site-describe" }, [
-        _vm._v("PikachuKing PikachuKing")
+        _vm._v("少年不知愁滋味，为赋新词强说愁。"),
+        _c("br"),
+        _vm._v("而今尝尽愁滋味，却道天凉好个秋。")
       ])
     ])
   },

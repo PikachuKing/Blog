@@ -17,8 +17,6 @@ Route::group([
     $router->resource('categories', 'CategoryController');
     // 文章
     $router->resource('articles', 'ArticleController');
-    // 回收站
-    $router->resource('recycle_bin', 'RecycleBinController');
     // 关于
     $router->resource('abouts', 'AboutController');
     // 友链

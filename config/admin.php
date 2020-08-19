@@ -11,6 +11,8 @@ return [
     |
     */
     'name' => 'PikachuKing-admin',
+    //ssl
+    'secure' => false,
     /*
     |--------------------------------------------------------------------------
     | Laravel-admin logo

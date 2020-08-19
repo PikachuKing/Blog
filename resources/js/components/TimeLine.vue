@@ -7,14 +7,12 @@
             <article class="timeline-item" v-for="item of article" :key="item.slug">
                 <header class="timeline-item-header">
                     <h3 class="timeline-item-title">
+                        <time class="timeline-item-time">{{ item.time }}</time>
                         <router-link class="timeline-item-link"
                                      :to="{ name: 'article', params: { slug: item.slug }}">
                             <span>{{ item.name }}</span>
                         </router-link>
                     </h3>
-                    <div class="timeline-item-meta">
-                        <time class="timeline-item-time">{{ item.time }}</time>
-                    </div>
                 </header>
             </article>
         </div>
@@ -36,7 +34,7 @@
 
         .timeline-title {
             position: relative;
-            margin: 60px 0;
+            margin: 0;
             h2 {
                 margin-left: 20px;
                 font-size: 20px
@@ -67,10 +65,15 @@
                 border-bottom: 1px dashed #ccc;
 
                 .timeline-item-title {
-                    margin-left: 60px;
+                    margin-left: 20px;
                     font-size: 16px;
                     font-weight: normal;
                     line-height: inherit;
+                    .timeline-item-time {
+                        font-size: 12px;
+                        left: 20px;
+                        top: 5px;
+                    }
                     a {
                         color: #555;
                         text-decoration: none;
@@ -83,12 +86,7 @@
                     opacity: 0.6;
                 }
 
-                .timeline-item-meta {
-                    position: absolute;
-                    font-size: 12px;
-                    left: 20px;
-                    top: 5px;
-                }
+
             }
             .timeline-item-header::before {
                 content: " ";
@@ -115,7 +113,6 @@
             }
         }
     }
-
     .timeline-collapse::after {
         content: " ";
         position: absolute;

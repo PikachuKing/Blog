@@ -61,35 +61,11 @@ __webpack_require__.r(__webpack_exports__);
     Foot: _components_global_Foot__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
-    return {
-      screenWidth: document.body.clientWidth
-    };
+    return {};
   },
   created: function created() {
     this.$store.dispatch('loadTags');
     this.$store.dispatch('loadCategories');
-  },
-  mounted: function mounted() {
-    var that = this;
-
-    window.onresize = function () {
-      return function () {
-        window.screenWidth = document.body.clientWidth;
-        that.screenWidth = window.screenWidth;
-      }();
-    };
-  },
-  watch: {
-    screenWidth: function screenWidth() {
-      // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-      if (!this.timer) {
-        this.$store.commit('setScreenWidth', this.screenWidth);
-        var that = this;
-        setTimeout(function () {
-          that.timer = false;
-        }, 400);
-      }
-    }
   }
 });
 

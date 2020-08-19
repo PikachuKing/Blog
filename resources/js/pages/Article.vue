@@ -2,41 +2,40 @@
     <div class="article">
         <div class="content" v-if="article">
             <header class="article-header">
-                <h2 class="article-title">{{ article.title }}</h2>
+                <h2 class="article-title" v-text="article.title"></h2>
                 <div class="article-meta">
                     <span class="article-meta-item">
                         <span class="article-meta-item-icon"><i class="fa fa-clock-o"></i></span>
-                        <span class="post-meta-item-text" v-if="screenWidth">发表于:</span>
-                        <time>{{ article.time }}</time>
+                        <span class="post-meta-item-text">发表于:</span>
+                        <time>{{ article.published_at | formatTimer }}</time>
                     </span>
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-folder-o"></i></span>
-                        <span class="post-meta-item-text" v-if="screenWidth">分类:</span>
+                        <span class="post-meta-item-text">分类: </span>
                         <span>
-                            <router-link class="page-number"
-                                         :to="{ name: 'categoryCatalog', params: { name: article.category.name, page: 1 }}">
-                                {{ article.category.name }}
+                            <router-link
+                                class="page-number"
+                                :to="{ name: 'categoryCatalog', params: { name: article.category.name, page: 1 }}"
+                                v-text="article.category.name">
                             </router-link>
                         </span>
                     </span>
                     <span class="article-meta-item">
                         <span class="article-meta-item-divider">|</span>
                         <span class="article-meta-item-icon"><i class="fa fa-eye"></i></span>
-                        <span class="post-meta-item-text" v-if="screenWidth">浏览:</span>
-                        <span>{{ article.view_number }}</span>
+                        <span class="post-meta-item-text" v-text="'浏览: ' + article.view_number"></span>
                     </span>
                 </div>
             </header>
-            <section class="article-body markdown-body" v-highlight v-html="article.content.html"></section>
+            <section class="article-body markdown-body" v-highlight v-html="article.content_html"></section>
             <footer class="article-footer">
                 <div class="article-tags">
                     <router-link
-                            v-for="(tag, index) of article.tags" :key="index"
-                            :to="{ name: 'tagCatalog', params: { name: tag.name, page: 1 }}"
-                    >
-                        {{ tag.name }}
-                    </router-link>
+                        v-for="(tag, index) of article.tags" :key="index"
+                        :to="{ name: 'tagCatalog', params: { name: tag.name, page: 1 }}"
+                        v-text="tag.name"
+                    ></router-link>
                 </div>
                 <div class="article-nav">
                     <div class="article-nav-item">
@@ -69,9 +68,6 @@
             },
             nextArticle() {
                 return this.$store.getters.getArticle.nextArticle;
-            },
-            screenWidth() {
-                return this.$store.getters.getScreenWidth > 767;
             }
         },
         watch: {
@@ -88,6 +84,7 @@
 <style lang="scss" scoped>
     .article {
         margin-top: 70px;
+
         .content {
             .article-header {
                 .article-title {
@@ -96,6 +93,7 @@
                     font-weight: bold;
                     color: #000;
                 }
+
                 .article-meta {
                     margin-top: 5px;
                     margin-bottom: 20px;
@@ -105,6 +103,12 @@
                     .article-meta-item {
                         .article-meta-item-divider {
                             margin: 0 0.5em;
+                        }
+
+                        @media (max-width: 767px) {
+                            .post-meta-item-text {
+                                display: none;
+                            }
                         }
 
                         a {
@@ -117,12 +121,15 @@
                     }
                 }
             }
+
             .article-body {
                 text-align: justify;
             }
+
             .article-footer {
                 .article-tags {
                     text-align: left;
+
                     a {
                         position: relative;
                         padding: 1px 5px;
@@ -136,25 +143,30 @@
                         outline: none;
                         word-wrap: break-word;
                     }
+
                     a::before {
                         content: '# ';
                     }
+
                     a:hover {
                         color: #222;
                         background: #ccc;
                     }
                 }
+
                 .article-nav {
                     margin-top: 40px;
                     display: table;
                     width: 100%;
                     border-top: 1px solid #eee;
+
                     .article-nav-item {
                         display: table-cell;
                         padding: 10px 0 0 0;
                         width: 45%;
                         vertical-align: top;
                         text-align: left;
+
                         a {
                             position: relative;
                             display: block;
@@ -166,11 +178,13 @@
                             outline: none;
                             word-wrap: break-word;
                         }
+
                         a:hover {
                             color: #222;
                             border-bottom: none;
                         }
                     }
+
                     .article-nav-prev {
                         text-align: right;
                     }

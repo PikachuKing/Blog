@@ -37,6 +37,13 @@ import store from './store.js'
 // highlight.js代码高亮插件
 import Highlight from './highlight.js';
 Vue.use(Highlight);
+
+//全局过滤器
+Vue.filter('formatTimer', function (value) {
+    var date = new Date(value);
+    return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+});
+
 // 将 Vue 挂载到 ID 为 app 的页面元素上
 new Vue({
     router,

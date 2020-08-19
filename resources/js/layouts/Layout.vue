@@ -21,35 +21,12 @@
             Foot
         },
         data() {
-            return {
-                screenWidth: document.body.clientWidth
-            }
+            return {}
         },
         created() {
             this.$store.dispatch('loadTags');
             this.$store.dispatch('loadCategories');
         },
-        mounted() {
-            const that = this;
-            window.onresize = () => {
-                return (() => {
-                    window.screenWidth = document.body.clientWidth;
-                    that.screenWidth = window.screenWidth;
-                })()
-            }
-        },
-        watch: {
-            screenWidth() {
-                // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
-                if (!this.timer) {
-                    this.$store.commit('setScreenWidth', this.screenWidth);
-                    let that = this;
-                    setTimeout(function () {
-                        that.timer = false;
-                    }, 400)
-                }
-            }
-        }
     }
 </script>
 

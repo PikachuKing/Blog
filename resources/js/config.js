@@ -6,12 +6,12 @@ var app_url = '';
 
 switch( process.env.NODE_ENV ){
     case 'development':
-        api_url = 'http://blog.com/api/v1';
-        app_url = 'http://blog.com';
+        api_url = '/api/v1';
+        app_url = '/';
         break;
     case 'production':
-        api_url = 'https://www.pikachuking.com/api/v1';
-        app_url = 'https://www.pikachuking.com';
+        api_url = '/api/v1';
+        app_url = '/';
         break;
 }
 

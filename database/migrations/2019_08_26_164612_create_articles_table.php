@@ -17,7 +17,6 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->comment('用户ID');
             $table->unsignedBigInteger('category_id')->comment('分类ID');
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('title')->nullable(false)->comment('标题');
             $table->string('slug')->unique();
             $table->string('description')->nullable()->comment('摘要');
@@ -26,7 +25,6 @@ class CreateArticlesTable extends Migration
             $table->integer('view_number')->default(0)->comment('阅读数');
             $table->timestamp('published_at')->nullable()->comment('发布时间');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

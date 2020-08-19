@@ -166,7 +166,9 @@ var render = function() {
                 _vm._v("发表于:")
               ]),
               _vm._v(" "),
-              _c("time", [_vm._v(_vm._s(article.time))])
+              _c("time", [
+                _vm._v(_vm._s(_vm._f("formatTimer")(article.published_at)))
+              ])
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "article-meta-item" }, [

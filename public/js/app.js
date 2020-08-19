@@ -3139,18 +3139,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResponsiveAccordionTabs", function() { return ResponsiveAccordionTabs; });
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
 
 
 function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    _typeof = function _typeof(obj) {
-      return _typeof2(obj);
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
     };
   } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
 
@@ -3219,7 +3217,7 @@ function _assertThisInitialized(self) {
 }
 
 function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof2(call) === "object" || typeof call === "function")) {
+  if (call && (typeof call === "object" || typeof call === "function")) {
     return call;
   }
 
@@ -3255,10 +3253,10 @@ function _get(target, property, receiver) {
 
   return _get(target, property, receiver || target);
 }
+
 /**
  * Returns a boolean for RTL support
  */
-
 
 function rtl() {
   return jquery__WEBPACK_IMPORTED_MODULE_0___default()('html').attr('dir') === 'rtl';
@@ -3405,20 +3403,21 @@ function ignoreMousedisappear(handler) {
   };
 }
 
-var foundation_core_utils =
-/*#__PURE__*/
-Object.freeze({
+var foundation_core_utils = /*#__PURE__*/Object.freeze({
   rtl: rtl,
   GetYoDigits: GetYoDigits,
   RegExpEscape: RegExpEscape,
   transitionend: transitionend,
   onLoad: onLoad,
   ignoreMousedisappear: ignoreMousedisappear
-}); // Authors & copyright(c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. MIT license
+});
+
+// Authors & copyright(c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. MIT license
 
 /* eslint-disable */
 
 window.matchMedia || (window.matchMedia = function () {
+
   var styleMedia = window.styleMedia || window.media; // For those that don't support matchMedium
 
   if (!styleMedia) {
@@ -4226,12 +4225,12 @@ function GetExplicitOffsets(element, anchor, position, alignment, vOffset, hOffs
     left: leftVal
   };
 }
+
 /**
  * Runs a callback function when images are fully loaded.
  * @param {Object} images - Image(s) to check if loaded.
  * @param {Func} callback - Function to execute when image is fully loaded.
  */
-
 
 function onImagesLoaded(images, callback) {
   var unloaded = images.length;
@@ -4266,6 +4265,7 @@ function onImagesLoaded(images, callback) {
     }
   }
 }
+
 /*******************************************
  *                                         *
  * This util was created by Marius Olbertz *
@@ -4273,8 +4273,6 @@ function onImagesLoaded(images, callback) {
  * or the web http://www.mariusolbertz.de/ *
  *                                         *
  ******************************************/
-
-
 var keyCodes = {
   9: 'TAB',
   13: 'ENTER',
@@ -4427,11 +4425,11 @@ function getKeyCodes(kcs) {
 
   return k;
 }
+
 /**
  * Motion module.
  * @module foundation.motion
  */
-
 
 var initClasses = ['mui-enter', 'mui-leave'];
 var activeClasses = ['mui-enter-active', 'mui-leave-active'];
@@ -5062,9 +5060,10 @@ Triggers.init = function ($$$1, Foundation) {
 
     Foundation.IHearYou = Triggers.Initializers.addGlobalListeners;
   }
-}; // {function} _setup (replaces previous constructor),
-// {function} _destroy (replaces previous destroy)
+};
 
+// {function} _setup (replaces previous constructor),
+// {function} _destroy (replaces previous destroy)
 
 var Plugin =
 /*#__PURE__*/
@@ -5128,11 +5127,11 @@ function getPluginName(obj) {
     return hyphenate$1(obj.className);
   }
 }
+
 /**
  * Abide module.
  * @module foundation.abide
  */
-
 
 var Abide =
 /*#__PURE__*/
@@ -5388,7 +5387,6 @@ function (_Plugin) {
           errorId = GetYoDigits(6, 'abide-error');
           $error.attr('id', errorId);
         }
-
         $el.attr('aria-describedby', errorId);
       }
 
@@ -5655,7 +5653,6 @@ function (_Plugin) {
           }
         });
       }
-
       return valid;
     }
     /**
@@ -5862,6 +5859,7 @@ Abide.defaults = {
     }
   }
 };
+
 /**
  * Accordion module.
  * @module foundation.accordion
@@ -6299,6 +6297,7 @@ Accordion.defaults = {
    */
   updateHistory: false
 };
+
 /**
  * AccordionMenu module.
  * @module foundation.accordionMenu
@@ -6564,10 +6563,10 @@ function (_Plugin) {
   }, {
     key: "down",
     value: function down($target) {
-      var _this2 = this; // If having multiple submenus active is disabled, close all the submenus
+      var _this2 = this;
+
+      // If having multiple submenus active is disabled, close all the submenus
       // that are not parents or children of the targeted submenu.
-
-
       if (!this.options.multiOpen) {
         // The "branch" of the targetted submenu, from the component root to
         // the active submenus nested in it.
@@ -6692,6 +6691,7 @@ AccordionMenu.defaults = {
    */
   multiOpen: true
 };
+
 /**
  * Drilldown module.
  * @module foundation.drilldown
@@ -7221,6 +7221,7 @@ function (_Plugin) {
       if (this.options.autoHeight) this.$wrapper.css({
         height: $elem.parent().closest('ul').data('calcHeight')
       });
+
       $elem.parent('li').attr('aria-expanded', false);
       $elem.attr('aria-hidden', true);
       $elem.addClass('is-closing').one(transitionend($elem), function () {
@@ -7406,6 +7407,7 @@ Drilldown.defaults = {
   animationEasing: 'swing' // holdOpen: false
 
 };
+
 var POSITIONS = ['left', 'right', 'top', 'bottom'];
 var VERTICAL_ALIGNMENTS = ['top', 'bottom', 'center'];
 var HORIZONTAL_ALIGNMENTS = ['left', 'right', 'center'];
@@ -7654,6 +7656,7 @@ Positionable.defaults = {
    */
   hOffset: 0
 };
+
 /**
  * Dropdown module.
  * @module foundation.dropdown
@@ -7733,7 +7736,6 @@ function (_Positionable) {
         if (typeof this.$currentAnchor.attr('id') === 'undefined') {
           this.$currentAnchor.attr('id', GetYoDigits(6, 'dd-anchor'));
         }
-
         this.$element.attr('aria-labelledby', this.$currentAnchor.attr('id'));
       }
 
@@ -8124,6 +8126,7 @@ Dropdown.defaults = {
    */
   closeOnClick: false
 };
+
 /**
  * DropdownMenu module.
  * @module foundation.dropdown-menu
@@ -8651,6 +8654,7 @@ DropdownMenu.defaults = {
    */
   forceFollow: true
 };
+
 /**
  * Equalizer module.
  * @module foundation.equalizer
@@ -8773,6 +8777,7 @@ function (_Plugin) {
   }, {
     key: "_events",
     value: function _events() {
+
       this._pauseEvents();
 
       if (this.hasNested) {
@@ -9036,6 +9041,7 @@ Equalizer.defaults = {
    */
   equalizeOn: ''
 };
+
 /**
  * Interchange module.
  * @module foundation.interchange
@@ -9270,6 +9276,7 @@ Interchange.SPECIAL_QUERIES = {
   'portrait': 'screen and (orientation: portrait)',
   'retina': 'only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx)'
 };
+
 /**
  * SmoothScroll module.
  * @module foundation.smooth-scroll
@@ -9341,9 +9348,9 @@ function (_Plugin) {
   }, {
     key: "_handleLinkClick",
     value: function _handleLinkClick(e) {
-      var _this = this; // Follow the link if it does not point to an anchor.
+      var _this = this;
 
-
+      // Follow the link if it does not point to an anchor.
       if (!jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.currentTarget).is('a[href^="#"]')) return;
       var arrival = e.currentTarget.getAttribute('href');
       this._inTransition = true;
@@ -9432,6 +9439,7 @@ SmoothScroll.defaults = {
    */
   offset: 0
 };
+
 /**
  * Magellan module.
  * @module foundation.magellan
@@ -9478,6 +9486,7 @@ function (_Plugin) {
     key: "_init",
     value: function _init() {
       var id = this.$element[0].id || GetYoDigits(6, 'magellan');
+
       this.$targets = jquery__WEBPACK_IMPORTED_MODULE_0___default()('[data-magellan-target]');
       this.$links = this.$element.find('a');
       this.$element.attr({
@@ -9628,6 +9637,7 @@ function (_Plugin) {
             activeIdx = visibleLinks.length ? visibleLinks.length - 1 : 0;
           } // Get the new active link
 
+
       var $oldActive = this.$active;
       var activeHash = '';
 
@@ -9742,6 +9752,7 @@ Magellan.defaults = {
    */
   offset: 0
 };
+
 /**
  * OffCanvas module.
  * @module foundation.offcanvas
@@ -10345,6 +10356,7 @@ OffCanvas.defaults = {
    */
   trapFocus: false
 };
+
 /**
  * Orbit module.
  * @module foundation.orbit
@@ -10486,6 +10498,7 @@ function (_Plugin) {
   }, {
     key: "_prepareForOrbit",
     value: function _prepareForOrbit() {
+
       this._setWrapperHeight();
     }
     /**
@@ -10933,6 +10946,7 @@ Orbit.defaults = {
   */
   useMUI: true
 };
+
 var MenuPlugins = {
   dropdown: {
     cssClass: 'dropdown',
@@ -11091,6 +11105,7 @@ function (_Plugin) {
 }(Plugin);
 
 ResponsiveMenu.defaults = {};
+
 /**
  * ResponsiveToggle module.
  * @module foundation.responsiveToggle
@@ -11170,6 +11185,7 @@ function (_Plugin) {
   }, {
     key: "_events",
     value: function _events() {
+
       this._updateMqHandler = this._update.bind(this);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(window).on('changed.zf.mediaquery', this._updateMqHandler);
       this.$toggler.on('click.zf.responsiveToggle', this.toggleMenu.bind(this));
@@ -11257,6 +11273,7 @@ ResponsiveToggle.defaults = {
    */
   animate: false
 };
+
 /**
  * Reveal module.
  * @module foundation.reveal
@@ -11513,9 +11530,9 @@ function (_Plugin) {
   }, {
     key: "open",
     value: function open() {
-      var _this4 = this; // either update or replace browser history
+      var _this4 = this;
 
-
+      // either update or replace browser history
       var hash = "#".concat(this.id);
 
       if (this.options.deepLink && window.location.hash !== hash) {
@@ -11971,6 +11988,7 @@ Reveal.defaults = {
    */
   additionalOverlayClasses: ''
 };
+
 /**
  * Slider module.
  * @module foundation.slider
@@ -12769,13 +12787,13 @@ function absPosition($handle, dir, clickPos, param) {
 function baseLog(base, value) {
   return Math.log(value) / Math.log(base);
 }
+
 /**
  * Sticky module.
  * @module foundation.sticky
  * @requires foundation.util.triggers
  * @requires foundation.util.mediaQuery
  */
-
 
 var Sticky =
 /*#__PURE__*/
@@ -13341,13 +13359,13 @@ Sticky.defaults = {
 function emCalc(em) {
   return parseInt(window.getComputedStyle(document.body, null).fontSize, 10) * em;
 }
+
 /**
  * Tabs module.
  * @module foundation.tabs
  * @requires foundation.util.keyboard
  * @requires foundation.util.imageLoader if tabs contain images
  */
-
 
 var Tabs =
 /*#__PURE__*/
@@ -13904,6 +13922,7 @@ Tabs.defaults = {
    */
   panelActiveClass: 'is-active'
 };
+
 /**
  * Toggler module.
  * @module foundation.toggler
@@ -14081,6 +14100,7 @@ Toggler.defaults = {
    */
   animate: false
 };
+
 /**
  * Tooltip module.
  * @module foundation.tooltip
@@ -14317,7 +14337,8 @@ function (_Positionable) {
       if (this.options.clickOpen) {
         this.$element.on('mousedown.zf.tooltip', function (e) {
           e.stopImmediatePropagation();
-          if (_this.isClick) ;else {
+
+          if (_this.isClick) ; else {
             _this.isClick = true;
 
             if ((_this.options.disableHover || !_this.$element.attr('tabindex')) && !_this.isActive) {
@@ -14567,6 +14588,7 @@ Tooltip.defaults = {
   */
   allowHtml: false
 };
+
 var MenuPlugins$1 = {
   tabs: {
     cssClass: 'tabs',
@@ -14751,7 +14773,6 @@ function (_Plugin) {
       if (fromString === toSet) {
         return;
       }
-
       var tabsTitle = _this.allOptions.linkClass ? _this.allOptions.linkClass : 'tabs-title';
       var tabsPanel = _this.allOptions.panelClass ? _this.allOptions.panelClass : 'tabs-panel';
       this.$element.removeAttr('role');
@@ -14764,7 +14785,6 @@ function (_Plugin) {
       } else {
         $panels = $liHeads.children('[data-tab-content]').removeClass('accordion-content');
       }
-
       $panels.css({
         display: '',
         visibility: ''
@@ -14793,7 +14813,6 @@ function (_Plugin) {
         } else {
           $tabsContent = jquery__WEBPACK_IMPORTED_MODULE_0___default()('<div class="tabs-content"></div>').insertAfter(_this.$element).attr('data-tabs-content', _this.$element.attr('id'));
         }
-
         $panels.each(function (key, value) {
           var tempValue = jquery__WEBPACK_IMPORTED_MODULE_0___default()(value).appendTo($tabsContent).addClass(tabsPanel);
           var hash = $liHeadsA.get(key).hash.slice(1);
@@ -14808,7 +14827,6 @@ function (_Plugin) {
               jquery__WEBPACK_IMPORTED_MODULE_0___default()($liHeadsA.get(key)).attr('href', jquery__WEBPACK_IMPORTED_MODULE_0___default()($liHeadsA.get(key)).attr('href').replace('#', '') + '#' + hash);
             }
           }
-
           var isActive = jquery__WEBPACK_IMPORTED_MODULE_0___default()($liHeads.get(key)).hasClass('is-active');
 
           if (isActive) {
@@ -14835,6 +14853,7 @@ function (_Plugin) {
 }(Plugin);
 
 ResponsiveAccordionTabs.defaults = {};
+
 Foundation.addToJquery(jquery__WEBPACK_IMPORTED_MODULE_0___default.a); // Add Foundation Utils to Foundation global namespace for backwards
 // compatibility.
 
@@ -14879,7 +14898,10 @@ Foundation.plugin(Tabs, 'Tabs');
 Foundation.plugin(Toggler, 'Toggler');
 Foundation.plugin(Tooltip, 'Tooltip');
 Foundation.plugin(ResponsiveAccordionTabs, 'ResponsiveAccordionTabs');
+
 /* harmony default export */ __webpack_exports__["default"] = (Foundation);
+
+//# sourceMappingURL=foundation.esm.js.map
 
 
 /***/ }),
@@ -84924,7 +84946,12 @@ if (token) {
  // highlight.js代码高亮插件
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_highlight_js__WEBPACK_IMPORTED_MODULE_3__["default"]); // 将 Vue 挂载到 ID 为 app 的页面元素上
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(_highlight_js__WEBPACK_IMPORTED_MODULE_3__["default"]); //全局过滤器
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('formatTimer', function (value) {
+  var date = new Date(value);
+  return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+}); // 将 Vue 挂载到 ID 为 app 的页面元素上
 
 new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _routes_js__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -84951,13 +84978,13 @@ var app_url = '';
 
 switch ("development") {
   case 'development':
-    api_url = 'http://blog.com/api/v1';
-    app_url = 'http://blog.com';
+    api_url = '/api/v1';
+    app_url = '/';
     break;
 
   case 'production':
-    api_url = 'https://www.pikachuking.com/api/v1';
-    app_url = 'https://www.pikachuking.com';
+    api_url = '/api/v1';
+    app_url = '/';
     break;
 }
 
@@ -85349,51 +85376,6 @@ var categories = {
 
 /***/ }),
 
-/***/ "./resources/js/modules/layout.js":
-/*!****************************************!*\
-  !*** ./resources/js/modules/layout.js ***!
-  \****************************************/
-/*! exports provided: layout */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "layout", function() { return layout; });
-/*
- |-------------------------------------------------------------------------------
- | VUEX modules/layout.js
- |-------------------------------------------------------------------------------
- | The Vuex data store for the tags
- */
-var layout = {
-  /**
-   * Defines the state being monitored for the module.
-   */
-  state: {
-    screenWidth: 1000
-  },
-
-  /**
-   * Defines the mutations used
-   */
-  mutations: {
-    setScreenWidth: function setScreenWidth(state, status) {
-      state.screenWidth = status;
-    }
-  },
-
-  /**
-   * Defines the getters used by the module
-   */
-  getters: {
-    getScreenWidth: function getScreenWidth(state) {
-      return state.screenWidth;
-    }
-  }
-};
-
-/***/ }),
-
 /***/ "./resources/js/modules/tags.js":
 /*!**************************************!*\
   !*** ./resources/js/modules/tags.js ***!
@@ -85424,6 +85406,24 @@ var tags = {
   },
 
   /**
+   * Defines the mutations used
+   */
+  mutations: {
+    setTagsLoadStatus: function setTagsLoadStatus(state, status) {
+      state.tagsLoadStatus = status;
+    },
+    setTags: function setTags(state, tags) {
+      state.tags = tags;
+    },
+    setTagCatalogsLoadStatus: function setTagCatalogsLoadStatus(state, status) {
+      state.tagCatalogsLoadStatus = status;
+    },
+    setTagCatalogs: function setTagCatalogs(state, tagCatalogs) {
+      state.tagCatalogs = tagCatalogs;
+    }
+  },
+
+  /**
    * Defines the actions used to retrieve the data.
    */
   actions: {
@@ -85449,24 +85449,6 @@ var tags = {
         commit('setTagCatalogs', []);
         commit('setTagCatalogsLoadStatus', 3);
       });
-    }
-  },
-
-  /**
-   * Defines the mutations used
-   */
-  mutations: {
-    setTagsLoadStatus: function setTagsLoadStatus(state, status) {
-      state.tagsLoadStatus = status;
-    },
-    setTags: function setTags(state, tags) {
-      state.tags = tags;
-    },
-    setTagCatalogsLoadStatus: function setTagCatalogsLoadStatus(state, status) {
-      state.tagCatalogsLoadStatus = status;
-    },
-    setTagCatalogs: function setTagCatalogs(state, tagCatalogs) {
-      state.tagCatalogs = tagCatalogs;
     }
   },
 
@@ -85533,6 +85515,7 @@ function loadView(dir, view) {
 
 
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  mode: 'history',
   routes: [{
     path: '/',
     redirect: {
@@ -85602,8 +85585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/tags.js */ "./resources/js/modules/tags.js");
 /* harmony import */ var _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/categories.js */ "./resources/js/modules/categories.js");
 /* harmony import */ var _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/archives.js */ "./resources/js/modules/archives.js");
-/* harmony import */ var _modules_layout_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/layout.js */ "./resources/js/modules/layout.js");
-/* harmony import */ var _modules_about_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/about.js */ "./resources/js/modules/about.js");
+/* harmony import */ var _modules_about_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/about.js */ "./resources/js/modules/about.js");
 /*
  Vuex 模块的起点，
  Vuex 由一个父模块和多个子模块构成，该文件包含父模块，
@@ -85623,7 +85605,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
-
 /**
  * Export our data store.
  */
@@ -85634,8 +85615,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     tags: _modules_tags_js__WEBPACK_IMPORTED_MODULE_3__["tags"],
     categories: _modules_categories_js__WEBPACK_IMPORTED_MODULE_4__["categories"],
     archives: _modules_archives_js__WEBPACK_IMPORTED_MODULE_5__["archives"],
-    layout: _modules_layout_js__WEBPACK_IMPORTED_MODULE_6__["layout"],
-    about: _modules_about_js__WEBPACK_IMPORTED_MODULE_7__["about"]
+    about: _modules_about_js__WEBPACK_IMPORTED_MODULE_6__["about"]
   }
 }));
 
@@ -85659,8 +85639,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/Code/pikchuking-blog/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/Code/pikchuking-blog/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\PikachuKing\Desktop\pikchuking-blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\PikachuKing\Desktop\pikchuking-blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

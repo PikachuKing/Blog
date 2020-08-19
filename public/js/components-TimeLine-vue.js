@@ -30,8 +30,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TimeLine",
   props: ['articles']
@@ -51,7 +49,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".timeline-collapse[data-v-7574454c] {\n  position: relative;\n}\n.timeline-collapse .timeline-title[data-v-7574454c] {\n  position: relative;\n  margin: 60px 0;\n}\n.timeline-collapse .timeline-title h2[data-v-7574454c] {\n  margin-left: 20px;\n  font-size: 20px;\n}\n.timeline-collapse .timeline-title[data-v-7574454c]::before {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 50%;\n  margin-left: -4px;\n  margin-top: -4px;\n  width: 8px;\n  height: 8px;\n  background: #bbb;\n  border-radius: 50%;\n  z-index: 2;\n}\n.timeline-collapse .timeline-item[data-v-7574454c] {\n  margin: 30px 0;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c] {\n  position: relative;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n  transition-property: border;\n  border-bottom: 1px dashed #ccc;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title[data-v-7574454c] {\n  margin-left: 60px;\n  font-size: 16px;\n  font-weight: normal;\n  line-height: inherit;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title a[data-v-7574454c] {\n  color: #555;\n  text-decoration: none;\n  word-wrap: break-word;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title[data-v-7574454c]::after {\n  margin-left: 3px;\n  opacity: 0.6;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-meta[data-v-7574454c] {\n  position: absolute;\n  font-size: 12px;\n  left: 20px;\n  top: 5px;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]::before {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 12px;\n  width: 6px;\n  height: 6px;\n  margin-left: -4px;\n  background: #bbb;\n  border-radius: 50%;\n  border: 1px solid #fff;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n  transition-property: background;\n  z-index: 2;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]:hover {\n  border-bottom-color: #666;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]:hover::before {\n  background: #222;\n}\n.timeline-collapse[data-v-7574454c]::after {\n  content: \" \";\n  position: absolute;\n  top: 20px;\n  left: 0;\n  margin-left: -2px;\n  width: 4px;\n  height: 100%;\n  background: #f5f5f5;\n  z-index: 1;\n}", ""]);
+exports.push([module.i, ".timeline-collapse[data-v-7574454c] {\n  position: relative;\n}\n.timeline-collapse .timeline-title[data-v-7574454c] {\n  position: relative;\n  margin: 0;\n}\n.timeline-collapse .timeline-title h2[data-v-7574454c] {\n  margin-left: 20px;\n  font-size: 20px;\n}\n.timeline-collapse .timeline-title[data-v-7574454c]::before {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 50%;\n  margin-left: -4px;\n  margin-top: -4px;\n  width: 8px;\n  height: 8px;\n  background: #bbb;\n  border-radius: 50%;\n  z-index: 2;\n}\n.timeline-collapse .timeline-item[data-v-7574454c] {\n  margin: 30px 0;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c] {\n  position: relative;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n  transition-property: border;\n  border-bottom: 1px dashed #ccc;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title[data-v-7574454c] {\n  margin-left: 20px;\n  font-size: 16px;\n  font-weight: normal;\n  line-height: inherit;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title .timeline-item-time[data-v-7574454c] {\n  font-size: 12px;\n  left: 20px;\n  top: 5px;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title a[data-v-7574454c] {\n  color: #555;\n  text-decoration: none;\n  word-wrap: break-word;\n}\n.timeline-collapse .timeline-item .timeline-item-header .timeline-item-title[data-v-7574454c]::after {\n  margin-left: 3px;\n  opacity: 0.6;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]::before {\n  content: \" \";\n  position: absolute;\n  left: 0;\n  top: 12px;\n  width: 6px;\n  height: 6px;\n  margin-left: -4px;\n  background: #bbb;\n  border-radius: 50%;\n  border: 1px solid #fff;\n  transition-duration: 0.2s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n  transition-property: background;\n  z-index: 2;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]:hover {\n  border-bottom-color: #666;\n}\n.timeline-collapse .timeline-item .timeline-item-header[data-v-7574454c]:hover::before {\n  background: #222;\n}\n.timeline-collapse[data-v-7574454c]::after {\n  content: \" \";\n  position: absolute;\n  top: 20px;\n  left: 0;\n  margin-left: -2px;\n  width: 4px;\n  height: 100%;\n  background: #f5f5f5;\n  z-index: 1;\n}", ""]);
 
 // exports
 
@@ -125,6 +123,10 @@ var render = function() {
                     "h3",
                     { staticClass: "timeline-item-title" },
                     [
+                      _c("time", { staticClass: "timeline-item-time" }, [
+                        _vm._v(_vm._s(item.time))
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "router-link",
                         {
@@ -137,13 +139,7 @@ var render = function() {
                       )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "timeline-item-meta" }, [
-                    _c("time", { staticClass: "timeline-item-time" }, [
-                      _vm._v(_vm._s(item.time))
-                    ])
-                  ])
+                  )
                 ])
               ]
             )
