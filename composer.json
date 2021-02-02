@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "jellybool/translug": "^2.0",
         "laravel-admin-ext/simplemde": "^1.0",
-        "laravel/framework": "7.0.*",
+        "laravel/framework": "7.30.*",
         "laravel/passport": "^7.4",
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^2.0",
